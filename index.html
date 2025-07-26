@@ -6,272 +6,371 @@
     <title>Apple & X.AI Project</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <!-- Floating particles -->
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
-
-    <div class="container">
-        <!-- Modern Header Section -->
-        <header class="header">
+    <!-- Particle Background -->
+    <div id="particles-container"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
             <div class="header-content">
-                <div class="header-grid">
-                    <div class="logo-section">
-                        <div class="logo-container">
-                            <img src="https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/apple_logo.png" alt="Apple Logo" class="apple-logo">
+                <div class="logo-section">
+                    <!-- сюда картинка Apple логотип -->
+                    <span class="apple-logo">🍎</span>
+                    <span class="logo-divider">×</span>
+                    <!-- сюда картинка X.AI логотип -->
+                    <span class="xai-logo">⚡</span>
+                </div>
+                <nav class="nav">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">Gallery</a>
+                    <a href="#" class="nav-link">About Us</a>
+                    <a href="#" class="nav-link">FAQ</a>
+                    <a href="#" class="nav-link">Join Us</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <h1 class="hero-title">
+                        <span class="welcome-text">WELCOME</span>
+                        <span class="to-text">TO</span>
+                        <span class="project-text">APPLE & X.AI</span>
+                        <span class="project-label">PROJECT</span>
+                    </h1>
+                </div>
+                <div class="hero-right">
+                    <div class="robot-container">
+                        <!-- сюда картинка робота с зеленым яблоком -->
+                        <div class="robot-placeholder">🤖</div>
+                        <div class="green-apple">🍏</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <section class="main-content">
+        <div class="container">
+            <div class="content-grid">
+                <!-- Project Overview -->
+                <div class="content-card overview-card">
+                    <h3 class="card-title">Project Overview</h3>
+                    <p class="card-text">
+                        This project demonstrates a comprehensive testing approach for modern web applications, including UI automation, API testing, performance monitoring, and security validation.
+                    </p>
+                </div>
+
+                <!-- Key Focus Areas -->
+                <div class="content-card focus-card">
+                    <h3 class="card-title">Key Focus Areas</h3>
+                    <div class="focus-list">
+                        <div class="focus-item">
+                            <span class="focus-label">Frontend UI:</span>
+                            <span class="focus-desc">Interface automation</span>
                         </div>
-                        <div class="logo-container">
-                            <img src="https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/xai%20logo.png" alt="X Grok Logo" class="grok-logo">
+                        <div class="focus-item">
+                            <span class="focus-label">API Testing:</span>
+                            <span class="focus-desc">REST API validation</span>
+                        </div>
+                        <div class="focus-item">
+                            <span class="focus-label">Performance:</span>
+                            <span class="focus-desc">Load testing</span>
+                        </div>
+                        <div class="focus-item">
+                            <span class="focus-label">Security:</span>
+                            <span class="focus-desc">Vulnerability testing</span>
                         </div>
                     </div>
-                    
-                    <div class="title-section">
-                        <div class="welcome-text">Welcome to the Future</div>
-                        <h1 class="main-title">APPLE & X.AI</h1>
-                        <p class="subtitle">Intelligent Testing Project</p>
-                        <p class="project-description">
-                            Revolutionary collaboration bringing together Apple's innovation and X.AI's intelligence 
-                            to create next-generation testing solutions powered by artificial intelligence.
-                        </p>
-                    </div>
-                    
-                    <div class="robot-section">
-                        <div class="robot-container">
-                            <img src="https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/android.png" alt="AI Robot" class="robot-image">
+                </div>
+
+                <!-- Technology Stack -->
+                <div class="content-card tech-card">
+                    <h3 class="card-title">Technology Stack</h3>
+                    <div class="tech-list">
+                        <div class="tech-category">
+                            <h4>Languages:</h4>
+                            <p>Python</p>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Tools:</h4>
+                            <p>PyCharm, Postman</p>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Automation:</h4>
+                            <p>Selenium, Requests</p>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Testing:</h4>
+                            <p>unittest, HTML Report, Allure Report, Newman Report</p>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Performance:</h4>
+                            <p>GTmetrix</p>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Security:</h4>
+                            <p>Observatory, Astra</p>
+                        </div>
+                        <div class="tech-category">
+                            <h4>CI/CD:</h4>
+                            <p>GitHub, Jira, Slack</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Info Cards Row -->
-            <div class="info-cards">
-                <div class="card project-overview">
-                    <h3>Project Overview</h3>
-                    <p>This project demonstrates a comprehensive testing approach for modern web applications, including UI automation, API testing, performance monitoring, and security validation powered by advanced AI algorithms.</p>
+    <!-- Key Features -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-section">
+                    <h3 class="feature-title">FRONTEND TESTING</h3>
+                    <ul class="feature-list">
+                        <li>Page Object Model for scalability</li>
+                        <li>Cross-browser testing support</li>
+                        <li>Responsive design validation</li>
+                        <li>Automatic screenshots on failures</li>
+                    </ul>
                 </div>
-
-                <div class="card key-focus">
-                    <h3>Key Focus Areas</h3>
-                    <div class="focus-item">
-                        <strong>Frontend UI:</strong> Intelligent interface automation with machine learning
-                    </div>
-                    <div class="focus-item">
-                        <strong>API Testing:</strong> Smart REST API validation and monitoring
-                    </div>
-                    <div class="focus-item">
-                        <strong>Performance:</strong> AI-driven load testing and optimization
-                    </div>
-                    <div class="focus-item">
-                        <strong>Security:</strong> Advanced vulnerability detection and analysis
-                    </div>
+                
+                <div class="feature-section">
+                    <h3 class="feature-title">API TESTING</h3>
+                    <ul class="feature-list">
+                        <li>REST API endpoints validation</li>
+                        <li>Authentication & Authorization tests</li>
+                        <li>Error handling and edge cases</li>
+                        <li>API performance metrics</li>
+                    </ul>
                 </div>
-
-                <div class="card tech-stack">
-                    <h3>Technology Stack</h3>
-                    <div class="tech-section">
-                        <strong>Languages:</strong> Python, JavaScript, TypeScript<br>
-                        <strong>AI/ML:</strong> TensorFlow, PyTorch, OpenAI<br>
-                        <strong>Tools:</strong> PyCharm, VS Code, Postman<br>
-                        <strong>Automation:</strong> Selenium, Playwright, Cypress<br>
-                        <strong>Testing:</strong> Jest, Pytest, Allure Reports<br>
-                        <strong>Performance:</strong> K6, Lighthouse, GTmetrix<br>
-                        <strong>Security:</strong> OWASP ZAP, SonarQube<br>
-                        <strong>CI/CD:</strong> GitHub Actions, Docker, Kubernetes
-                    </div>
+                
+                <div class="feature-section">
+                    <h3 class="feature-title">PERFORMANCE TESTING</h3>
+                    <ul class="feature-list">
+                        <li>Lighthouse audits</li>
+                        <li>GTmetrix monitoring</li>
+                        <li>Load testing scenarios</li>
+                        <li>Performance metrics tracking</li>
+                    </ul>
                 </div>
-            </div>
-
-            <!-- Key Features Section -->
-            <div class="features-section">
-                <h2 class="features-title">Key Features</h2>
-                <div class="features-grid">
-                    <div class="feature-column">
-                        <h4>AI-POWERED FRONTEND TESTING</h4>
-                        <ul>
-                            <li>Machine learning-based element detection</li>
-                            <li>Intelligent cross-browser testing</li>
-                            <li>Self-healing test automation</li>
-                            <li>Visual regression analysis with AI</li>
-                            <li>Smart responsive design validation</li>
-                        </ul>
-                    </div>
-                    <div class="feature-column">
-                        <h4>INTELLIGENT API TESTING</h4>
-                        <ul>
-                            <li>Auto-generated test scenarios</li>
-                            <li>Smart authentication handling</li>
-                            <li>Predictive error detection</li>
-                            <li>Performance anomaly detection</li>
-                            <li>Contract testing automation</li>
-                        </ul>
-                    </div>
-                    <div class="feature-column">
-                        <h4>ADVANCED PERFORMANCE TESTING</h4>
-                        <ul>
-                            <li>AI-driven load pattern analysis</li>
-                            <li>Intelligent bottleneck detection</li>
-                            <li>Predictive scaling recommendations</li>
-                            <li>Real-time performance optimization</li>
-                            <li>Custom metric tracking</li>
-                        </ul>
-                    </div>
-                    <div class="feature-column">
-                        <h4>SMART SECURITY TESTING</h4>
-                        <ul>
-                            <li>ML-powered vulnerability scanning</li>
-                            <li>Behavioral anomaly detection</li>
-                            <li>Automated penetration testing</li>
-                            <li>Smart threat modeling</li>
-                            <li>Compliance validation automation</li>
-                        </ul>
-                    </div>
+                
+                <div class="feature-section">
+                    <h3 class="feature-title">SECURITY TESTING</h3>
+                    <ul class="feature-list">
+                        <li>HTTP Observatory scanning</li>
+                        <li>SSL/TLS validation</li>
+                        <li>XSS and CSRF checks</li>
+                        <li>Security audit reports</li>
+                    </ul>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Statistics Section -->
-            <div class="stats-section">
-                <h3>Project Statistics</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <strong>Test Success Rate:</strong> 99.8%
-                    </div>
-                    <div class="stat-item">
-                        <strong>Code Coverage:</strong> 97.5%
-                    </div>
-                    <div class="stat-item">
-                        <strong>Performance Score:</strong> 96/100
-                    </div>
-                    <div class="stat-item">
-                        <strong>Security Grade:</strong> A+
-                    </div>
+    <!-- Project Statistics -->
+    <section class="statistics">
+        <div class="container">
+            <h2 class="section-title">Project Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Tests Passed</div>
                 </div>
-
-                <div class="architecture-section">
-                    <h4>Project Architecture</h4>
-                    <p>Explore our intelligent testing architecture powered by cutting-edge AI technology:</p>
-                    <button class="menu-btn" onclick="window.location.href='#'">Explore Architecture</button>
+                <div class="stat-card">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-label">Coverage</div>
                 </div>
-            </div>
-        </main>
-
-        <!-- Team Section -->
-        <section class="team-section">
-            <h2 class="team-title">Our <span class="team-highlight">Team</span></h2>
-            
-            <div class="team-leads">
-                <div class="team-member" data-role="Project Manager" data-name="John Smith" data-photo="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" data-actions="Coordinates project timeline and manages stakeholder communications. Ensures delivery of high-quality AI-powered testing solutions with focus on innovation and efficiency.">
-                    <div class="member-card">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Project Manager" class="member-photo">
-                        <div class="member-info">
-                            <h4>Project Manager</h4>
-                        </div>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number">A+</div>
+                    <div class="stat-label">Performance Score</div>
                 </div>
-
-                <div class="team-member" data-role="QA Lead" data-name="Sarah Johnson" data-photo="https://images.unsplash.com/photo-1494790108755-2616b612b8b5?w=150&h=150&fit=crop&crop=face" data-actions="Leads quality assurance strategy and mentors QA engineers. Oversees AI-driven test planning and execution processes with expertise in machine learning applications.">
-                    <div class="member-card">
-                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b8b5?w=150&h=150&fit=crop&crop=face" alt="QA Lead" class="member-photo">
-                        <div class="member-info">
-                            <h4>QA Lead</h4>
-                        </div>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number">A+</div>
+                    <div class="stat-label">Security Grade</div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="qa-engineers">
-                <h3>QA Engineers</h3>
-                <div class="engineers-grid">
-                    <div class="team-member" data-role="QA Engineer" data-name="Mike Chen" data-photo="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" data-actions="Specializes in AI-powered frontend automation testing. Develops and maintains intelligent Selenium test suites with machine learning capabilities for UI validation.">
-                        <div class="member-card">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Mike Chen" class="member-photo">
-                            <div class="member-info">
-                                <h4>Frontend AI Specialist</h4>
-                            </div>
-                        </div>
+    <!-- Architecture Button -->
+    <section class="architecture">
+        <div class="container">
+            <div class="architecture-content">
+                <p>Discover our interactive project architecture through this button:</p>
+                <a href="#" class="menu-btn cyber-btn">
+                    <!-- сюда ссылку на архитектуру -->
+                    MENU
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Our Team</h2>
+            <div class="team-grid">
+                <!-- Project Manager -->
+                <div class="team-card" data-role="project-manager">
+                    <div class="team-photo">
+                        <!-- сюда картинка Project Manager -->
+                        <div class="photo-placeholder">👨‍💼</div>
                     </div>
-                    <div class="team-member" data-role="QA Engineer" data-name="Emma Davis" data-photo="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" data-actions="Focuses on intelligent API testing and backend validation. Creates comprehensive REST API test scenarios using machine learning for predictive testing.">
-                        <div class="member-card">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Emma Davis" class="member-photo">
-                            <div class="member-info">
-                                <h4>API Intelligence Expert</h4>
-                            </div>
-                        </div>
+                    <h3 class="team-name">Project Manager</h3>
+                    <p class="team-role">Project Manager</p>
+                </div>
+
+                <!-- QA Lead -->
+                <div class="team-card" data-role="qa-lead">
+                    <div class="team-photo">
+                        <!-- сюда картинка QA Lead -->
+                        <div class="photo-placeholder">👩‍💻</div>
                     </div>
-                    <div class="team-member" data-role="QA Engineer" data-name="Alex Rodriguez" data-photo="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face" data-actions="Performance testing specialist with AI expertise. Conducts intelligent load testing and uses machine learning for optimization analysis and predictive scaling.">
-                        <div class="member-card">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face" alt="Alex Rodriguez" class="member-photo">
-                            <div class="member-info">
-                                <h4>Performance AI Analyst</h4>
-                            </div>
-                        </div>
+                    <h3 class="team-name">QA Lead</h3>
+                    <p class="team-role">QA Lead</p>
+                </div>
+
+                <!-- QA Engineers -->
+                <div class="team-card" data-role="qa-engineer">
+                    <div class="team-photo">
+                        <div class="photo-placeholder">👨‍💻</div>
                     </div>
-                    <div class="team-member" data-role="QA Engineer" data-name="Lisa Wang" data-photo="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" data-actions="Security testing expert with ML focus. Performs AI-powered vulnerability assessments and intelligent penetration testing with automated threat detection.">
-                        <div class="member-card">
-                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" alt="Lisa Wang" class="member-photo">
-                            <div class="member-info">
-                                <h4>Security AI Specialist</h4>
-                            </div>
-                        </div>
+                    <h3 class="team-name">QA Engineer 1</h3>
+                    <p class="team-role">QA Engineer</p>
+                </div>
+
+                <div class="team-card" data-role="qa-engineer">
+                    <div class="team-photo">
+                        <div class="photo-placeholder">👩‍💻</div>
                     </div>
-                    <div class="team-member" data-role="QA Engineer" data-name="David Brown" data-photo="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=150&h=150&fit=crop&crop=face" data-actions="Mobile testing specialist with AI integration. Ensures cross-platform compatibility using intelligent testing and AI-powered responsive design validation.">
-                        <div class="member-card">
-                            <img src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=150&h=150&fit=crop&crop=face" alt="David Brown" class="member-photo">
-                            <div class="member-info">
-                                <h4>Mobile AI Testing Lead</h4>
-                            </div>
-                        </div>
+                    <h3 class="team-name">QA Engineer 2</h3>
+                    <p class="team-role">QA Engineer</p>
+                </div>
+
+                <div class="team-card" data-role="qa-engineer">
+                    <div class="team-photo">
+                        <div class="photo-placeholder">👨‍💻</div>
                     </div>
-                    <div class="team-member" data-role="QA Engineer" data-name="Anna Kowalski" data-photo="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face" data-actions="Database testing expert with AI analytics. Validates data integrity and performs intelligent database performance optimization using machine learning algorithms.">
-                        <div class="member-card">
-                            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face" alt="Anna Kowalski" class="member-photo">
-                            <div class="member-info">
-                                <h4>Data Intelligence Analyst</h4>
-                            </div>
-                        </div>
+                    <h3 class="team-name">QA Engineer 3</h3>
+                    <p class="team-role">QA Engineer</p>
+                </div>
+
+                <div class="team-card" data-role="qa-engineer">
+                    <div class="team-photo">
+                        <div class="photo-placeholder">👩‍💻</div>
                     </div>
-                    <div class="team-member" data-role="QA Engineer" data-name="James Wilson" data-photo="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face" data-actions="Automation framework developer with AI expertise. Builds and maintains intelligent testing infrastructure and AI-powered CI/CD pipelines with self-healing capabilities.">
-                        <div class="member-card">
-                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face" alt="James Wilson" class="member-photo">
-                            <div class="member-info">
-                                <h4>AI Framework Architect</h4>
-                            </div>
-                        </div>
+                    <h3 class="team-name">QA Engineer 4</h3>
+                    <p class="team-role">QA Engineer</p>
+                </div>
+
+                <div class="team-card" data-role="qa-engineer">
+                    <div class="team-photo">
+                        <div class="photo-placeholder">👨‍💻</div>
                     </div>
-                    <div class="team-member" data-role="QA Engineer" data-name="Maria Garcia" data-photo="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face" data-actions="User experience testing specialist with AI insights. Conducts intelligent usability testing and AI-powered accessibility compliance validation with behavioral analysis.">
-                        <div class="member-card">
-                            <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face" alt="Maria Garcia" class="member-photo">
-                            <div class="member-info">
-                                <h4>UX Intelligence Expert</h4>
-                            </div>
-                        </div>
+                    <h3 class="team-name">QA Engineer 5</h3>
+                    <p class="team-role">QA Engineer</p>
+                </div>
+
+                <div class="team-card" data-role="qa-engineer">
+                    <div class="team-photo">
+                        <div class="photo-placeholder">👩‍💻</div>
                     </div>
+                    <h3 class="team-name">QA Engineer 6</h3>
+                    <p class="team-role">QA Engineer</p>
+                </div>
+
+                <div class="team-card" data-role="qa-engineer">
+                    <div class="team-photo">
+                        <div class="photo-placeholder">👨‍💻</div>
+                    </div>
+                    <h3 class="team-name">QA Engineer 7</h3>
+                    <p class="team-role">QA Engineer</p>
+                </div>
+
+                <div class="team-card" data-role="qa-engineer">
+                    <div class="team-photo">
+                        <div class="photo-placeholder">👩‍💻</div>
+                    </div>
+                    <h3 class="team-name">QA Engineer 8</h3>
+                    <p class="team-role">QA Engineer</p>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
-    <!-- Team Member Modal -->
-    <div id="memberModal" class="modal">
+    <!-- Other Projects Section -->
+    <section class="other-projects">
+        <div class="container">
+            <h2 class="section-title">You can also check out our other projects</h2>
+            <div class="projects-grid">
+                <a href="#" class="project-btn cyber-project-btn">
+                    <!-- сюда ссылка на проект 1 -->
+                    <span class="btn-text">Project Alpha</span>
+                    <span class="btn-glow"></span>
+                </a>
+                <a href="#" class="project-btn cyber-project-btn">
+                    <!-- сюда ссылка на проект 2 -->
+                    <span class="btn-text">Project Beta</span>
+                    <span class="btn-glow"></span>
+                </a>
+                <a href="#" class="project-btn cyber-project-btn">
+                    <!-- сюда ссылка на проект 3 -->
+                    <span class="btn-text">Project Gamma</span>
+                    <span class="btn-glow"></span>
+                </a>
+                <a href="#" class="project-btn cyber-project-btn">
+                    <!-- сюда ссылка на проект 4 -->
+                    <span class="btn-text">Project Delta</span>
+                    <span class="btn-glow"></span>
+                </a>
+                <a href="#" class="project-btn cyber-project-btn">
+                    <!-- сюда ссылка на проект 5 -->
+                    <span class="btn-text">Project Epsilon</span>
+                    <span class="btn-glow"></span>
+                </a>
+                <a href="#" class="project-btn cyber-project-btn">
+                    <!-- сюда ссылка на проект 6 -->
+                    <span class="btn-text">Project Zeta</span>
+                    <span class="btn-glow"></span>
+                </a>
+                <a href="#" class="project-btn cyber-project-btn">
+                    <!-- сюда ссылка на проект 7 -->
+                    <span class="btn-text">Project Eta</span>
+                    <span class="btn-glow"></span>
+                </a>
+                <a href="#" class="project-btn cyber-project-btn">
+                    <!-- сюда ссылка на проект 8 -->
+                    <span class="btn-text">Project Theta</span>
+                    <span class="btn-glow"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Modal -->
+    <div id="team-modal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="modal-close">&times;</span>
             <div class="modal-body">
-                <img id="modalPhoto" src="" alt="Team Member" class="modal-photo">
+                <div class="modal-photo">
+                    <!-- сюда картинка участника команды -->
+                    <div class="modal-photo-placeholder">👤</div>
+                </div>
                 <div class="modal-info">
-                    <h3 id="modalName"></h3>
-                    <h4 id="modalRole"></h4>
-                    <p id="modalActions"></p>
+                    <h3 class="modal-name">Team Member Name</h3>
+                    <p class="modal-role">Role</p>
+                    <div class="modal-details">
+                        <p>Detailed information about the team member, their experience, skills, and contributions to the project...</p>
+                    </div>
                 </div>
             </div>
         </div>
