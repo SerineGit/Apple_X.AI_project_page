@@ -634,6 +634,41 @@ function initKeyboardNavigation() {
     });
 }
 
+// Add loading screen effect
+function initLoadingScreen() {
+    const loadingScreen = document.createElement('div');
+    loadingScreen.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #0f1419;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        transition: opacity 0.5s ease;
+    `;
+    
+    loadingScreen.innerHTML = `
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🤖</div>
+            <div style="color: #7877c6; font-size: 1.2rem; font-weight: 600;">Loading Apple & X.AI Project...</div>
+        </div>
+    `;
+    
+    document.body.appendChild(loadingScreen);
+    
+    // Hide loading screen after 1 second
+    setTimeout(() => {
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+            loadingScreen.remove();
+        }, 500);
+    }, 1000);
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Add a loading delay for better UX
@@ -683,41 +718,6 @@ window.addEventListener('scroll', () => {
     
     lastScrollY = currentScrollY;
 });
-
-// Add loading screen effect
-function initLoadingScreen() {
-    const loadingScreen = document.createElement('div');
-    loadingScreen.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #0f1419;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        transition: opacity 0.5s ease;
-    `;
-    
-    loadingScreen.innerHTML = `
-        <div style="text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">🤖</div>
-            <div style="color: #7877c6; font-size: 1.2rem; font-weight: 600;">Loading Apple & X.AI Project...</div>
-        </div>
-    `;
-    
-    document.body.appendChild(loadingScreen);
-    
-    // Hide loading screen after 1 second
-    setTimeout(() => {
-        loadingScreen.style.opacity = '0';
-        setTimeout(() => {
-            loadingScreen.remove();
-        }, 500);
-    }, 1000);
-}
 
 // Initialize loading screen immediately
 initLoadingScreen();
