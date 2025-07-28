@@ -1,4 +1,4 @@
-// Team Manager 
+// Team Manager
 class TeamManager {
     constructor() {
         this.modal = null;
@@ -97,6 +97,8 @@ class TeamManager {
         try {
             this.createModal();
             this.bindEvents();
+            this.initParallax(); // Инициализация параллакс-эффекта
+            this.addGlitchDataAttributes(); // Добавляем data-text для глитч-эффекта
             this.isInitialized = true;
             console.log('✅ TeamManager initialized');
         } catch (error) {
@@ -182,7 +184,7 @@ class TeamManager {
         if (!this.modal || !this.teamData[role]) return;
 
         const data = this.teamData[role];
-        
+
         // Populate modal
         this.modal.querySelector('.modal-avatar').textContent = data.avatar;
         this.modal.querySelector('.modal-name').textContent = data.name;
@@ -221,7 +223,7 @@ class TeamManager {
 
     hideModal() {
         if (!this.modal) return;
-        
+
         this.modal.classList.remove('active');
         document.body.style.overflow = '';
     }
@@ -233,6 +235,34 @@ class TeamManager {
         this.modal = null;
         this.isInitialized = false;
         document.body.style.overflow = '';
+        // Удаляем обработчик скролла для параллакса при уничтожении
+        window.removeEventListener('scroll', this.handleParallaxScroll);
+    }
+
+    // New method for parallax effect
+    initParallax() {
+        this.parallaxLayers = document.querySelectorAll('.parallax-layer');
+        // Привязываем this к handleParallaxScroll для корректного доступа к this.parallaxLayers
+        this.handleParallaxScroll = this.handleParallaxScroll.bind(this);
+        window.addEventListener('scroll', this.handleParallaxScroll);
+        this.handleParallaxScroll(); // Вызываем один раз для начальной позиции
+    }
+
+    handleParallaxScroll() {
+        const scrolled = window.scrollY;
+        this.parallaxLayers.forEach((layer, index) => {
+            const depth = parseFloat(layer.style.transform.match(/translateZ\(([^)]+)px\)/)?.[1] || '0'); // Получаем depth из translateZ
+            // Вычисляем скорость на основе depth - чем больше отрицательное значение, тем медленнее
+            const movement = scrolled * (1 + (depth * -1)); // Регулируем множитель для разной скорости
+            layer.style.transform = `translateZ(${depth}px) translateY(${movement * -0.1}px) scale(${1 - depth * 0.5})`; // Умножаем на -0.1 для движения вверх при скролле вниз
+        });
+    }
+
+    // New method to add data-text for glitch effect
+    addGlitchDataAttributes() {
+        document.querySelectorAll('.glitch-text, .nav-link .btn-text, .card-title, .section-title, .team-name').forEach(element => {
+            element.setAttribute('data-text', element.textContent);
+        });
     }
 }
 
@@ -241,14 +271,14 @@ class TeamManager {
 function initApp() {
     try {
         const teamManager = new TeamManager();
-        
+
         teamManager.init();
-        
+
         // Store globally for cleanup
         window.teamManager = teamManager;
-        
+
         console.log('🚀 App initialized successfully');
-        
+
     } catch (error) {
         console.error('❌ App initialization error:', error);
     }
