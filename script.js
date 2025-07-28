@@ -1,7 +1,8 @@
-// Team Manager
+// Team Manager 
 class TeamManager {
     constructor() {
         this.modal = null;
+        this.modalElements = {}; // Cache for modal's inner elements
         this.isInitialized = false;
         this.teamData = {
             'project-manager': {
@@ -91,14 +92,15 @@ class TeamManager {
         };
     }
 
+    /**
+     * Initializes the TeamManager. Creates the modal, binds events, and sets the initialized flag.
+     */
     init() {
         if (this.isInitialized) return;
 
         try {
             this.createModal();
             this.bindEvents();
-            this.initParallax(); // Инициализация параллакс-эффекта
-            this.addGlitchDataAttributes(); // Добавляем data-text для глитч-эффекта
             this.isInitialized = true;
             console.log('✅ TeamManager initialized');
         } catch (error) {
@@ -106,15 +108,24 @@ class TeamManager {
         }
     }
 
+    /**
+     * Creates the modal HTML structure and appends it to the body.
+     * Caches references to the modal's internal elements for performance.
+     */
     createModal() {
-        if (document.querySelector('#team-modal')) return;
+        // Check if modal already exists to prevent duplicates
+        if (document.querySelector('#team-modal')) {
+            this.modal = document.querySelector('#team-modal'); // Assign existing modal
+            this.cacheModalElements(); // Cache elements if modal already exists
+            return;
+        }
 
         const modal = document.createElement('div');
         modal.id = 'team-modal';
         modal.className = 'modal-overlay';
         modal.innerHTML = `
             <div class="modal-content">
-                <button class="modal-close">&times;</button>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
                 <div class="modal-body">
                     <div class="modal-header">
                         <div class="modal-avatar"></div>
@@ -136,10 +147,32 @@ class TeamManager {
 
         document.body.appendChild(modal);
         this.modal = modal;
+        this.cacheModalElements(); // Cache elements right after creation
     }
 
+    /**
+     * Caches references to frequently accessed DOM elements within the modal.
+     * This improves performance by reducing repeated DOM queries.
+     */
+    cacheModalElements() {
+        if (!this.modal) return;
+        this.modalElements = {
+            avatar: this.modal.querySelector('.modal-avatar'),
+            name: this.modal.querySelector('.modal-name'),
+            role: this.modal.querySelector('.modal-role'),
+            details: this.modal.querySelector('.modal-text'),
+            experience: this.modal.querySelector('.modal-experience'),
+            skillsContainer: this.modal.querySelector('.modal-skills'),
+            achievementsList: this.modal.querySelector('.modal-achievements'),
+            closeBtn: this.modal.querySelector('.modal-close')
+        };
+    }
+
+    /**
+     * Binds event listeners to team cards and modal controls.
+     */
     bindEvents() {
-        // Team card clicks
+        // Team card clicks 
         document.querySelectorAll('.team-card').forEach(card => {
             card.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -147,32 +180,27 @@ class TeamManager {
                 this.showModal(role);
             });
 
-            // Keyboard support
-            card.setAttribute('tabindex', '0');
+            // Keyboard support for team cards
+            card.setAttribute('tabindex', '0'); // Make cards focusable
             card.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
+                    e.preventDefault(); // Prevent default scroll for spacebar
                     const role = card.getAttribute('data-role');
                     this.showModal(role);
                 }
             });
         });
 
-        // Modal close events
-        if (this.modal) {
-            const closeBtn = this.modal.querySelector('.modal-close');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', () => this.hideModal());
+        // Modal close events using cached elements and optional chaining
+        this.modalElements.closeBtn?.addEventListener('click', () => this.hideModal());
+
+        this.modal?.addEventListener('click', (e) => {
+            if (e.target === this.modal) {
+                this.hideModal();
             }
+        });
 
-            this.modal.addEventListener('click', (e) => {
-                if (e.target === this.modal) {
-                    this.hideModal();
-                }
-            });
-        }
-
-        // Escape key
+        // Escape key to close modal
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.modal?.classList.contains('active')) {
                 this.hideModal();
@@ -180,118 +208,102 @@ class TeamManager {
         });
     }
 
+    /**
+     * Populates and displays the modal with data for a specific team member.
+     * @param {string} role - The role identifier for the team member.
+     */
     showModal(role) {
-        if (!this.modal || !this.teamData[role]) return;
-
         const data = this.teamData[role];
+        if (!this.modal || !data) {
+            console.warn(`Attempted to show modal for unknown role or missing modal: ${role}`);
+            return;
+        }
 
-        // Populate modal
-        this.modal.querySelector('.modal-avatar').textContent = data.avatar;
-        this.modal.querySelector('.modal-name').textContent = data.name;
-        this.modal.querySelector('.modal-role').textContent = data.role;
-        this.modal.querySelector('.modal-text').textContent = data.details;
-        this.modal.querySelector('.modal-experience').textContent = data.experience;
+        // Populate modal using cached elements
+        this.modalElements.avatar.textContent = data.avatar;
+        this.modalElements.name.textContent = data.name;
+        this.modalElements.role.textContent = data.role;
+        this.modalElements.details.textContent = data.details;
+        this.modalElements.experience.textContent = data.experience;
 
         // Skills
-        const skillsContainer = this.modal.querySelector('.modal-skills');
-        skillsContainer.innerHTML = '';
+        this.modalElements.skillsContainer.innerHTML = ''; // Clear previous skills
         data.skills.forEach(skill => {
             const tag = document.createElement('span');
             tag.className = 'skill-tag';
             tag.textContent = skill;
-            skillsContainer.appendChild(tag);
+            this.modalElements.skillsContainer.appendChild(tag);
         });
 
         // Achievements
-        const achievementsList = this.modal.querySelector('.modal-achievements');
-        achievementsList.innerHTML = '';
+        this.modalElements.achievementsList.innerHTML = ''; // Clear previous achievements
         data.achievements.forEach(achievement => {
             const li = document.createElement('li');
             li.textContent = achievement;
-            achievementsList.appendChild(li);
+            this.modalElements.achievementsList.appendChild(li);
         });
 
-        // Show modal
+        // Show modal and manage body overflow
         this.modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling background
 
-        // Focus management
+        // Focus management: ensure the close button is focused for accessibility
         setTimeout(() => {
-            this.modal.querySelector('.modal-close')?.focus();
+            this.modalElements.closeBtn?.focus();
         }, 100);
     }
 
+    /**
+     * Hides the modal and restores body scrolling.
+     */
     hideModal() {
         if (!this.modal) return;
-
+        
         this.modal.classList.remove('active');
-        document.body.style.overflow = '';
+        document.body.style.overflow = ''; // Restore scrolling
     }
 
+    /**
+     * Cleans up the modal and resets the manager's state.
+     */
     destroy() {
-        if (this.modal?.parentNode) {
+        if (this.modal?.parentNode) { // Check if modal exists and has a parent
             this.modal.parentNode.removeChild(this.modal);
         }
         this.modal = null;
+        this.modalElements = {}; // Clear cached elements
         this.isInitialized = false;
-        document.body.style.overflow = '';
-        // Удаляем обработчик скролла для параллакса при уничтожении
-        window.removeEventListener('scroll', this.handleParallaxScroll);
-    }
-
-    // New method for parallax effect
-    initParallax() {
-        this.parallaxLayers = document.querySelectorAll('.parallax-layer');
-        // Привязываем this к handleParallaxScroll для корректного доступа к this.parallaxLayers
-        this.handleParallaxScroll = this.handleParallaxScroll.bind(this);
-        window.addEventListener('scroll', this.handleParallaxScroll);
-        this.handleParallaxScroll(); // Вызываем один раз для начальной позиции
-    }
-
-    handleParallaxScroll() {
-        const scrolled = window.scrollY;
-        this.parallaxLayers.forEach((layer, index) => {
-            const depth = parseFloat(layer.style.transform.match(/translateZ\(([^)]+)px\)/)?.[1] || '0'); // Получаем depth из translateZ
-            // Вычисляем скорость на основе depth - чем больше отрицательное значение, тем медленнее
-            const movement = scrolled * (1 + (depth * -1)); // Регулируем множитель для разной скорости
-            layer.style.transform = `translateZ(${depth}px) translateY(${movement * -0.1}px) scale(${1 - depth * 0.5})`; // Умножаем на -0.1 для движения вверх при скролле вниз
-        });
-    }
-
-    // New method to add data-text for glitch effect
-    addGlitchDataAttributes() {
-        document.querySelectorAll('.glitch-text, .nav-link .btn-text, .card-title, .section-title, .team-name').forEach(element => {
-            element.setAttribute('data-text', element.textContent);
-        });
+        document.body.style.overflow = ''; // Ensure body scroll is restored
+        console.log('✅ TeamManager destroyed');
     }
 }
 
-
-// Initialize when DOM is ready
+// Initialize when DOM is ready 
 function initApp() {
     try {
         const teamManager = new TeamManager();
-
+        
         teamManager.init();
-
-        // Store globally for cleanup
+        
+        // Store globally for cleanup (useful for development/debugging)
         window.teamManager = teamManager;
-
+        
         console.log('🚀 App initialized successfully');
-
+        
     } catch (error) {
         console.error('❌ App initialization error:', error);
     }
 }
 
-// Safe initialization
+// Safe initialization - checks if DOM is already loaded
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
-    initApp();
+    initApp(); // DOM is already loaded
 }
 
-// Cleanup on page unload
+// Cleanup on page unload: important for single-page applications or complex scenarios
+// For simple static sites, it might not be strictly necessary but is good practice.
 window.addEventListener('beforeunload', () => {
     if (window.teamManager) {
         window.teamManager.destroy();
