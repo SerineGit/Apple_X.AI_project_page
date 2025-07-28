@@ -1,5 +1,5 @@
-// Modern Team Card Interactions - Исправленная версия
-class TeamInteractionManager {
+// Оптимизированный Team Manager - только логика, эффекты в CSS
+class TeamManager {
     constructor() {
         this.modal = null;
         this.isInitialized = false;
@@ -92,311 +92,142 @@ class TeamInteractionManager {
     }
 
     init() {
-        if (this.isInitialized) {
-            console.warn('TeamInteractionManager already initialized');
-            return;
-        }
+        if (this.isInitialized) return;
 
         try {
             this.createModal();
-            this.bindTeamCardEvents();
-            this.bindModalEvents();
-            this.bindKeyboardEvents();
+            this.bindEvents();
             this.isInitialized = true;
-            console.log('✅ TeamInteractionManager initialized successfully');
+            console.log('✅ TeamManager initialized');
         } catch (error) {
-            console.error('❌ Error initializing TeamInteractionManager:', error);
+            console.error('❌ TeamManager init error:', error);
         }
     }
 
     createModal() {
-        // Проверяем, существует ли уже модальное окно
-        if (document.querySelector('#team-modal-overlay')) {
-            return;
-        }
+        if (document.querySelector('#team-modal')) return;
 
-        const modalOverlay = document.createElement('div');
-        modalOverlay.id = 'team-modal-overlay';
-        modalOverlay.className = 'modal-overlay';
-        modalOverlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 10000;
-        `;
-
-        modalOverlay.innerHTML = `
-            <div class="modal-content" style="
-                background: rgba(15, 20, 25, 0.95);
-                border: 1px solid rgba(120, 119, 198, 0.3);
-                border-radius: 20px;
-                padding: 2rem;
-                max-width: 600px;
-                width: 90%;
-                max-height: 80vh;
-                overflow-y: auto;
-                position: relative;
-                transform: scale(0.8);
-                transition: transform 0.3s ease;
-            ">
-                <button class="modal-close" style="
-                    position: absolute;
-                    top: 1rem;
-                    right: 1rem;
-                    background: none;
-                    border: none;
-                    color: #7877c6;
-                    font-size: 2rem;
-                    cursor: pointer;
-                    z-index: 1;
-                    width: 40px;
-                    height: 40px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: 50%;
-                    transition: all 0.3s ease;
-                " onmouseover="this.style.background='rgba(120, 119, 198, 0.2)'" 
-                   onmouseout="this.style.background='none'">&times;</button>
-                
+        const modal = document.createElement('div');
+        modal.id = 'team-modal';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
                 <div class="modal-body">
-                    <div class="modal-header" style="text-align: center; margin-bottom: 2rem;">
-                        <div class="modal-avatar" style="
-                            font-size: 4rem;
-                            margin-bottom: 1rem;
-                            display: block;
-                        "></div>
-                        <h2 class="modal-name" style="
-                            color: #ffffff;
-                            margin: 0 0 0.5rem 0;
-                            font-size: 1.8rem;
-                            font-weight: 600;
-                        "></h2>
-                        <p class="modal-role" style="
-                            color: #7877c6;
-                            margin: 0;
-                            font-size: 1.1rem;
-                            font-weight: 500;
-                        "></p>
+                    <div class="modal-header">
+                        <div class="modal-avatar"></div>
+                        <h2 class="modal-name"></h2>
+                        <p class="modal-role"></p>
                     </div>
-                    
                     <div class="modal-details">
-                        <p class="modal-text" style="
-                            color: #e2e8f0;
-                            line-height: 1.6;
-                            margin-bottom: 2rem;
-                        "></p>
-                        
-                        <h3 class="modal-section-title" style="
-                            color: #7877c6;
-                            font-size: 1.2rem;
-                            margin: 1.5rem 0 1rem 0;
-                            font-weight: 600;
-                        ">Experience</h3>
-                        <p class="modal-experience" style="
-                            color: #e2e8f0;
-                            line-height: 1.6;
-                            margin-bottom: 1.5rem;
-                        "></p>
-                        
-                        <h3 class="modal-section-title" style="
-                            color: #7877c6;
-                            font-size: 1.2rem;
-                            margin: 1.5rem 0 1rem 0;
-                            font-weight: 600;
-                        ">Skills</h3>
-                        <div class="modal-skills" style="
-                            display: flex;
-                            flex-wrap: wrap;
-                            gap: 0.5rem;
-                            margin-bottom: 1.5rem;
-                        "></div>
-                        
-                        <h3 class="modal-section-title" style="
-                            color: #7877c6;
-                            font-size: 1.2rem;
-                            margin: 1.5rem 0 1rem 0;
-                            font-weight: 600;
-                        ">Achievements</h3>
-                        <ul class="modal-achievements" style="
-                            color: #e2e8f0;
-                            line-height: 1.6;
-                            padding-left: 1.2rem;
-                        "></ul>
+                        <p class="modal-text"></p>
+                        <h3 class="modal-section-title">Experience</h3>
+                        <p class="modal-experience"></p>
+                        <h3 class="modal-section-title">Skills</h3>
+                        <div class="modal-skills"></div>
+                        <h3 class="modal-section-title">Achievements</h3>
+                        <ul class="modal-achievements"></ul>
                     </div>
                 </div>
             </div>
         `;
 
-        document.body.appendChild(modalOverlay);
-        this.modal = modalOverlay;
+        document.body.appendChild(modal);
+        this.modal = modal;
     }
 
-    bindTeamCardEvents() {
-        const teamCards = document.querySelectorAll('.team-card');
-        
-        teamCards.forEach(card => {
-            // Удаляем старые обработчики, если они есть
-            const newCard = card.cloneNode(true);
-            card.parentNode.replaceChild(newCard, card);
-            
-            newCard.addEventListener('click', (e) => {
+    bindEvents() {
+        // Team card clicks
+        document.querySelectorAll('.team-card').forEach(card => {
+            card.addEventListener('click', (e) => {
                 e.preventDefault();
-                const role = newCard.getAttribute('data-role');
+                const role = card.getAttribute('data-role');
                 this.showModal(role);
             });
 
-            // Добавляем поддержку клавиатуры
-            newCard.setAttribute('tabindex', '0');
-            newCard.addEventListener('keydown', (e) => {
+            // Keyboard support
+            card.setAttribute('tabindex', '0');
+            card.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    const role = newCard.getAttribute('data-role');
+                    const role = card.getAttribute('data-role');
                     this.showModal(role);
                 }
             });
         });
+
+        // Modal close events
+        if (this.modal) {
+            const closeBtn = this.modal.querySelector('.modal-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => this.hideModal());
+            }
+
+            this.modal.addEventListener('click', (e) => {
+                if (e.target === this.modal) {
+                    this.hideModal();
+                }
+            });
+        }
+
+        // Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.modal?.classList.contains('active')) {
+                this.hideModal();
+            }
+        });
     }
 
     showModal(role) {
-        if (!this.modal || !this.teamData[role]) {
-            console.error('Modal not found or invalid role:', role);
-            return;
-        }
+        if (!this.modal || !this.teamData[role]) return;
 
         const data = this.teamData[role];
         
-        try {
-            // Заполняем модальное окно данными
-            this.populateModal(data);
-            
-            // Показываем модальное окно
-            this.modal.style.opacity = '1';
-            this.modal.style.visibility = 'visible';
-            
-            const modalContent = this.modal.querySelector('.modal-content');
-            if (modalContent) {
-                modalContent.style.transform = 'scale(1)';
-            }
-            
-            // Блокируем скролл страницы
-            document.body.style.overflow = 'hidden';
-            
-            // Фокус на кнопке закрытия для доступности
-            const closeBtn = this.modal.querySelector('.modal-close');
-            if (closeBtn) {
-                setTimeout(() => closeBtn.focus(), 100);
-            }
-            
-        } catch (error) {
-            console.error('Error showing modal:', error);
-            this.hideModal();
-        }
-    }
+        // Populate modal
+        this.modal.querySelector('.modal-avatar').textContent = data.avatar;
+        this.modal.querySelector('.modal-name').textContent = data.name;
+        this.modal.querySelector('.modal-role').textContent = data.role;
+        this.modal.querySelector('.modal-text').textContent = data.details;
+        this.modal.querySelector('.modal-experience').textContent = data.experience;
 
-    populateModal(data) {
-        const elements = {
-            avatar: this.modal.querySelector('.modal-avatar'),
-            name: this.modal.querySelector('.modal-name'),
-            role: this.modal.querySelector('.modal-role'),
-            text: this.modal.querySelector('.modal-text'),
-            experience: this.modal.querySelector('.modal-experience'),
-            skills: this.modal.querySelector('.modal-skills'),
-            achievements: this.modal.querySelector('.modal-achievements')
-        };
-
-        // Проверяем наличие всех элементов
-        for (const [key, element] of Object.entries(elements)) {
-            if (!element) {
-                throw new Error(`Modal element not found: ${key}`);
-            }
-        }
-
-        // Заполняем текстовые поля
-        elements.avatar.textContent = data.avatar;
-        elements.name.textContent = data.name;
-        elements.role.textContent = data.role;
-        elements.text.textContent = data.details;
-        elements.experience.textContent = data.experience;
-
-        // Очищаем и заполняем навыки
-        elements.skills.innerHTML = '';
+        // Skills
+        const skillsContainer = this.modal.querySelector('.modal-skills');
+        skillsContainer.innerHTML = '';
         data.skills.forEach(skill => {
-            const skillTag = document.createElement('span');
-            skillTag.textContent = skill;
-            skillTag.style.cssText = `
-                background: rgba(120, 119, 198, 0.2);
-                color: #7877c6;
-                padding: 0.4rem 0.8rem;
-                border-radius: 20px;
-                font-size: 0.9rem;
-                font-weight: 500;
-                border: 1px solid rgba(120, 119, 198, 0.3);
-            `;
-            elements.skills.appendChild(skillTag);
+            const tag = document.createElement('span');
+            tag.className = 'skill-tag';
+            tag.textContent = skill;
+            skillsContainer.appendChild(tag);
         });
 
-        // Очищаем и заполняем достижения
-        elements.achievements.innerHTML = '';
+        // Achievements
+        const achievementsList = this.modal.querySelector('.modal-achievements');
+        achievementsList.innerHTML = '';
         data.achievements.forEach(achievement => {
             const li = document.createElement('li');
             li.textContent = achievement;
-            li.style.marginBottom = '0.5rem';
-            elements.achievements.appendChild(li);
+            achievementsList.appendChild(li);
         });
+
+        // Show modal
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Focus management
+        setTimeout(() => {
+            this.modal.querySelector('.modal-close')?.focus();
+        }, 100);
     }
 
     hideModal() {
         if (!this.modal) return;
-
-        this.modal.style.opacity = '0';
-        this.modal.style.visibility = 'hidden';
         
-        const modalContent = this.modal.querySelector('.modal-content');
-        if (modalContent) {
-            modalContent.style.transform = 'scale(0.8)';
-        }
-        
-        // Восстанавливаем скролл страницы
+        this.modal.classList.remove('active');
         document.body.style.overflow = '';
     }
 
-    bindModalEvents() {
-        if (!this.modal) return;
-
-        const closeBtn = this.modal.querySelector('.modal-close');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => this.hideModal());
-        }
-
-        // Закрытие при клике вне модального окна
-        this.modal.addEventListener('click', (e) => {
-            if (e.target === this.modal) {
-                this.hideModal();
-            }
-        });
-    }
-
-    bindKeyboardEvents() {
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.modal && this.modal.style.visibility === 'visible') {
-                this.hideModal();
-            }
-        });
-    }
-
     destroy() {
-        if (this.modal && this.modal.parentNode) {
+        if (this.modal?.parentNode) {
             this.modal.parentNode.removeChild(this.modal);
         }
         this.modal = null;
@@ -405,64 +236,37 @@ class TeamInteractionManager {
     }
 }
 
-// Система уведомлений
+// Notification system
 class NotificationManager {
     constructor() {
         this.notifications = new Set();
     }
 
     show(message, type = 'info', duration = 3000) {
-        // Создаем уведомление
-        const notification = document.createElement('div');
-        notification.className = 'notification';
-        
-        const colors = {
-            success: 'rgba(34, 197, 94, 0.9)',
-            error: 'rgba(239, 68, 68, 0.9)',
-            warning: 'rgba(245, 158, 11, 0.9)',
-            info: 'rgba(59, 130, 246, 0.9)'
-        };
-
-        notification.style.cssText = `
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            background: ${colors[type] || colors.info};
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            font-weight: 500;
-            z-index: 10001;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            max-width: 300px;
-            word-wrap: break-word;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        `;
-        
-        notification.textContent = message;
-        
-        // Удаляем предыдущие уведомления
+        // Clear previous notifications
         this.notifications.forEach(n => {
             if (n.parentNode) {
-                n.style.transform = 'translateX(100%)';
+                n.classList.remove('show');
                 setTimeout(() => n.remove(), 300);
             }
         });
         this.notifications.clear();
+
+        // Create notification
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
         
         document.body.appendChild(notification);
         this.notifications.add(notification);
         
-        // Показываем уведомление
-        setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
-        }, 100);
+        // Show animation
+        setTimeout(() => notification.classList.add('show'), 100);
         
-        // Автоматически убираем уведомление
+        // Auto hide
         setTimeout(() => {
             if (notification.parentNode) {
-                notification.style.transform = 'translateX(100%)';
+                notification.classList.remove('show');
                 setTimeout(() => {
                     notification.remove();
                     this.notifications.delete(notification);
@@ -474,50 +278,40 @@ class NotificationManager {
     }
 }
 
-// Глобальные экземпляры
-let teamManager;
-let notificationManager;
-
-// Инициализация при загрузке DOM
-function initializeApp() {
+// Initialize when DOM is ready
+function initApp() {
     try {
-        teamManager = new TeamInteractionManager();
-        notificationManager = new NotificationManager();
+        const teamManager = new TeamManager();
+        const notificationManager = new NotificationManager();
         
         teamManager.init();
         
-        // Показываем приветственное уведомление
+        // Welcome message
         setTimeout(() => {
             notificationManager.show('Welcome to Apple & X.AI Project! ✨', 'success');
         }, 1000);
         
-        console.log('🚀 Application initialized successfully!');
+        // Store globally for cleanup
+        window.teamManager = teamManager;
+        window.notificationManager = notificationManager;
+        
+        console.log('🚀 App initialized successfully');
         
     } catch (error) {
-        console.error('❌ Error initializing application:', error);
+        console.error('❌ App initialization error:', error);
     }
 }
 
-// Функция для безопасной инициализации
-function safeInit() {
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeApp);
-    } else {
-        initializeApp();
-    }
+// Safe initialization
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
 }
 
-// Экспорт для использования в других модулях
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { TeamInteractionManager, NotificationManager };
-}
-
-// Инициализируем приложение
-safeInit();
-
-// Очистка при выгрузке страницы
+// Cleanup on page unload
 window.addEventListener('beforeunload', () => {
-    if (teamManager) {
-        teamManager.destroy();
+    if (window.teamManager) {
+        window.teamManager.destroy();
     }
 });
