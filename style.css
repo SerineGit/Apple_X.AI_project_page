@@ -615,7 +615,7 @@ body {
     box-shadow: 0 0 40px rgba(255, 0, 255, 0.8);
 }
 
-/* NEW TEAM SECTION STYLES */
+/* TEAM SECTION STYLES */
 .team {
     padding: 80px 0;
     background: linear-gradient(180deg, rgba(255, 0, 255, 0.05) 0%, rgba(0, 255, 255, 0.05) 100%);
@@ -657,6 +657,7 @@ body {
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .glitch-card:hover {
@@ -824,33 +825,6 @@ body {
     color: var(--primary-color);
     animation: glitch-anim var(--glitch-anim-duration)
         cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
-}
-
-@keyframes glitch-anim {
-    0% {
-        transform: translate(0);
-        clip-path: inset(0 0 0 0);
-    }
-    20% {
-        transform: translate(-0.3rem, 0.15rem);
-        clip-path: inset(50% 0 20% 0);
-    }
-    40% {
-        transform: translate(0.15rem, -0.1rem);
-        clip-path: inset(20% 0 60% 0);
-    }
-    60% {
-        transform: translate(-0.25rem, 0.1rem);
-        clip-path: inset(80% 0 5% 0);
-    }
-    80% {
-        transform: translate(0.25rem, -0.15rem);
-        clip-path: inset(30% 0 45% 0);
-    }
-    100% {
-        transform: translate(0);
-        clip-path: inset(0 0 0 0);
-    }
 }
 
 /* Other Projects Section */
