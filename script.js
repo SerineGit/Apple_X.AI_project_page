@@ -5,29 +5,27 @@ class TeamManager {
         this.isInitialized = false;
         this.teamData = {
             'project-manager': {
-                name: 'Alex Johnson',
+                name: 'Sergey Efremov ',
                 role: 'Project Manager',
                 avatar: '👨‍💼',
-                details: 'Experienced project manager with 8+ years in QA leadership and agile methodologies. Specializes in coordinating cross-functional teams and delivering high-quality software products on time and within budget.',
+                details: 'Software QA Engineer. 14+ years experience in QA with Automation and Manual Testing for Web, Client/Server, Cloud Based, Desktop and Mobile Applications. Front and Back-end REST API Testing, CI/CD, code coverage analysis, relational databases End-to-End data tests. AI in QA.',
                 skills: ['Project Management', 'Agile/Scrum', 'Team Leadership', 'Strategic Planning', 'Risk Management', 'Stakeholder Communication'],
-                experience: '8+ years in project management and QA leadership across various industries',
+                experience: '14+ years in project management and QA leadership across various industries',
                 achievements: [
-                    'Successfully led 15+ major product launches with zero critical post-release bugs',
+                    'Successfully led 14+ major product launches with zero critical post-release bugs',
                     'Improved team productivity by 40% through process optimization and tool implementation',
-                    'Implemented Agile methodologies across 5 departments, reducing delivery time by 30%',
-                    'Managed budgets exceeding $2M while maintaining 95% on-time delivery rate'
+                    'Implemented Agile methodologies across 5 departments, reducing delivery time by 30%'
                 ]
             },
             'qa-lead': {
-                name: 'Sarah Chen',
+                name: 'Tatsiana Lentz',
                 role: 'QA Lead',
                 avatar: '👩‍💻',
                 details: 'Senior QA professional with deep expertise in test automation frameworks, API testing, and performance optimization. Passionate about building robust testing strategies that ensure exceptional software quality.',
                 skills: ['Test Automation', 'API Testing', 'Performance Testing', 'Team Leadership', 'CI/CD', 'Quality Strategy'],
-                experience: '6+ years in quality assurance with focus on automation and team leadership',
+                experience: '4+ years in quality assurance with focus on automation and team leadership',
                 achievements: [
                     'Reduced overall testing time by 60% through comprehensive automation framework',
-                    'Built end-to-end CI/CD testing pipeline handling 500+ daily deployments',
                     'Mentored 10+ junior QA engineers, with 8 received promotions',
                     'Designed testing architecture that caught 95% of bugs before production'
                 ]
