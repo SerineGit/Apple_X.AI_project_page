@@ -31,8 +31,8 @@ class TeamManager {
                 ]
             },
             'qa-engineer-1': {
-                name: 'Mike Rodriguez',
-                role: 'Senior QA Engineer',
+                name: 'Anton Buyanovski',
+                role: 'QA Engineer',
                 avatar: '👨‍💻',
                 details: 'Dedicated senior QA engineer with expertise in comprehensive testing strategies. Specializes in functional, regression, and integration testing with a keen eye for detail and user experience.',
                 skills: ['Manual Testing', 'Automation Testing', 'Bug Analysis', 'Test Planning', 'User Experience Testing', 'Documentation'],
@@ -45,7 +45,7 @@ class TeamManager {
                 ]
             },
             'qa-engineer-2': {
-                name: 'Lisa Wang',
+                name: 'Assiya Beribassova',
                 role: 'QA Engineer',
                 avatar: '👩‍💻',
                 details: 'Detail-oriented QA engineer with strong expertise in mobile and web application testing. Passionate about delivering exceptional user experiences through comprehensive quality assurance.',
@@ -59,7 +59,7 @@ class TeamManager {
                 ]
             },
             'qa-engineer-3': {
-                name: 'David Kim',
+                name: 'Daria Bataeva',
                 role: 'QA Engineer',
                 avatar: '👨‍💻',
                 details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
@@ -73,7 +73,7 @@ class TeamManager {
                 ]
             },
             'qa-engineer-4': {
-                name: 'Jennifer Brown',
+                name: 'Lina Gorelik',
                 role: 'QA Engineer',
                 avatar: '👩‍💻',
                 details: 'Enthusiastic QA engineer specializing in performance testing and load testing. Committed to ensuring applications perform optimally under various conditions and user loads.',
@@ -84,6 +84,62 @@ class TeamManager {
                     'Created performance testing scenarios for applications handling 100K+ concurrent users',
                     'Identified critical bottlenecks preventing system failures under peak load',
                     'Established performance benchmarks and monitoring alerts for production systems'
+                ]
+            },
+            'qa-engineer-5': {
+                name: 'Milana Binaminova',
+                role: 'QA Engineer',
+                avatar: '👨‍💻',
+                details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
+                skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing', 'Integration Testing', 'Performance Analysis'],
+                experience: '3+ years in full-stack quality assurance and testing',
+                achievements: [
+                    'Automated 150+ API test cases reducing manual testing effort by 70%',
+                    'Identified and helped resolve 50+ security vulnerabilities before production',
+                    'Built robust data validation framework used across multiple projects',
+                    'Improved API response time by 30% through performance testing insights'
+                ]
+            },
+            'qa-engineer-6': {
+                name: 'Sergeiy Borovich',
+                role: 'QA Engineer',
+                avatar: '👨‍💻',
+                details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
+                skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing', 'Integration Testing', 'Performance Analysis'],
+                experience: '3+ years in full-stack quality assurance and testing',
+                achievements: [
+                    'Automated 150+ API test cases reducing manual testing effort by 70%',
+                    'Identified and helped resolve 50+ security vulnerabilities before production',
+                    'Built robust data validation framework used across multiple projects',
+                    'Improved API response time by 30% through performance testing insights'
+                ]
+            },
+            'qa-engineer-7': {
+                name: 'Serine Zargaryan',
+                role: 'QA Engineer',
+                avatar: '👨‍💻',
+                details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
+                skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing', 'Integration Testing', 'Performance Analysis'],
+                experience: '3+ years in full-stack quality assurance and testing',
+                achievements: [
+                    'Automated 150+ API test cases reducing manual testing effort by 70%',
+                    'Identified and helped resolve 50+ security vulnerabilities before production',
+                    'Built robust data validation framework used across multiple projects',
+                    'Improved API response time by 30% through performance testing insights'
+                ]
+            },
+            'qa-engineer-8': {
+                name: 'Viktor Pervushkin',
+                role: 'QA Engineer',
+                avatar: '👨‍💻',
+                details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
+                skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing', 'Integration Testing', 'Performance Analysis'],
+                experience: '3+ years in full-stack quality assurance and testing',
+                achievements: [
+                    'Automated 150+ API test cases reducing manual testing effort by 70%',
+                    'Identified and helped resolve 50+ security vulnerabilities before production',
+                    'Built robust data validation framework used across multiple projects',
+                    'Improved API response time by 30% through performance testing insights'
                 ]
             }
         };
