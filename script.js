@@ -1,32 +1,6 @@
-// Particle Animation
-function createParticles() {
-    const container = document.getElementById('particles-container');
-    const particleCount = 50;
-
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        // Random size
-        const size = Math.random() * 4 + 1;
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        
-        // Random position
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        
-        // Random animation delay
-        particle.style.animationDelay = Math.random() * 6 + 's';
-        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-        
-        container.appendChild(particle);
-    }
-}
-
-// Team Card Click Interactions with Modal
+// Modern Team Card Interactions with Modal
 function initTeamInteractions() {
-    const teamCards = document.querySelectorAll('.profile-card');
+    const teamCards = document.querySelectorAll('.team-card');
     const modalOverlay = document.createElement('div');
     modalOverlay.id = 'modal-overlay';
     modalOverlay.className = 'modal-overlay';
@@ -74,84 +48,90 @@ function initTeamInteractions() {
     const modalSkills = document.querySelector('.modal-skills');
     const modalAchievements = document.querySelector('.modal-achievements');
     
-    // Team member data
+    // Enhanced team member data
     const teamData = {
         'project-manager': {
             name: 'Alex Johnson',
             role: 'Project Manager',
             avatar: '👨‍💼',
-            details: 'Experienced project manager with 8+ years in QA leadership. Specializes in agile methodologies, team coordination, and strategic planning for complex software testing projects.',
-            skills: ['Project Management', 'Agile/Scrum', 'Team Leadership', 'Strategic Planning'],
-            experience: '8+ years in project management and QA leadership',
+            details: 'Experienced project manager with 8+ years in QA leadership and agile methodologies. Specializes in coordinating cross-functional teams and delivering high-quality software products on time and within budget.',
+            skills: ['Project Management', 'Agile/Scrum', 'Team Leadership', 'Strategic Planning', 'Risk Management', 'Stakeholder Communication'],
+            experience: '8+ years in project management and QA leadership across various industries',
             achievements: [
-                'Led 15+ successful product launches',
-                'Improved team productivity by 40%',
-                'Implemented Agile processes across 5 departments'
+                'Successfully led 15+ major product launches with zero critical post-release bugs',
+                'Improved team productivity by 40% through process optimization and tool implementation',
+                'Implemented Agile methodologies across 5 departments, reducing delivery time by 30%',
+                'Managed budgets exceeding $2M while maintaining 95% on-time delivery rate'
             ]
         },
         'qa-lead': {
             name: 'Sarah Chen',
             role: 'QA Lead',
             avatar: '👩‍💻',
-            details: 'Senior QA professional with expertise in test automation frameworks, API testing, and performance optimization. Leads the technical direction of our testing initiatives.',
-            skills: ['Test Automation', 'API Testing', 'Performance Testing', 'Team Leadership'],
-            experience: '6+ years in quality assurance and test automation',
+            details: 'Senior QA professional with deep expertise in test automation frameworks, API testing, and performance optimization. Passionate about building robust testing strategies that ensure exceptional software quality.',
+            skills: ['Test Automation', 'API Testing', 'Performance Testing', 'Team Leadership', 'CI/CD', 'Quality Strategy'],
+            experience: '6+ years in quality assurance with focus on automation and team leadership',
             achievements: [
-                'Reduced testing time by 60% through automation',
-                'Built comprehensive CI/CD testing pipeline',
-                'Mentored 10+ junior QA engineers'
+                'Reduced overall testing time by 60% through comprehensive automation framework',
+                'Built end-to-end CI/CD testing pipeline handling 500+ daily deployments',
+                'Mentored 10+ junior QA engineers, with 8 receiving promotions',
+                'Designed testing architecture that caught 95% of bugs before production'
             ]
         },
         'qa-engineer-1': {
             name: 'Mike Rodriguez',
             role: 'Senior QA Engineer',
             avatar: '👨‍💻',
-            details: 'Dedicated QA engineer focused on ensuring software quality through comprehensive testing strategies, including functional, regression, and integration testing.',
-            skills: ['Manual Testing', 'Automation Testing', 'Bug Tracking', 'Test Planning'],
-            experience: '4+ years in software quality assurance',
+            details: 'Dedicated senior QA engineer with expertise in comprehensive testing strategies. Specializes in functional, regression, and integration testing with a keen eye for detail and user experience.',
+            skills: ['Manual Testing', 'Automation Testing', 'Bug Analysis', 'Test Planning', 'User Experience Testing', 'Documentation'],
+            experience: '4+ years in software quality assurance with focus on comprehensive testing',
             achievements: [
-                'Discovered 200+ critical bugs',
-                'Improved test coverage by 35%',
-                'Created comprehensive test documentation'
+                'Discovered and documented 200+ critical bugs preventing major production issues',
+                'Improved test coverage by 35% through systematic test case design',
+                'Created comprehensive testing documentation adopted company-wide',
+                'Reduced customer-reported bugs by 45% through thorough pre-release testing'
             ]
         },
         'qa-engineer-2': {
             name: 'Lisa Wang',
             role: 'QA Engineer',
             avatar: '👩‍💻',
-            details: 'Detail-oriented QA engineer with strong expertise in mobile and web application testing. Passionate about delivering high-quality user experiences.',
-            skills: ['Mobile Testing', 'Web Testing', 'Cross-browser Testing', 'Usability Testing'],
-            experience: '3+ years in mobile and web testing',
+            details: 'Detail-oriented QA engineer with strong expertise in mobile and web application testing. Passionate about delivering exceptional user experiences through comprehensive quality assurance.',
+            skills: ['Mobile Testing', 'Web Testing', 'Cross-browser Testing', 'Usability Testing', 'Responsive Design Testing', 'Accessibility Testing'],
+            experience: '3+ years specializing in mobile and web application testing',
             achievements: [
-                'Led mobile app testing for 8 major releases',
-                'Implemented cross-browser testing strategy',
-                'Reduced user-reported bugs by 45%'
+                'Led mobile app testing for 8 major releases across iOS and Android platforms',
+                'Implemented comprehensive cross-browser testing strategy covering 15+ browsers',
+                'Reduced user-reported mobile bugs by 45% through device-specific testing',
+                'Established accessibility testing standards ensuring WCAG 2.1 compliance'
             ]
         },
         'qa-engineer-3': {
             name: 'David Kim',
             role: 'QA Engineer',
             avatar: '👨‍💻',
-            details: 'Versatile QA engineer with experience in both backend and frontend testing. Strong background in API testing and database validation.',
-            skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing'],
-            experience: '3+ years in full-stack testing',
+            details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
+            skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing', 'Integration Testing', 'Performance Analysis'],
+            experience: '3+ years in full-stack quality assurance and testing',
             achievements: [
-                'Automated 150+ API test cases',
-                'Identified 50+ security vulnerabilities',
-                'Built robust data validation framework'
+                'Automated 150+ API test cases reducing manual testing effort by 70%',
+                'Identified and helped resolve 50+ security vulnerabilities before production',
+                'Built robust data validation framework used across multiple projects',
+                'Improved API response time by 30% through performance testing insights'
             ]
         },
         'qa-engineer-4': {
             name: 'Jennifer Brown',
             role: 'QA Engineer',
             avatar: '👩‍💻',
-            details: 'Enthusiastic QA engineer specializing in performance testing and load testing. Committed to ensuring applications perform optimally under various conditions.',
-            skills: ['Performance Testing', 'Load Testing', 'Stress Testing', 'JMeter'],
-            experience: '2+ years in performance testing',
+            details: 'Enthusiastic QA engineer specializing in performance testing and load testing. Committed to ensuring applications perform optimally under various conditions and user loads.',
+            skills: ['Performance Testing', 'Load Testing', 'Stress Testing', 'JMeter', 'Performance Monitoring', 'Capacity Planning'],
+            experience: '2+ years focused on performance testing and optimization',
             achievements: [
-                'Optimized application performance by 50%',
-                'Created comprehensive load testing scenarios',
-                'Identified critical bottlenecks under heavy load'
+                'Optimized application performance by 50% through comprehensive load testing',
+                'Created performance testing scenarios for applications handling 100K+ concurrent users',
+                'Identified critical bottlenecks preventing system failures under peak load',
+                'Established performance benchmarks and monitoring alerts for production systems'
             ]
         }
     };
@@ -188,9 +168,14 @@ function initTeamInteractions() {
                     modalAchievements.appendChild(li);
                 });
                 
-                // Show modal
+                // Show modal with animation
                 modalOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                
+                // Add entrance animation
+                setTimeout(() => {
+                    modalAvatar.style.animation = 'gentle-pulse 2s ease-in-out infinite';
+                }, 300);
             }
         });
     });
@@ -218,8 +203,8 @@ function initTeamInteractions() {
     });
 }
 
-// Simple notification system
-function showNotification(message) {
+// Enhanced notification system
+function showNotification(message, type = 'info') {
     // Remove existing notification
     const existing = document.querySelector('.notification');
     if (existing) {
@@ -230,21 +215,15 @@ function showNotification(message) {
     const notification = document.createElement('div');
     notification.className = 'notification';
     notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: rgba(0, 242, 234, 0.9);
-        color: #0d0d0d;
-        padding: 15px 20px;
-        border-radius: 10px;
-        font-family: 'Courier New', monospace;
-        font-weight: bold;
-        z-index: 10000;
-        box-shadow: 0 0 20px rgba(0, 242, 234, 0.5);
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-    `;
+    
+    // Add type-specific styling
+    if (type === 'success') {
+        notification.style.background = 'rgba(34, 197, 94, 0.9)';
+    } else if (type === 'error') {
+        notification.style.background = 'rgba(239, 68, 68, 0.9)';
+    } else if (type === 'warning') {
+        notification.style.background = 'rgba(245, 158, 11, 0.9)';
+    }
     
     document.body.appendChild(notification);
     
@@ -272,44 +251,62 @@ function initSmoothScrolling() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Get target section from href
-            const targetId = link.getAttribute('href');
-            if (targetId === '#') return;
+            // Get target section from href or simulate navigation
+            const linkText = link.textContent.trim();
             
-            const targetSection = document.querySelector(targetId);
-            if (targetSection) {
-                // Add click effect
-                link.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    link.style.transform = '';
-                }, 150);
-                
-                // Scroll to section
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-                
-                // Show notification
-                const linkText = link.textContent.trim();
-                showNotification(`Navigating to ${linkText}`);
-            }
+            // Add click effect
+            link.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                link.style.transform = '';
+            }, 150);
+            
+            // Show notification based on link
+            showNotification(`Navigating to ${linkText}`, 'info');
+            
+            // Simulate different pages
+            setTimeout(() => {
+                if (linkText === 'HOME') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else if (linkText === 'GALLERY') {
+                    showNotification('Gallery coming soon! 🎨', 'warning');
+                } else if (linkText === 'ABOUT US') {
+                    const teamSection = document.querySelector('.team');
+                    if (teamSection) {
+                        teamSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else if (linkText === 'FAQ') {
+                    showNotification('FAQ section is under development 📝', 'warning');
+                } else if (linkText === 'JOIN US') {
+                    showNotification('Ready to join our team? Contact us! 🚀', 'success');
+                }
+            }, 500);
         });
     });
 }
 
-// Add Glitch Effect to Buttons on Load
-function initGlitchEffects() {
-    const glitchBtns = document.querySelectorAll('.glitch-btn');
+// Add Modern Glitch Effect to Buttons
+function initModernEffects() {
+    const modernBtns = document.querySelectorAll('.modern-btn');
     
-    glitchBtns.forEach(btn => {
-        // Add random glitch animation on page load
+    modernBtns.forEach(btn => {
+        // Add random subtle animation on page load
         setTimeout(() => {
-            btn.style.animation = 'glitch-anim 0.3s ease-out';
+            btn.style.animation = 'subtle-glitch 0.2s ease-out';
             setTimeout(() => {
                 btn.style.animation = '';
-            }, 300);
-        }, Math.random() * 2000);
+            }, 200);
+        }, Math.random() * 3000);
+        
+        // Enhanced hover effects
+        btn.addEventListener('mouseenter', () => {
+            const btnText = btn.querySelector('.btn-text');
+            if (btnText) {
+                btnText.style.animation = 'subtle-glitch 0.3s ease-out';
+                setTimeout(() => {
+                    btnText.style.animation = '';
+                }, 300);
+            }
+        });
     });
 }
 
@@ -325,52 +322,58 @@ function initScrollAnimations() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                
+                // Add stagger effect for cards in the same container
+                const siblings = Array.from(entry.target.parentElement.children);
+                const index = siblings.indexOf(entry.target);
+                entry.target.style.transitionDelay = `${index * 0.1}s`;
             }
         });
     }, observerOptions);
     
     // Observe content cards and team cards
-    const cards = document.querySelectorAll('.info-card, .stat-card, .glitch-card');
+    const cards = document.querySelectorAll('.glass-card, .stat-card, .team-card');
     cards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        card.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
         observer.observe(card);
     });
 }
 
 // Project Button Interactions
 function initProjectButtons() {
-    const projectBtns = document.querySelectorAll('.project-btn');
+    const projectBtns = document.querySelectorAll('.project-card');
     
     projectBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Add special effect for project buttons
             const btnText = btn.querySelector('.btn-text').textContent;
             
             // Add loading effect
             btn.style.opacity = '0.7';
             btn.style.pointerEvents = 'none';
+            btn.style.transform = 'scale(0.98)';
+            
+            // Show loading notification
+            showNotification(`Loading ${btnText}...`, 'info');
             
             setTimeout(() => {
                 btn.style.opacity = '1';
                 btn.style.pointerEvents = '';
-            }, 1000);
-            
-            // Show notification
-            showNotification(`Loading ${btnText}...`);
-            
-            // Simulate loading (in a real app, this would navigate to the project)
-            setTimeout(() => {
-                showNotification(`${btnText} is currently under development 🚧`);
+                btn.style.transform = '';
             }, 1500);
+            
+            // Simulate project loading
+            setTimeout(() => {
+                showNotification(`${btnText} is currently under development 🚧`, 'warning');
+            }, 2000);
         });
     });
 }
 
-// Menu Button Special Effect
+// Enhanced Menu Button Effect
 function initMenuButton() {
     const menuBtn = document.querySelector('.menu-btn');
     
@@ -378,20 +381,20 @@ function initMenuButton() {
         menuBtn.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Add special cyber effect
-            menuBtn.style.boxShadow = '0 0 50px #00ffff, 0 0 100px #ff00ff';
+            // Add special effect
             menuBtn.style.transform = 'scale(0.95)';
+            menuBtn.style.boxShadow = '0 0 30px rgba(120, 119, 198, 0.4), 0 0 60px rgba(120, 200, 255, 0.2)';
             
             setTimeout(() => {
-                menuBtn.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.5)';
                 menuBtn.style.transform = '';
+                menuBtn.style.boxShadow = '';
             }, 1000);
             
-            showNotification('Opening architecture menu...');
+            showNotification('Opening architecture menu...', 'info');
             
-            // In a real app, this would open a modal with architecture diagram
+            // Simulate architecture menu
             setTimeout(() => {
-                showNotification('Architecture visualization is coming soon!');
+                showNotification('Interactive architecture visualization coming soon! 🏗️', 'success');
             }, 2000);
         });
     }
@@ -408,58 +411,180 @@ function initTypingEffect() {
         span.style.transform = 'translateY(20px)';
         
         setTimeout(() => {
-            span.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            span.style.transition = 'opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1)';
             span.style.opacity = '1';
             span.style.transform = 'translateY(0)';
-        }, index * 300);
+        }, index * 300 + 500); // Delay start by 500ms
     });
 }
 
 // Enhanced avatar interactions
 function initAvatarEffects() {
-    const avatars = document.querySelectorAll('.profile-avatar');
+    const avatars = document.querySelectorAll('.team-avatar');
     
     avatars.forEach(avatar => {
         avatar.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent card click
             
             // Add special click effect
-            avatar.style.transform = 'translateX(-50%) scale(1.2) rotate(360deg)';
-            avatar.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            const avatarImage = avatar.querySelector('.avatar-image');
+            avatarImage.style.transform = 'scale(1.2) rotate(360deg)';
+            avatarImage.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
             
             setTimeout(() => {
-                avatar.style.transform = 'translateX(-50%) scale(1)';
-                avatar.style.transition = 'all 0.5s ease-in-out';
-            }, 600);
+                avatarImage.style.transform = 'scale(1)';
+                avatarImage.style.transition = 'all 0.3s ease';
+            }, 800);
             
-            showNotification('Avatar clicked! 🤖');
+            showNotification('Team member avatar clicked! 🤖', 'info');
+        });
+        
+        // Add hover effect
+        avatar.addEventListener('mouseenter', () => {
+            const avatarGlow = avatar.querySelector('.avatar-glow');
+            if (avatarGlow) {
+                avatarGlow.style.opacity = '0.8';
+            }
+        });
+        
+        avatar.addEventListener('mouseleave', () => {
+            const avatarGlow = avatar.querySelector('.avatar-glow');
+            if (avatarGlow) {
+                avatarGlow.style.opacity = '0';
+            }
         });
     });
 }
 
-// Performance optimization - Reduce particles on mobile
-function optimizeForDevice() {
-    const isMobile = window.innerWidth <= 768;
+// Android character interactions
+function initAndroidInteractions() {
+    const androidCharacter = document.querySelector('.android-character');
+    const androidMain = document.querySelector('.android-main');
     
-    if (isMobile) {
-        // Reduce particle count
-        const particles = document.querySelectorAll('.particle');
-        particles.forEach((particle, index) => {
-            if (index > 20) {
-                particle.remove();
+    if (androidCharacter) {
+        let clickCount = 0;
+        
+        androidCharacter.addEventListener('click', () => {
+            clickCount++;
+            
+            // Different effects based on click count
+            if (clickCount === 1) {
+                showNotification('Hello! I\'m your AI assistant 🤖', 'info');
+            } else if (clickCount === 3) {
+                showNotification('Keep clicking for a surprise! ✨', 'warning');
+            } else if (clickCount === 5) {
+                showNotification('🎉 Easter egg activated! Welcome to the future!', 'success');
+                
+                // Add rainbow effect
+                document.body.style.filter = 'hue-rotate(0deg)';
+                let hue = 0;
+                const rainbow = setInterval(() => {
+                    hue += 10;
+                    document.body.style.filter = `hue-rotate(${hue}deg)`;
+                    if (hue >= 360) {
+                        clearInterval(rainbow);
+                        document.body.style.filter = '';
+                        clickCount = 0;
+                    }
+                }, 50);
+            } else {
+                showNotification(`Click ${clickCount}/5 🎯`, 'info');
             }
+        });
+    }
+    
+    if (androidMain) {
+        // Add parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const rect = androidMain.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const deltaX = (e.clientX - centerX) / window.innerWidth;
+            const deltaY = (e.clientY - centerY) / window.innerHeight;
+            
+            androidMain.style.transform = `translate(${deltaX * 20}px, ${deltaY * 20}px) rotate(${deltaX * 5}deg)`;
         });
     }
 }
 
-// Add keyboard navigation support
+// Card hover effects
+function initCardEffects() {
+    const glassCards = document.querySelectorAll('.glass-card');
+    
+    glassCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            // Add subtle particle effect
+            createCardParticles(card);
+        });
+    });
+}
+
+function createCardParticles(card) {
+    const particles = [];
+    const particleCount = 5;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(120, 119, 198, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+        `;
+        
+        const rect = card.getBoundingClientRect();
+        particle.style.left = (rect.left + Math.random() * rect.width) + 'px';
+        particle.style.top = (rect.top + Math.random() * rect.height) + 'px';
+        
+        document.body.appendChild(particle);
+        particles.push(particle);
+        
+        // Animate particle
+        const animation = particle.animate([
+            { transform: 'translateY(0px)', opacity: 1 },
+            { transform: 'translateY(-30px)', opacity: 0 }
+        ], {
+            duration: 1000,
+            easing: 'ease-out'
+        });
+        
+        animation.addEventListener('finish', () => {
+            particle.remove();
+        });
+    }
+}
+
+// Performance optimization
+function optimizeForDevice() {
+    const isMobile = window.innerWidth <= 768;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (isMobile || prefersReducedMotion) {
+        // Disable heavy animations on mobile or for users who prefer reduced motion
+        const style = document.createElement('style');
+        style.textContent = `
+            .android-main { animation: none !important; }
+            .effect-ring { animation: none !important; }
+            .floating-icon { animation: none !important; }
+            .android-glow { animation: none !important; }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Keyboard navigation support
 function initKeyboardNavigation() {
     document.addEventListener('keydown', (e) => {
-        // ESC key - remove any notifications or close modal
+        // ESC key - close modals and notifications
         if (e.key === 'Escape') {
             const notification = document.querySelector('.notification');
             if (notification) {
-                notification.remove();
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
             }
             
             const modal = document.querySelector('.modal-overlay.active');
@@ -469,29 +594,66 @@ function initKeyboardNavigation() {
             }
         }
         
-        // Space or Enter on focused glitch buttons
-        if ((e.key === ' ' || e.key === 'Enter') && e.target.classList.contains('glitch-btn')) {
+        // Space or Enter on focused buttons
+        if ((e.key === ' ' || e.key === 'Enter') && e.target.classList.contains('modern-btn')) {
             e.preventDefault();
             e.target.click();
         }
+        
+        // Arrow keys for card navigation
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+            const focusableCards = document.querySelectorAll('.team-card, .glass-card');
+            const currentIndex = Array.from(focusableCards).indexOf(document.activeElement);
+            
+            if (currentIndex !== -1) {
+                e.preventDefault();
+                const nextIndex = e.key === 'ArrowRight' 
+                    ? (currentIndex + 1) % focusableCards.length
+                    : (currentIndex - 1 + focusableCards.length) % focusableCards.length;
+                
+                focusableCards[nextIndex].focus();
+            }
+        }
+    });
+    
+    // Make cards focusable
+    const cards = document.querySelectorAll('.team-card, .glass-card');
+    cards.forEach(card => {
+        card.setAttribute('tabindex', '0');
+        card.style.outline = 'none';
+        
+        card.addEventListener('focus', () => {
+            card.style.transform = 'translateY(-8px)';
+            card.style.boxShadow = '0 20px 40px rgba(120, 119, 198, 0.2)';
+        });
+        
+        card.addEventListener('blur', () => {
+            card.style.transform = '';
+            card.style.boxShadow = '';
+        });
     });
 }
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    createParticles();
-    initTeamInteractions();
-    initSmoothScrolling();
-    initGlitchEffects();
-    initScrollAnimations();
-    initProjectButtons();
-    initMenuButton();
-    initTypingEffect();
-    initAvatarEffects();
-    initKeyboardNavigation();
-    optimizeForDevice();
-    
-    console.log('Apple & X.AI Project initialized successfully! 🚀');
+    // Add a loading delay for better UX
+    setTimeout(() => {
+        initTeamInteractions();
+        initSmoothScrolling();
+        initModernEffects();
+        initScrollAnimations();
+        initProjectButtons();
+        initMenuButton();
+        initTypingEffect();
+        initAvatarEffects();
+        initAndroidInteractions();
+        initCardEffects();
+        initKeyboardNavigation();
+        optimizeForDevice();
+        
+        console.log('🚀 Modern Apple & X.AI Project initialized successfully!');
+        showNotification('Welcome to Apple & X.AI Project! ✨', 'success');
+    }, 500);
 });
 
 // Handle window resize
@@ -499,44 +661,63 @@ window.addEventListener('resize', () => {
     optimizeForDevice();
 });
 
-// Add some Easter eggs
-function initEasterEggs() {
-    let clickCount = 0;
-    const logo = document.querySelector('.logo-section');
+// Handle scroll for header effect
+let lastScrollY = window.scrollY;
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    const currentScrollY = window.scrollY;
     
-    if (logo) {
-        logo.addEventListener('click', () => {
-            clickCount++;
-            
-            if (clickCount === 5) {
-                showNotification('🎉 Easter egg found! You discovered the secret!');
-                
-                // Add rainbow effect to the page
-                document.body.style.animation = 'rainbow 2s ease-in-out';
-                
-                setTimeout(() => {
-                    document.body.style.animation = '';
-                    clickCount = 0;
-                }, 2000);
-            }
-        });
+    if (header) {
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Scrolling down
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            // Scrolling up
+            header.style.transform = 'translateY(0)';
+        }
+        
+        // Add blur effect based on scroll
+        const blurAmount = Math.min(currentScrollY / 10, 20);
+        header.style.backdropFilter = `blur(${20 + blurAmount}px)`;
     }
+    
+    lastScrollY = currentScrollY;
+});
+
+// Add loading screen effect
+function initLoadingScreen() {
+    const loadingScreen = document.createElement('div');
+    loadingScreen.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #0f1419;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        transition: opacity 0.5s ease;
+    `;
+    
+    loadingScreen.innerHTML = `
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🤖</div>
+            <div style="color: #7877c6; font-size: 1.2rem; font-weight: 600;">Loading Apple & X.AI Project...</div>
+        </div>
+    `;
+    
+    document.body.appendChild(loadingScreen);
+    
+    // Hide loading screen after 1 second
+    setTimeout(() => {
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+            loadingScreen.remove();
+        }, 500);
+    }, 1000);
 }
 
-// Rainbow animation for easter egg
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes rainbow {
-        0% { filter: hue-rotate(0deg); }
-        25% { filter: hue-rotate(90deg); }
-        50% { filter: hue-rotate(180deg); }
-        75% { filter: hue-rotate(270deg); }
-        100% { filter: hue-rotate(360deg); }
-    }
-`;
-document.head.appendChild(style);
-
-// Initialize easter eggs after DOM load
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(initEasterEggs, 1000);
-});
+// Initialize loading screen immediately
+initLoadingScreen();
