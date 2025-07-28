@@ -1,4 +1,4 @@
-// Оптимизированный Team Manager - только логика, эффекты в CSS
+// Team Manager 
 class TeamManager {
     constructor() {
         this.modal = null;
@@ -236,64 +236,16 @@ class TeamManager {
     }
 }
 
-// Notification system
-class NotificationManager {
-    constructor() {
-        this.notifications = new Set();
-    }
-
-    show(message, type = 'info', duration = 3000) {
-        // Clear previous notifications
-        this.notifications.forEach(n => {
-            if (n.parentNode) {
-                n.classList.remove('show');
-                setTimeout(() => n.remove(), 300);
-            }
-        });
-        this.notifications.clear();
-
-        // Create notification
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.textContent = message;
-        
-        document.body.appendChild(notification);
-        this.notifications.add(notification);
-        
-        // Show animation
-        setTimeout(() => notification.classList.add('show'), 100);
-        
-        // Auto hide
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    notification.remove();
-                    this.notifications.delete(notification);
-                }, 300);
-            }
-        }, duration);
-        
-        return notification;
-    }
-}
 
 // Initialize when DOM is ready
 function initApp() {
     try {
         const teamManager = new TeamManager();
-        const notificationManager = new NotificationManager();
         
         teamManager.init();
         
-        // Welcome message
-        setTimeout(() => {
-            notificationManager.show('Welcome to Apple & X.AI Project! ✨', 'success');
-        }, 1000);
-        
         // Store globally for cleanup
         window.teamManager = teamManager;
-        window.notificationManager = notificationManager;
         
         console.log('🚀 App initialized successfully');
         
