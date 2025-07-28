@@ -615,7 +615,7 @@ body {
     box-shadow: 0 0 40px rgba(255, 0, 255, 0.8);
 }
 
-/* Team Section */
+/* NEW TEAM SECTION STYLES */
 .team {
     padding: 80px 0;
     background: linear-gradient(180deg, rgba(255, 0, 255, 0.05) 0%, rgba(0, 255, 255, 0.05) 100%);
@@ -623,78 +623,234 @@ body {
 
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+    justify-items: center;
 }
 
-.team-card {
-    background: rgba(16, 21, 46, 0.8);
-    border: 2px solid #00ffff;
-    border-radius: 15px;
-    padding: 25px;
+/* Glitch Profile Wrapper & Card */
+.glitch-profile-wrapper {
+    --bg-color: #0d0d0d;
+    --primary-color: #00f2ea;
+    --secondary-color: #a855f7;
+    --text-color: #e5e5e5;
+    --font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+    --glitch-anim-duration: 0.4s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-family);
+    padding: 1rem;
+}
+
+.glitch-card {
+    position: relative;
+    background-color: var(--bg-color);
+    width: 19rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(0, 242, 234, 0.2);
+    box-shadow:
+        0 0 1.5rem rgba(0, 242, 234, 0.1),
+        inset 0 0 1rem rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.glitch-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 0 2rem rgba(0, 242, 234, 0.3),
+        inset 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+
+.card-header-visual {
+    height: 3.5rem;
+    background: linear-gradient(
+            45deg,
+            rgba(0, 242, 234, 0.1),
+            rgba(13, 13, 13, 0.8)
+        ),
+        radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%);
+    border-bottom: 1px solid rgba(0, 242, 234, 0.1);
+}
+
+/* Avatar */
+.profile-avatar {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0.75rem;
+    z-index: 2;
+    width: 5.5rem;
+    height: 5.5rem;
+    background: var(--bg-color);
+    border-radius: 50%;
+    padding: 0.9rem;
+    box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 242, 234, 0.3);
+    transition: all 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-placeholder {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 10px rgba(0, 242, 234, 0.3));
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-avatar:hover {
+    background-color: var(--primary-color);
+    transform: translateX(-50%) scale(1.1);
+}
+
+.profile-avatar:hover .avatar-placeholder {
+    transform: rotate(-5deg);
+    filter: drop-shadow(0 0 15px rgba(13, 13, 13, 0.8));
+}
+
+/* Card Body */
+.card-body {
+    padding: 1.1rem;
+    padding-top: 0;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.profile-body {
+    align-items: center;
     text-align: center;
+    padding-top: 2.75rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.profile-info {
+    margin-bottom: 1.5rem;
+}
+
+.profile-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0;
+    position: relative;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
 }
 
-.team-card::before {
-    content: '';
+.profile-title {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    opacity: 0.8;
+    margin: 0.25rem 0 0 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Profile Links */
+.profile-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.social-link:hover {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    transform: scale(1.1);
+    box-shadow: 0 0 1rem var(--primary-color);
+}
+
+.social-link svg {
+    transition: all 0.3s ease;
+}
+
+.social-link:hover svg {
+    transform: scale(1.1);
+}
+
+/* Glitch Effects for Profile Name */
+.profile-name:hover::before,
+.profile-name:hover::after {
+    content: attr(data-text);
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, #00ffff, #ff00ff, #00ff00, #00ffff);
-    animation: teamBorderGlow 4s linear infinite;
-}
-
-@keyframes teamBorderGlow {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-.team-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    border-color: #ff00ff;
-    box-shadow: 0 20px 40px rgba(255, 0, 255, 0.4);
-}
-
-.team-photo {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    border: 3px solid #00ffff;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
-    transition: all 0.3s ease;
 }
 
-.team-card:hover .team-photo {
-    border-color: #ff00ff;
-    box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
+.profile-name:hover {
+    color: transparent;
 }
 
-.photo-placeholder {
-    font-size: 50px;
-    filter: drop-shadow(0 0 10px currentColor);
+.profile-name:hover::before {
+    opacity: 1;
+    color: var(--secondary-color);
+    animation: glitch-anim var(--glitch-anim-duration)
+        cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-.team-name {
-    color: #00ffff;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    text-shadow: 0 0 10px currentColor;
+.profile-name:hover::after {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    animation: glitch-anim var(--glitch-anim-duration)
+        cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
 }
 
-.team-role {
-    color: #cccccc;
-    font-size: 0.9rem;
-    text-transform: uppercase;
+@keyframes glitch-anim {
+    0% {
+        transform: translate(0);
+        clip-path: inset(0 0 0 0);
+    }
+    20% {
+        transform: translate(-0.3rem, 0.15rem);
+        clip-path: inset(50% 0 20% 0);
+    }
+    40% {
+        transform: translate(0.15rem, -0.1rem);
+        clip-path: inset(20% 0 60% 0);
+    }
+    60% {
+        transform: translate(-0.25rem, 0.1rem);
+        clip-path: inset(80% 0 5% 0);
+    }
+    80% {
+        transform: translate(0.25rem, -0.15rem);
+        clip-path: inset(30% 0 45% 0);
+    }
+    100% {
+        transform: translate(0);
+        clip-path: inset(0 0 0 0);
+    }
 }
 
 /* Other Projects Section */
@@ -725,110 +881,6 @@ body {
     color: #ff00ff;
 }
 
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
-    background: linear-gradient(135deg, rgba(16, 21, 46, 0.95), rgba(22, 33, 62, 0.95));
-    margin: 5% auto;
-    padding: 0;
-    border: 2px solid #00ffff;
-    border-radius: 20px;
-    width: 80%;
-    max-width: 600px;
-    position: relative;
-    animation: modalSlideIn 0.4s ease;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
-}
-
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-50px) scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.modal-close {
-    color: #ff00ff;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    padding: 15px 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.modal-close:hover {
-    color: #fff;
-    text-shadow: 0 0 20px #ff00ff;
-    transform: scale(1.2);
-}
-
-.modal-body {
-    display: flex;
-    padding: 30px;
-    gap: 30px;
-    align-items: center;
-}
-
-.modal-photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 3px solid #00ffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
-    flex-shrink: 0;
-}
-
-.modal-photo-placeholder {
-    font-size: 80px;
-    filter: drop-shadow(0 0 15px currentColor);
-}
-
-.modal-info {
-    flex: 1;
-}
-
-.modal-name {
-    color: #00ffff;
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    text-shadow: 0 0 15px currentColor;
-}
-
-.modal-role {
-    color: #ff00ff;
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px currentColor;
-}
-
-.modal-details {
-    color: #cccccc;
-    line-height: 1.6;
-    font-size: 1rem;
-}
-
 /* Pulse Animation */
 @keyframes pulse {
     0%, 100% { opacity: 1; }
@@ -840,7 +892,9 @@ body {
     .glitch-btn:hover::before,
     .glitch-btn:focus::before,
     .glitch-btn:hover::after,
-    .glitch-btn:focus::after {
+    .glitch-btn:focus::after,
+    .profile-name:hover::before,
+    .profile-name:hover::after {
         animation: none;
         opacity: 0;
     }
@@ -850,12 +904,15 @@ body {
         opacity: 1;
     }
 
+    .profile-name:hover {
+        color: var(--text-color);
+    }
+
     .particle,
     .robot-placeholder,
     .green-apple,
     .hero::before,
     .stat-card::before,
-    .team-card::before,
     .content-card {
         animation: none;
     }
@@ -883,11 +940,6 @@ body {
         grid-template-columns: 1fr;
     }
     
-    .modal-body {
-        flex-direction: column;
-        text-align: center;
-    }
-    
     .nav {
         gap: 10px;
     }
@@ -909,6 +961,11 @@ body {
         padding: 10px 20px;
         font-size: 12px;
     }
+
+    .glitch-card {
+        width: 100%;
+        max-width: 300px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -918,11 +975,6 @@ body {
     
     .section-title {
         font-size: 2rem;
-    }
-    
-    .modal-content {
-        width: 95%;
-        margin: 10% auto;
     }
     
     .robot-placeholder {
@@ -951,5 +1003,10 @@ body {
     .glitch-btn {
         padding: 8px 15px;
         font-size: 11px;
+    }
+
+    .glitch-card {
+        width: 100%;
+        max-width: 280px;
     }
 }
