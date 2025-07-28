@@ -408,7 +408,7 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    max-height: 400px;
+    max-height: 355px;
     overflow-y: auto;
 }
 
@@ -504,6 +504,7 @@ body {
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.3s ease;
+    height: 53px;
 }
 
 .focus-item:hover {
