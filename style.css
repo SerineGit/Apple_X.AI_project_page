@@ -1,620 +1,3024 @@
-/* General Styles & Utilities */
-:root {
-    /* Color Palette */
-    --color-primary: #7877c6; /* Purple-ish */
-    --color-secondary: #78c8ff; /* Light Blue */
-    --color-background-dark: #1a1a2e; /* Dark Blue */
-    --color-text-light: #e6edf3; /* Off-white */
-    --color-text-dark: #0f0f1a; /* Very dark blue */
-    --color-accent-green: #38c172; /* Green for success/highlight */
-    --color-accent-red: #e3342f; /* Red for errors/alerts */
+* {
 
-    /* Spacing */
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 16px;
-    --spacing-lg: 24px;
-    --spacing-xl: 48px;
+    margin: 0;
 
-    /* Border Radii */
-    --border-radius-sm: 4px;
-    --border-radius-md: 8px;
-    --border-radius-lg: 12px;
+    padding: 0;
 
-    /* Font Sizes (Example) */
-    --font-size-h1: 3.5rem;
-    --font-size-h2: 2.5rem;
-    --font-size-h3: 1.8rem;
-    --font-size-body: 1rem;
+    box-sizing: border-box;
 
-    /* Transitions */
-    --transition-speed: 0.3s;
-    --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+
 
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--color-background-dark);
-    color: var(--color-text-light);
-    line-height: 1.6;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    background: #0f1419;
+
+    color: #e6edf3;
+
+    overflow-x: hidden;
+
+    line-height: 1.6;
+
 }
 
-a {
-    color: var(--color-secondary);
-    text-decoration: none;
-}
 
-a:hover {
-    text-decoration: underline;
-}
-
-section {
-    padding: var(--spacing-xl) var(--spacing-md);
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-md);
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 0 20px;
+
 }
 
-.section-title {
-    font-size: var(--font-size-h2);
-    color: var(--color-text-light);
-    text-align: center;
-    margin-bottom: var(--spacing-xl);
-    position: relative;
-    padding-bottom: var(--spacing-md);
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block; /* Required for text-fill-color */
-    width: 100%; /* Required for text-fill-color */
-    text-align: center;
-    transition: filter var(--transition-speed) var(--transition-ease);
+
+
+/* Gradient Background */
+
+#gradient-background {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    z-index: -1;
+
+    background: 
+
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+
+        radial-gradient(circle at 40% 40%, rgba(120, 200, 255, 0.1) 0%, transparent 50%),
+
+        linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0f1419 100%);
+
 }
 
-.section-title::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    border-radius: var(--border-radius-sm);
+
+
+/* Modern Button Style */
+
+.modern-btn {
+
+    position: relative;
+
+    display: inline-block;
+
+    padding: 12px 24px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 12px;
+
+    color: #e6edf3;
+
+    text-decoration: none;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    overflow: hidden;
+
 }
 
-/* Hover effect for section titles */
-.section-title:hover {
-    animation: subtle-glitch var(--transition-speed) ease-out;
-    filter: brightness(1.2); /* Make the gradient slightly brighter */
+
+
+.modern-btn::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+
+    left: -100%;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+
+    transition: left 0.5s ease;
+
 }
 
-/* Keyframe Animations */
+
+
+.modern-btn:hover {
+
+    background: rgba(255, 255, 255, 0.1);
+
+    border-color: rgba(120, 119, 198, 0.5);
+
+    transform: translateY(-2px);
+
+    box-shadow: 
+
+        0 8px 25px rgba(120, 119, 198, 0.15),
+
+        0 0 0 1px rgba(120, 119, 198, 0.1);
+
+}
+
+
+
+.modern-btn:hover::before {
+
+    left: 100%;
+
+}
+
+
+
+.modern-btn:active {
+
+    transform: translateY(0);
+
+}
+
+
+
+/* Glitch effect on hover for text */
+
+.modern-btn .btn-text {
+
+    position: relative;
+
+    z-index: 1;
+
+}
+
+
+
+.modern-btn:hover .btn-text {
+
+    animation: subtle-glitch 0.3s ease-out;
+
+}
+
+
+
 @keyframes subtle-glitch {
-    0% {
-        transform: translate(0);
-    }
-    20% {
-        transform: translate(-2px, 2px);
-    }
-    40% {
-        transform: translate(-2px, -2px);
-    }
-    60% {
-        transform: translate(2px, 2px);
-    }
-    80% {
-        transform: translate(2px, -2px);
-    }
-    100% {
-        transform: translate(0);
-    }
+
+    0%, 100% { transform: translate(0); }
+
+    20% { transform: translate(-1px, 1px); }
+
+    40% { transform: translate(1px, -1px); }
+
+    60% { transform: translate(-1px, -1px); }
+
+    80% { transform: translate(1px, 1px); }
+
 }
 
-@keyframes background-pan {
-    from {
-        background-position: 0% center;
-    }
-    to {
-        background-position: -200% center;
-    }
-}
+
 
 /* Header */
-header {
-    background-color: var(--color-background-dark);
-    padding: var(--spacing-md) 0;
-    border-bottom: 1px solid rgba(120, 119, 198, 0.2);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(10px); /* Glassmorphism effect */
-    -webkit-backdrop-filter: blur(10px);
+
+.header {
+
+    position: fixed;
+
+    top: 0;
+
+    width: 100%;
+
+    background: rgba(15, 20, 25, 0.8);
+
+    backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    z-index: 1000;
+
+    padding: 15px 0;
+
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-md);
+
+
+.header-content {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
 }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--color-primary);
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 5px rgba(120, 119, 198, 0.5);
+
+
+.logo-section {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    font-size: 24px;
+
+    position: relative;
+
 }
 
-.nav-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: var(--spacing-lg);
+
+
+.apple-logo img, .xai-logo img {
+
+    height: 40px;
+
+    width: auto;
+
+    filter: drop-shadow(0 0 8px rgba(120, 119, 198, 0.3));
+
+    transition: all 0.3s ease;
+
 }
+
+
+
+.apple-logo img:hover, .xai-logo img:hover {
+
+    filter: drop-shadow(0 0 15px rgba(120, 119, 198, 0.5));
+
+    transform: scale(1.05);
+
+}
+
+
+
+.logo-divider {
+
+    color: #7877c6;
+
+    font-weight: bold;
+
+    text-shadow: 0 0 10px rgba(120, 119, 198, 0.5);
+
+    font-size: 28px;
+
+}
+
+
+
+/* Android Character */
+
+.android-character {
+
+    position: absolute;
+
+    right: -100px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 80px;
+
+    height: 80px;
+
+    cursor: pointer;
+
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+
+
+.android-character img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    filter: drop-shadow(0 0 15px rgba(120, 200, 255, 0.4));
+
+    transition: all 0.3s ease;
+
+}
+
+
+
+.android-glow {
+
+    position: absolute;
+
+    top: -10px;
+
+    left: -10px;
+
+    right: -10px;
+
+    bottom: -10px;
+
+    background: radial-gradient(circle, rgba(120, 200, 255, 0.2) 0%, transparent 70%);
+
+    border-radius: 50%;
+
+    animation: gentle-pulse 3s ease-in-out infinite;
+
+}
+
+
+
+.android-character:hover {
+
+    transform: translateY(-50%) scale(1.1);
+
+}
+
+
+
+.android-character:hover img {
+
+    filter: drop-shadow(0 0 25px rgba(120, 200, 255, 0.6));
+
+    transform: rotate(10deg);
+
+}
+
+
+
+@keyframes gentle-pulse {
+
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+
+    50% { opacity: 0.6; transform: scale(1.05); }
+
+}
+
+
+
+/* Navigation */
+
+.nav {
+
+    display: flex;
+
+    gap: 15px;
+
+}
+
+
 
 .nav-link {
-    font-size: 1.1rem;
-    color: var(--color-text-light);
-    transition: all var(--transition-speed) var(--transition-ease);
-    position: relative; /* For potential future pseudo-elements */
-    overflow: hidden; /* To contain glitch effect if it moves outside */
+
+    font-size: 13px;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
 }
 
-/* Navigation Link Hover Effect */
-.nav-link:hover {
-    color: var(--color-primary); /* Accent color on hover */
-    text-shadow: 0 0 10px rgba(120, 119, 198, 0.7); /* Stronger text shadow */
-    transform: translateY(-3px); /* Slight lift effect */
-    animation: subtle-glitch 0.3s ease-out; /* Apply glitch effect */
-}
 
 
 /* Hero Section */
-.hero-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 80vh;
-    background: radial-gradient(circle at center, rgba(120, 119, 198, 0.1) 0%, rgba(26, 26, 46, 0) 70%);
-    position: relative;
-    overflow: hidden;
+
+.hero {
+
+    padding: 140px 0 100px;
+
+    position: relative;
+
+    overflow: hidden;
+
 }
 
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(120, 119, 198, 0.1)"/></svg>') repeat;
-    background-size: 20px 20px;
-    opacity: 0.3;
-    z-index: -1;
-    animation: background-pan 60s linear infinite;
+
+
+.hero::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    background: 
+
+        radial-gradient(circle at 30% 70%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+
+        radial-gradient(circle at 70% 30%, rgba(255, 119, 198, 0.08) 0%, transparent 50%);
+
+    animation: hero-bg-float 8s ease-in-out infinite;
+
 }
+
+
+
+@keyframes hero-bg-float {
+
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+
+    50% { opacity: 0.8; transform: scale(1.05); }
+
+}
+
+
+
+.hero-content {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 80px;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 1;
+
+}
+
+
 
 .hero-title {
-    font-size: var(--font-size-h1);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.2;
-    font-weight: bold;
+
+    font-size: 3.5rem;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    line-height: 1.1;
+
+    margin-bottom: 24px;
+
 }
 
-.hero-title .welcome-text {
-    display: block;
-    font-size: 0.8em;
-    color: var(--color-text-light);
-    opacity: 0.8;
-    margin-bottom: var(--spacing-sm);
-    transition: animation var(--transition-speed) ease-out;
+
+
+.welcome-text {
+
+    display: block;
+
+    background: linear-gradient(135deg, #7877c6, #78c8ff);
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
 }
 
-.hero-title .project-text {
-    display: block;
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 15px rgba(120, 119, 198, 0.7);
-    transition: animation var(--transition-speed) ease-out;
+
+
+.to-text {
+
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 2rem;
+
+    font-weight: 400;
+
 }
 
-.hero-title .project-label {
-    display: block;
-    font-size: 0.6em;
-    color: var(--color-text-light);
-    opacity: 0.6;
-    margin-top: var(--spacing-sm);
-    transition: animation var(--transition-speed) ease-out;
+
+
+.project-text {
+
+    display: block;
+
+    background: linear-gradient(135deg, #ff77c6, #7877c6);
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
 }
 
-/* Hero Title Hover Effect */
-.hero-title:hover .welcome-text,
-.hero-title:hover .project-text,
-.hero-title:hover .project-label {
-    animation: subtle-glitch var(--transition-speed) ease-out;
+
+
+.project-label {
+
+    display: block;
+
+    color: #78c8ff;
+
+    font-size: 2rem;
+
+    font-weight: 600;
+
 }
 
-.hero-subtitle {
-    font-size: 1.2rem;
-    color: var(--color-text-light);
-    opacity: 0.9;
-    max-width: 700px;
-    margin-bottom: var(--spacing-xl);
+
+
+.hero-description {
+
+    font-size: 1.1rem;
+
+    color: #94a3b8;
+
+    line-height: 1.6;
+
+    max-width: 500px;
+
 }
 
-.modern-btn {
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    color: var(--color-text-light);
-    padding: var(--spacing-md) var(--spacing-lg);
-    border: none;
-    border-radius: var(--border-radius-lg);
-    font-size: 1.1rem;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: all var(--transition-speed) var(--transition-ease);
-    box-shadow: 0 5px 15px rgba(120, 119, 198, 0.4);
+
+
+/* Android Showcase */
+
+.android-showcase {
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    height: 500px;
+
 }
 
-/* Button Hover Effect */
-.modern-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(120, 119, 198, 0.6);
-    color: var(--color-text-light); /* Ensure text color remains light */
+
+
+.android-container {
+
+    position: relative;
+
+    z-index: 2;
+
 }
 
-.modern-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-primary) 100%);
-    transition: left var(--transition-speed) var(--transition-ease);
-    z-index: -1;
+
+
+.android-main {
+
+    width: 300px;
+
+    height: 300px;
+
+    object-fit: contain;
+
+    filter: drop-shadow(0 0 30px rgba(120, 200, 255, 0.3));
+
+    animation: android-float 4s ease-in-out infinite;
+
 }
 
-.modern-btn:hover::before {
-    left: 0;
+
+
+@keyframes android-float {
+
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+
+    50% { transform: translateY(-15px) rotate(2deg); }
+
 }
 
-.modern-btn span {
-    position: relative;
-    z-index: 2;
-    transition: all var(--transition-speed) var(--transition-ease);
+
+
+.android-effects {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 1;
+
 }
 
-.modern-btn:hover span {
-    animation: subtle-glitch 0.3s ease-out;
+
+
+.effect-ring {
+
+    position: absolute;
+
+    border: 1px solid rgba(120, 200, 255, 0.2);
+
+    border-radius: 50%;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
 }
 
-/* Team Section */
+
+
+.ring-1 {
+
+    width: 200px;
+
+    height: 200px;
+
+    animation: ring-pulse 3s ease-in-out infinite;
+
+}
+
+
+
+.ring-2 {
+
+    width: 300px;
+
+    height: 300px;
+
+    animation: ring-pulse 3s ease-in-out infinite 1s;
+
+}
+
+
+
+.ring-3 {
+
+    width: 400px;
+
+    height: 400px;
+
+    animation: ring-pulse 3s ease-in-out infinite 2s;
+
+}
+
+
+
+@keyframes ring-pulse {
+
+    0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+}
+
+
+
+.floating-elements {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    pointer-events: none;
+
+}
+
+
+
+.floating-icon {
+
+    position: absolute;
+
+    font-size: 40px;
+
+    animation: float-around 6s ease-in-out infinite;
+
+}
+
+
+
+.floating-icon.apple {
+
+    top: 20%;
+
+    right: 20%;
+
+    animation-delay: 0s;
+
+}
+
+
+
+.floating-icon.gear {
+
+    bottom: 30%;
+
+    left: 15%;
+
+    animation-delay: 2s;
+
+}
+
+
+
+.floating-icon.rocket {
+
+    top: 60%;
+
+    right: 10%;
+
+    animation-delay: 4s;
+
+}
+
+
+
+@keyframes float-around {
+
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+
+    33% { transform: translateY(-10px) rotate(5deg); opacity: 1; }
+
+    66% { transform: translateY(5px) rotate(-3deg); opacity: 0.8; }
+
+}
+
+
+
+/* Glass Cards */
+
+.main-content {
+
+    padding: 100px 0;
+
+    position: relative;
+
+}
+
+
+
+.content-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+
+    gap: 30px;
+
+}
+
+
+
+.glass-card {
+
+    background: rgba(255, 255, 255, 0.05);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 20px;
+
+    padding: 32px;
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    position: relative;
+
+    overflow: hidden;
+
+    max-height: 355px;
+
+    overflow-y: auto;
+
+}
+
+
+
+.glass-card::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+
+
+.glass-card::-webkit-scrollbar-track {
+
+    background: rgba(255, 255, 255, 0.1);
+
+    border-radius: 3px;
+
+}
+
+
+
+.glass-card::-webkit-scrollbar-thumb {
+
+    background: rgba(120, 119, 198, 0.5);
+
+    border-radius: 3px;
+
+}
+
+
+
+.glass-card::-webkit-scrollbar-thumb:hover {
+
+    background: rgba(120, 119, 198, 0.7);
+
+}
+
+
+
+.glass-card::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 1px;
+
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+
+}
+
+
+
+.glass-card:hover {
+
+    transform: translateY(-8px);
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border-color: rgba(120, 119, 198, 0.3);
+
+    box-shadow: 
+
+        0 20px 40px rgba(0, 0, 0, 0.1),
+
+        0 0 0 1px rgba(120, 119, 198, 0.1);
+
+}
+
+
+
+.card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 24px;
+
+}
+
+
+
+.card-icon {
+
+    font-size: 24px;
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(120, 119, 198, 0.1);
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(120, 119, 198, 0.2);
+
+}
+
+
+
+.card-title {
+
+    font-size: 1.25rem;
+
+    font-weight: 600;
+
+    color: #e6edf3;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+}
+
+
+
+.card-title:hover {
+
+    color: #7877c6;
+
+    animation: subtle-glitch 0.3s ease-out;
+
+}
+
+
+
+.card-text {
+
+    color: #94a3b8;
+
+    line-height: 1.6;
+
+    font-size: 1rem;
+
+}
+
+
+
+/* Focus Grid */
+
+.focus-grid {
+
+    display: grid;
+
+    gap: 16px;
+
+}
+
+
+
+.focus-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 16px;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    transition: all 0.3s ease;
+
+    height: 53px;
+
+}
+
+
+
+.focus-item:hover {
+
+    background: rgba(255, 255, 255, 0.06);
+
+    transform: translateX(8px);
+
+}
+
+
+
+.focus-icon {
+
+    font-size: 24px;
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(120, 200, 255, 0.1);
+
+    border-radius: 8px;
+
+}
+
+
+
+.focus-content h4 {
+
+    color: #e6edf3;
+
+    font-weight: 600;
+
+    margin-bottom: 4px;
+
+}
+
+
+
+.focus-content p {
+
+    color: #94a3b8;
+
+    font-size: 0.9rem;
+
+}
+
+
+
+/* Tech Grid */
+
+.tech-grid {
+
+    display: grid;
+
+    gap: 20px;
+
+}
+
+
+
+.tech-category h4 {
+
+    color: #e6edf3;
+
+    font-weight: 600;
+
+    margin-bottom: 12px;
+
+    font-size: 1rem;
+
+}
+
+
+
+.tech-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+}
+
+
+
+.tech-tag {
+
+    background: rgba(120, 119, 198, 0.1);
+
+    border: 1px solid rgba(120, 119, 198, 0.2);
+
+    border-radius: 20px;
+
+    padding: 6px 14px;
+
+    font-size: 0.85rem;
+
+    color: #e6edf3;
+
+    transition: all 0.3s ease;
+
+}
+
+
+
+.tech-tag:hover {
+
+    background: rgba(120, 119, 198, 0.2);
+
+    transform: scale(1.05);
+
+}
+
+
+
+/* Statistics Section */
+
+.statistics {
+
+    padding: 100px 0;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    position: relative;
+
+}
+
+
+
+.section-title {
+
+    font-size: 2.5rem;
+
+    text-align: center;
+
+    margin-bottom: 60px;
+
+    background: linear-gradient(135deg, #7877c6, #78c8ff);
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    font-weight: 700;
+
+}
+
+
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    gap: 30px;
+
+}
+
+
+
+.stat-card {
+
+    background: rgba(255, 255, 255, 0.05);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 20px;
+
+    padding: 40px 20px;
+
+    text-align: center;
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+
+.stat-card::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 2px;
+
+    background: linear-gradient(90deg, #7877c6, #78c8ff, #ff77c6);
+
+    transform: translateX(-100%);
+
+    transition: transform 0.6s ease;
+
+}
+
+
+
+.stat-card:hover::before {
+
+    transform: translateX(0);
+
+}
+
+
+
+.stat-card:hover {
+
+    transform: translateY(-10px);
+
+    background: rgba(255, 255, 255, 0.08);
+
+    box-shadow: 0 20px 40px rgba(120, 119, 198, 0.1);
+
+}
+
+
+
+.stat-icon {
+
+    font-size: 2rem;
+
+    margin-bottom: 16px;
+
+    opacity: 0.8;
+
+}
+
+
+
+.stat-number {
+
+    font-size: 3rem;
+
+    font-weight: 700;
+
+    background: linear-gradient(135deg, #7877c6, #78c8ff);
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    margin-bottom: 8px;
+
+}
+
+
+
+.stat-label {
+
+    color: #94a3b8;
+
+    font-size: 1rem;
+
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+
+/* Architecture Section */
+
+
+
+.menu-btn {
+
+    font-size: 16px;
+
+    padding: 16px 32px;
+
+    border-radius: 12px;
+
+    background: linear-gradient(135deg, rgba(120, 119, 198, 0.1), rgba(120, 200, 255, 0.1));
+
+    border-color: rgba(120, 119, 198, 0.3);
+
+}
+
+
+
+.menu-btn:hover {
+
+    background: linear-gradient(135deg, rgba(120, 119, 198, 0.2), rgba(120, 200, 255, 0.2));
+
+    box-shadow: 0 15px 35px rgba(120, 119, 198, 0.2);
+
+}
+
+
+
+/* Team Section - ИСПРАВЛЕНО */
+
+.team {
+
+    padding: 100px 0;
+
+    background: rgba(255, 255, 255, 0.02);
+
+}
+
+
+
 .team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-xl);
-    padding: var(--spacing-lg) 0;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 24px;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
 }
+
+
 
 .team-card {
-    background-color: #2a2a4a;
-    border-radius: var(--border-radius-lg);
-    padding: var(--spacing-lg);
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    transition: transform var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(120, 119, 198, 0.3);
+
+    background: rgba(255, 255, 255, 0.05);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 16px;
+
+    padding: 24px;
+
+    text-align: center;
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    cursor: pointer;
+
+    position: relative;
+
+    overflow: hidden;
+
+    width: 100%;
+
+    max-width: 280px;
+
+    justify-self: center;
+
 }
+
+
 
 .team-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, rgba(120, 119, 198, 0.1) 0%, rgba(120, 119, 198, 0) 70%);
-    opacity: 0;
-    transition: opacity var(--transition-speed) var(--transition-ease);
-    z-index: 0;
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 1px;
+
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+
 }
 
-.team-card:hover::before {
-    opacity: 1;
-}
+
 
 .team-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 12px 25px rgba(120, 119, 198, 0.5);
-    border-color: var(--color-primary);
+
+    transform: translateY(-8px);
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border-color: rgba(120, 119, 198, 0.3);
+
+    box-shadow: 0 20px 40px rgba(120, 119, 198, 0.1);
+
 }
+
+
 
 .team-avatar {
-    font-size: 4rem;
-    margin-bottom: var(--spacing-md);
-    line-height: 1;
-    position: relative;
-    z-index: 1;
+
+    position: relative;
+
+    width: 60px;
+
+    height: 60px;
+
+    margin: 0 auto 16px;
+
 }
+
+
+
+.avatar-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 1.8rem;
+
+    background: rgba(120, 119, 198, 0.1);
+
+    border: 2px solid rgba(120, 119, 198, 0.2);
+
+    border-radius: 50%;
+
+    transition: all 0.3s ease;
+
+}
+
+
+
+.avatar-glow {
+
+    position: absolute;
+
+    top: -4px;
+
+    left: -4px;
+
+    right: -4px;
+
+    bottom: -4px;
+
+    background: conic-gradient(from 0deg, #7877c6, #78c8ff, #ff77c6, #7877c6);
+
+    border-radius: 50%;
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease;
+
+    animation: rotate 3s linear infinite;
+
+}
+
+
+
+.team-card:hover .avatar-glow {
+
+    opacity: 0.8;
+
+}
+
+
+
+.team-card:hover .avatar-image {
+
+    background: rgba(120, 119, 198, 0.2);
+
+    transform: scale(1.1);
+
+}
+
+
+
+@keyframes rotate {
+
+    from { transform: rotate(0deg); }
+
+    to { transform: rotate(360deg); }
+
+}
+
+
+
+.team-info {
+
+    text-align: center;
+
+}
+
+
 
 .team-name {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: var(--spacing-sm);
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 8px rgba(120, 119, 198, 0.5);
-    transition: all var(--transition-speed) var(--transition-ease);
-    position: relative;
-    z-index: 1;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+    color: #e6edf3;
+
+    margin-bottom: 6px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    line-height: 1.2;
+
 }
 
-/* Team Name Hover Effect */
+
+
 .team-name:hover {
-    animation: subtle-glitch var(--transition-speed) ease-out;
-    filter: brightness(1.1); /* Slightly brighter on hover */
+
+    color: #7877c6;
+
+    animation: subtle-glitch 0.3s ease-out;
+
 }
+
+
 
 .team-role {
-    font-size: 1.1rem;
-    color: var(--color-text-light);
-    opacity: 0.7;
-    margin-bottom: var(--spacing-md);
-    position: relative;
-    z-index: 1;
+
+    color: #94a3b8;
+
+    font-size: 0.75rem;
+
+    margin-bottom: 16px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.2px;
+
+    line-height: 1.3;
+
 }
 
-/* Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-speed) ease-in-out, visibility var(--transition-speed) ease-in-out;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+
+
+.team-links {
+
+    display: flex;
+
+    gap: 8px;
+
+    justify-content: center;
+
 }
+
+
+
+.team-link {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 32px;
+
+    height: 32px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 8px;
+
+    color: #94a3b8;
+
+    text-decoration: none;
+
+    transition: all 0.3s ease;
+
+    background: rgba(255, 255, 255, 0.05);
+
+}
+
+
+
+.team-link:hover {
+
+    background: rgba(120, 119, 198, 0.1);
+
+    border-color: rgba(120, 119, 198, 0.3);
+
+    color: #7877c6;
+
+    transform: translateY(-2px);
+
+}
+
+
+
+/* Other Projects Section */
+
+.other-projects {
+
+    padding: 100px 0;
+
+}
+
+
+
+.projects-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 20px;
+
+}
+
+
+
+.project-card {
+
+    padding: 24px;
+
+    border-radius: 16px;
+
+    font-size: 1rem;
+
+    text-align: center;
+
+    min-height: 120px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+}
+
+
+
+.project-card:hover {
+
+    background: rgba(255, 255, 255, 0.06);
+
+    transform: translateY(-4px);
+
+    box-shadow: 0 15px 30px rgba(120, 119, 198, 0.1);
+
+}
+
+
+
+/* Modal Styles - Все через CSS */
+
+.modal-overlay {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    background: rgba(15, 20, 25, 0.9);
+
+    backdrop-filter: blur(20px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 10000;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+
 
 .modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
+
+    opacity: 1;
+
+    visibility: visible;
+
 }
+
+
 
 .modal-content {
-    background-color: #2a2a4a;
-    border-radius: var(--border-radius-lg);
-    padding: var(--spacing-xl);
-    max-width: 700px;
-    width: 90%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    position: relative;
-    transform: translateY(20px);
-    opacity: 0;
-    transition: transform var(--transition-speed) var(--transition-ease), opacity var(--transition-speed) var(--transition-ease);
-    border: 1px solid var(--color-primary);
+
+    position: relative;
+
+    background: rgba(15, 20, 25, 0.95);
+
+    backdrop-filter: blur(30px);
+
+    width: 90%;
+
+    max-width: 600px;
+
+    max-height: 80vh;
+
+    border-radius: 20px;
+
+    border: 1px solid rgba(120, 119, 198, 0.3);
+
+    overflow: hidden;
+
+    transform: scale(0.8) translateY(20px);
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    display: flex;
+
+    flex-direction: column;
+
 }
+
+
 
 .modal-overlay.active .modal-content {
-    transform: translateY(0);
-    opacity: 1;
+
+    transform: scale(1) translateY(0);
+
 }
+
+
 
 .modal-close {
-    position: absolute;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: var(--color-text-light);
-    cursor: pointer;
-    transition: color var(--transition-speed) ease-in-out;
+
+    position: absolute;
+
+    top: 16px;
+
+    right: 16px;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    color: #7877c6;
+
+    font-size: 1.5rem;
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 10001;
+
+    transition: all 0.3s ease;
+
+    font-family: inherit;
+
 }
+
+
 
 .modal-close:hover {
-    color: var(--color-accent-red);
+
+    background: rgba(255, 77, 77, 0.2);
+
+    border-color: rgba(255, 77, 77, 0.4);
+
+    transform: scale(1.1);
+
 }
+
+
+
+.modal-body {
+
+    padding: 32px;
+
+    overflow-y: auto;
+
+    max-height: calc(80vh - 64px);
+
+    flex: 1;
+
+}
+
+
+
+.modal-body::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+
+
+.modal-body::-webkit-scrollbar-track {
+
+    background: rgba(255, 255, 255, 0.1);
+
+    border-radius: 3px;
+
+}
+
+
+
+.modal-body::-webkit-scrollbar-thumb {
+
+    background: rgba(120, 119, 198, 0.5);
+
+    border-radius: 3px;
+
+}
+
+
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+
+    background: rgba(120, 119, 198, 0.7);
+
+}
+
+
 
 .modal-header {
-    text-align: center;
-    margin-bottom: var(--spacing-lg);
-    padding-bottom: var(--spacing-md);
-    border-bottom: 1px solid rgba(120, 119, 198, 0.2);
+
+    text-align: center;
+
+    margin-bottom: 24px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
 }
+
+
 
 .modal-avatar {
-    font-size: 5rem;
-    margin-bottom: var(--spacing-sm);
-    line-height: 1;
+
+    font-size: 3rem;
+
+    margin-bottom: 16px;
+
+    display: block;
+
 }
+
+
 
 .modal-name {
-    font-size: var(--font-size-h2);
-    font-weight: bold;
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 10px rgba(120, 119, 198, 0.7);
-    transition: animation var(--transition-speed) ease-out, filter var(--transition-speed) ease-out;
+
+    font-size: 1.5rem;
+
+    color: #ffffff;
+
+    font-weight: 600;
+
+    margin: 0 0 8px 0;
+
+    background: linear-gradient(135deg, #7877c6, #78c8ff);
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
 }
 
-/* Modal Name Hover Effect */
-.modal-name:hover {
-    animation: subtle-glitch var(--transition-speed) ease-out;
-    filter: brightness(1.1); /* Slightly brighter on hover */
-}
+
 
 .modal-role {
-    font-size: 1.2rem;
-    color: var(--color-text-light);
-    opacity: 0.8;
+
+    color: #7877c6;
+
+    font-size: 1rem;
+
+    margin: 0;
+
+    font-weight: 500;
+
 }
 
-.modal-details {
-    text-align: left;
-}
 
-.modal-text {
-    margin-bottom: var(--spacing-lg);
-    font-size: 1.1rem;
-    color: var(--color-text-light);
-}
 
 .modal-section-title {
-    font-size: var(--font-size-h3);
-    color: var(--color-primary);
-    margin-top: var(--spacing-lg);
-    margin-bottom: var(--spacing-md);
-    border-bottom: 1px dashed rgba(120, 119, 198, 0.3);
-    padding-bottom: var(--spacing-sm);
+
+    font-size: 1.1rem;
+
+    color: #7877c6;
+
+    font-weight: 600;
+
+    margin: 20px 0 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    border-left: 3px solid #7877c6;
+
+    padding-left: 12px;
+
 }
 
-.modal-experience {
-    font-size: 1rem;
-    margin-bottom: var(--spacing-md);
-    color: var(--color-text-light);
-    opacity: 0.9;
+
+
+.modal-text, .modal-experience {
+
+    color: #e2e8f0;
+
+    line-height: 1.6;
+
+    margin-bottom: 16px;
+
+    font-size: 0.95rem;
+
 }
+
+
 
 .modal-skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-lg);
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-bottom: 20px;
+
 }
+
+
 
 .skill-tag {
-    background-color: rgba(120, 119, 198, 0.3);
-    color: var(--color-text-light);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--border-radius-sm);
-    font-size: 0.9rem;
-    border: 1px solid var(--color-primary);
-    transition: background-color var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
+
+    background: rgba(120, 119, 198, 0.2);
+
+    color: #7877c6;
+
+    padding: 6px 12px;
+
+    border-radius: 16px;
+
+    font-size: 0.85rem;
+
+    font-weight: 500;
+
+    border: 1px solid rgba(120, 119, 198, 0.3);
+
+    transition: all 0.3s ease;
+
 }
+
+
 
 .skill-tag:hover {
-    background-color: var(--color-primary);
-    transform: translateY(-2px);
+
+    transform: scale(1.05);
+
+    background: rgba(120, 119, 198, 0.3);
+
 }
+
+
 
 .modal-achievements {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+
+    list-style: none;
+
+    margin-bottom: 20px;
+
+    padding: 0;
+
 }
+
+
 
 .modal-achievements li {
-    background-color: rgba(42, 42, 74, 0.5); /* Darker background for list items */
-    margin-bottom: var(--spacing-sm);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius-md);
-    border-left: 3px solid var(--color-secondary);
-    font-size: 1rem;
-    color: var(--color-text-light);
-    transition: background-color var(--transition-speed) ease-in-out, border-left-color var(--transition-speed) ease-in-out;
+
+    color: #e2e8f0;
+
+    padding: 6px 0;
+
+    padding-left: 20px;
+
+    position: relative;
+
+    line-height: 1.4;
+
+    font-size: 0.9rem;
+
 }
 
-.modal-achievements li:hover {
-    background-color: rgba(42, 42, 74, 0.8);
-    border-left-color: var(--color-primary);
+
+
+.modal-achievements li::before {
+
+    content: '✓';
+
+    position: absolute;
+
+    left: 0;
+
+    color: #78c8ff;
+
+    font-weight: bold;
+
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: var(--spacing-xl) 0;
-    color: var(--color-text-light);
-    opacity: 0.7;
-    border-top: 1px solid rgba(120, 119, 198, 0.2);
-    margin-top: var(--spacing-xl);
+
+
+
+
+
+
+/* Accessibility - Reduced Motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+    * {
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+
+    }
+
 }
+
+
 
 /* Responsive Design */
+
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        gap: var(--spacing-md);
-    }
 
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: var(--spacing-md);
-    }
+    .hero-content {
 
-    .hero-title {
-        font-size: 2.5rem;
-    }
+        grid-template-columns: 1fr;
 
-    .hero-subtitle {
-        font-size: 1rem;
-    }
+        gap: 60px;
 
-    .section-title {
-        font-size: 2rem;
-    }
+        text-align: center;
 
-    .team-grid {
-        grid-template-columns: 1fr; /* Stack cards on small screens */
-    }
+    }
 
-    .modal-content {
-        padding: var(--spacing-lg);
-    }
+    
 
-    .modal-avatar {
-        font-size: 4rem;
-    }
+    .hero-title {
 
-    .modal-name {
-        font-size: 1.8rem;
-    }
+        font-size: 2.5rem;
 
-    .modal-role {
-        font-size: 1rem;
-    }
+    }
+
+    
+
+    .android-main {
+
+        width: 200px;
+
+        height: 200px;
+
+    }
+
+    
+
+    .content-grid,
+
+    .stats-grid,
+
+    .projects-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    
+
+    .team-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 20px;
+
+        max-width: 600px;
+
+    }
+
+    
+
+    .nav {
+
+        gap: 8px;
+
+    }
+
+    
+
+    .nav-link {
+
+        padding: 8px 16px;
+
+        font-size: 12px;
+
+    }
+
+
+
+    .logo-section {
+
+        gap: 10px;
+
+    }
+
+
+
+    .apple-logo img, .xai-logo img {
+
+        height: 30px;
+
+    }
+
+
+
+    .android-character {
+
+        right: -80px;
+
+        width: 60px;
+
+        height: 60px;
+
+    }
+
+
+
+    .glass-card {
+
+        padding: 24px;
+
+    }
+
+
+
+    .modal-content {
+
+        width: 95%;
+
+        margin: 20px;
+
+    }
+
+
+
+    .modal-body {
+
+        padding: 24px;
+
+    }
+
+
+
+    .modal-name {
+
+        font-size: 1.3rem;
+
+    }
+
+
+
+    .floating-icon {
+
+        font-size: 30px;
+
+    }
+
+
+
+    .team-card {
+
+        max-width: none;
+
+        padding: 20px;
+
+    }
+
+
+
+    .team-avatar {
+
+        width: 50px;
+
+        height: 50px;
+
+    }
+
+
+
+    .avatar-image {
+
+        font-size: 1.5rem;
+
+    }
+
+
+
+    .team-name {
+
+        font-size: 0.85rem;
+
+    }
+
+
+
+    .team-role {
+
+        font-size: 0.7rem;
+
+    }
+
 }
+
+
 
 @media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
 
-    .modern-btn {
-        font-size: 1rem;
-        padding: var(--spacing-sm) var(--spacing-md);
-    }
+    .hero-title {
+
+        font-size: 2rem;
+
+    }
+
+    
+
+    .section-title {
+
+        font-size: 2rem;
+
+    }
+
+    
+
+    .android-main {
+
+        width: 150px;
+
+        height: 150px;
+
+    }
+
+
+
+    .apple-logo img, .xai-logo img {
+
+        height: 25px;
+
+    }
+
+
+
+    .android-character {
+
+        right: -70px;
+
+        width: 50px;
+
+        height: 50px;
+
+    }
+
+    
+
+    .nav {
+
+        gap: 5px;
+
+    }
+
+    
+
+    .nav-link {
+
+        padding: 6px 12px;
+
+        font-size: 11px;
+
+    }
+
+
+
+    .glass-card {
+
+        padding: 20px;
+
+    }
+
+
+
+    .modal-content {
+
+        width: 98%;
+
+        margin: 10px;
+
+    }
+
+
+
+    .modal-body {
+
+        padding: 20px;
+
+    }
+
+
+
+    .modal-avatar {
+
+        font-size: 2.5rem;
+
+    }
+
+
+
+    .modal-name {
+
+        font-size: 1.2rem;
+
+    }
+
+
+
+    .hero-description {
+
+        font-size: 1rem;
+
+    }
+
+
+
+    .floating-icon {
+
+        font-size: 25px;
+
+    }
+
+
+
+    .team-grid {
+
+        grid-template-columns: 1fr;
+
+        max-width: 300px;
+
+    }
+
+
+
+    .team-avatar {
+
+        width: 45px;
+
+        height: 45px;
+
+    }
+
+
+
+    .avatar-image {
+
+        font-size: 1.3rem;
+
+    }
+
+
+
+    .team-name {
+
+        font-size: 0.8rem;
+
+    }
+
+
+
+    .team-role {
+
+        font-size: 0.65rem;
+
+    }
+
+
+
+    .team-links {
+
+        gap: 6px;
+
+    }
+
+
+
+    .team-link {
+
+        width: 28px;
+
+        height: 28px;
+
+    }
+
 }
+
+
+
+Окей, я получил первый CSS-файл. Жду второй!
+
+
+
+
+
+
+а это мой js файл жди задание
+
+
+
+// Team Manager 
+
+class TeamManager {
+
+    constructor() {
+
+        this.modal = null;
+
+        this.isInitialized = false;
+
+        this.teamData = {
+
+            'project-manager': {
+
+                name: 'Alex Johnson',
+
+                role: 'Project Manager',
+
+                avatar: '👨‍💼',
+
+                details: 'Experienced project manager with 8+ years in QA leadership and agile methodologies. Specializes in coordinating cross-functional teams and delivering high-quality software products on time and within budget.',
+
+                skills: ['Project Management', 'Agile/Scrum', 'Team Leadership', 'Strategic Planning', 'Risk Management', 'Stakeholder Communication'],
+
+                experience: '8+ years in project management and QA leadership across various industries',
+
+                achievements: [
+
+                    'Successfully led 15+ major product launches with zero critical post-release bugs',
+
+                    'Improved team productivity by 40% through process optimization and tool implementation',
+
+                    'Implemented Agile methodologies across 5 departments, reducing delivery time by 30%',
+
+                    'Managed budgets exceeding $2M while maintaining 95% on-time delivery rate'
+
+                ]
+
+            },
+
+            'qa-lead': {
+
+                name: 'Sarah Chen',
+
+                role: 'QA Lead',
+
+                avatar: '👩‍💻',
+
+                details: 'Senior QA professional with deep expertise in test automation frameworks, API testing, and performance optimization. Passionate about building robust testing strategies that ensure exceptional software quality.',
+
+                skills: ['Test Automation', 'API Testing', 'Performance Testing', 'Team Leadership', 'CI/CD', 'Quality Strategy'],
+
+                experience: '6+ years in quality assurance with focus on automation and team leadership',
+
+                achievements: [
+
+                    'Reduced overall testing time by 60% through comprehensive automation framework',
+
+                    'Built end-to-end CI/CD testing pipeline handling 500+ daily deployments',
+
+                    'Mentored 10+ junior QA engineers, with 8 received promotions',
+
+                    'Designed testing architecture that caught 95% of bugs before production'
+
+                ]
+
+            },
+
+            'qa-engineer-1': {
+
+                name: 'Mike Rodriguez',
+
+                role: 'Senior QA Engineer',
+
+                avatar: '👨‍💻',
+
+                details: 'Dedicated senior QA engineer with expertise in comprehensive testing strategies. Specializes in functional, regression, and integration testing with a keen eye for detail and user experience.',
+
+                skills: ['Manual Testing', 'Automation Testing', 'Bug Analysis', 'Test Planning', 'User Experience Testing', 'Documentation'],
+
+                experience: '4+ years in software quality assurance with focus on comprehensive testing',
+
+                achievements: [
+
+                    'Discovered and documented 200+ critical bugs preventing major production issues',
+
+                    'Improved test coverage by 35% through systematic test case design',
+
+                    'Created comprehensive testing documentation adopted company-wide',
+
+                    'Reduced customer-reported bugs by 45% through thorough pre-release testing'
+
+                ]
+
+            },
+
+            'qa-engineer-2': {
+
+                name: 'Lisa Wang',
+
+                role: 'QA Engineer',
+
+                avatar: '👩‍💻',
+
+                details: 'Detail-oriented QA engineer with strong expertise in mobile and web application testing. Passionate about delivering exceptional user experiences through comprehensive quality assurance.',
+
+                skills: ['Mobile Testing', 'Web Testing', 'Cross-browser Testing', 'Usability Testing', 'Responsive Design Testing', 'Accessibility Testing'],
+
+                experience: '3+ years specializing in mobile and web application testing',
+
+                achievements: [
+
+                    'Led mobile app testing for 8 major releases across iOS and Android platforms',
+
+                    'Implemented comprehensive cross-browser testing strategy covering 15+ browsers',
+
+                    'Reduced user-reported mobile bugs by 45% through device-specific testing',
+
+                    'Established accessibility testing standards ensuring WCAG 2.1 compliance'
+
+                ]
+
+            },
+
+            'qa-engineer-3': {
+
+                name: 'David Kim',
+
+                role: 'QA Engineer',
+
+                avatar: '👨‍💻',
+
+                details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
+
+                skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing', 'Integration Testing', 'Performance Analysis'],
+
+                experience: '3+ years in full-stack quality assurance and testing',
+
+                achievements: [
+
+                    'Automated 150+ API test cases reducing manual testing effort by 70%',
+
+                    'Identified and helped resolve 50+ security vulnerabilities before production',
+
+                    'Built robust data validation framework used across multiple projects',
+
+                    'Improved API response time by 30% through performance testing insights'
+
+                ]
+
+            },
+
+            'qa-engineer-4': {
+
+                name: 'Jennifer Brown',
+
+                role: 'QA Engineer',
+
+                avatar: '👩‍💻',
+
+                details: 'Enthusiastic QA engineer specializing in performance testing and load testing. Committed to ensuring applications perform optimally under various conditions and user loads.',
+
+                skills: ['Performance Testing', 'Load Testing', 'Stress Testing', 'JMeter', 'Performance Monitoring', 'Capacity Planning'],
+
+                experience: '2+ years focused on performance testing and optimization',
+
+                achievements: [
+
+                    'Optimized application performance by 50% through comprehensive load testing',
+
+                    'Created performance testing scenarios for applications handling 100K+ concurrent users',
+
+                    'Identified critical bottlenecks preventing system failures under peak load',
+
+                    'Established performance benchmarks and monitoring alerts for production systems'
+
+                ]
+
+            }
+
+        };
+
+    }
+
+
+
+    init() {
+
+        if (this.isInitialized) return;
+
+
+
+        try {
+
+            this.createModal();
+
+            this.bindEvents();
+
+            this.isInitialized = true;
+
+            console.log('✅ TeamManager initialized');
+
+        } catch (error) {
+
+            console.error('❌ TeamManager init error:', error);
+
+        }
+
+    }
+
+
+
+    createModal() {
+
+        if (document.querySelector('#team-modal')) return;
+
+
+
+        const modal = document.createElement('div');
+
+        modal.id = 'team-modal';
+
+        modal.className = 'modal-overlay';
+
+        modal.innerHTML = `
+
+            <div class="modal-content">
+
+                <button class="modal-close">&times;</button>
+
+                <div class="modal-body">
+
+                    <div class="modal-header">
+
+                        <div class="modal-avatar"></div>
+
+                        <h2 class="modal-name"></h2>
+
+                        <p class="modal-role"></p>
+
+                    </div>
+
+                    <div class="modal-details">
+
+                        <p class="modal-text"></p>
+
+                        <h3 class="modal-section-title">Experience</h3>
+
+                        <p class="modal-experience"></p>
+
+                        <h3 class="modal-section-title">Skills</h3>
+
+                        <div class="modal-skills"></div>
+
+                        <h3 class="modal-section-title">Achievements</h3>
+
+                        <ul class="modal-achievements"></ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+
+        document.body.appendChild(modal);
+
+        this.modal = modal;
+
+    }
+
+
+
+    bindEvents() {
+
+        // Team card clicks
+
+        document.querySelectorAll('.team-card').forEach(card => {
+
+            card.addEventListener('click', (e) => {
+
+                e.preventDefault();
+
+                const role = card.getAttribute('data-role');
+
+                this.showModal(role);
+
+            });
+
+
+
+            // Keyboard support
+
+            card.setAttribute('tabindex', '0');
+
+            card.addEventListener('keydown', (e) => {
+
+                if (e.key === 'Enter' || e.key === ' ') {
+
+                    e.preventDefault();
+
+                    const role = card.getAttribute('data-role');
+
+                    this.showModal(role);
+
+                }
+
+            });
+
+        });
+
+
+
+        // Modal close events
+
+        if (this.modal) {
+
+            const closeBtn = this.modal.querySelector('.modal-close');
+
+            if (closeBtn) {
+
+                closeBtn.addEventListener('click', () => this.hideModal());
+
+            }
+
+
+
+            this.modal.addEventListener('click', (e) => {
+
+                if (e.target === this.modal) {
+
+                    this.hideModal();
+
+                }
+
+            });
+
+        }
+
+
+
+        // Escape key
+
+        document.addEventListener('keydown', (e) => {
+
+            if (e.key === 'Escape' && this.modal?.classList.contains('active')) {
+
+                this.hideModal();
+
+            }
+
+        });
+
+    }
+
+
+
+    showModal(role) {
+
+        if (!this.modal || !this.teamData[role]) return;
+
+
+
+        const data = this.teamData[role];
+
+        
+
+        // Populate modal
+
+        this.modal.querySelector('.modal-avatar').textContent = data.avatar;
+
+        this.modal.querySelector('.modal-name').textContent = data.name;
+
+        this.modal.querySelector('.modal-role').textContent = data.role;
+
+        this.modal.querySelector('.modal-text').textContent = data.details;
+
+        this.modal.querySelector('.modal-experience').textContent = data.experience;
+
+
+
+        // Skills
+
+        const skillsContainer = this.modal.querySelector('.modal-skills');
+
+        skillsContainer.innerHTML = '';
+
+        data.skills.forEach(skill => {
+
+            const tag = document.createElement('span');
+
+            tag.className = 'skill-tag';
+
+            tag.textContent = skill;
+
+            skillsContainer.appendChild(tag);
+
+        });
+
+
+
+        // Achievements
+
+        const achievementsList = this.modal.querySelector('.modal-achievements');
+
+        achievementsList.innerHTML = '';
+
+        data.achievements.forEach(achievement => {
+
+            const li = document.createElement('li');
+
+            li.textContent = achievement;
+
+            achievementsList.appendChild(li);
+
+        });
+
+
+
+        // Show modal
+
+        this.modal.classList.add('active');
+
+        document.body.style.overflow = 'hidden';
+
+
+
+        // Focus management
+
+        setTimeout(() => {
+
+            this.modal.querySelector('.modal-close')?.focus();
+
+        }, 100);
+
+    }
+
+
+
+    hideModal() {
+
+        if (!this.modal) return;
+
+        
+
+        this.modal.classList.remove('active');
+
+        document.body.style.overflow = '';
+
+    }
+
+
+
+    destroy() {
+
+        if (this.modal?.parentNode) {
+
+            this.modal.parentNode.removeChild(this.modal);
+
+        }
+
+        this.modal = null;
+
+        this.isInitialized = false;
+
+        document.body.style.overflow = '';
+
+    }
+
+}
+
+
+
+
+
+// Initialize when DOM is ready
+
+function initApp() {
+
+    try {
+
+        const teamManager = new TeamManager();
+
+        
+
+        teamManager.init();
+
+        
+
+        // Store globally for cleanup
+
+        window.teamManager = teamManager;
+
+        
+
+        console.log('🚀 App initialized successfully');
+
+        
+
+    } catch (error) {
+
+        console.error('❌ App initialization error:', error);
+
+    }
+
+}
+
+
+
+// Safe initialization
+
+if (document.readyState === 'loading') {
+
+    document.addEventListener('DOMContentLoaded', initApp);
+
+} else {
+
+    initApp();
+
+}
+
+
+
+// Cleanup on page unload
+
+window.addEventListener('beforeunload', () => {
+
+    if (window.teamManager) {
+
+        window.teamManager.destroy();
+
+    }
+
+});
