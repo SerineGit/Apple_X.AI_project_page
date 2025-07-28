@@ -1,4 +1,4 @@
-* {
+ * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -81,195 +81,54 @@
             font-size: 28px;
         }
 
+        /* Navigation - Clean Cyber Buttons */
         .nav {
             display: flex;
-            gap: 30px;
+            gap: 20px;
         }
 
-          .nav-link {
-  /* == BUTTON SETTINGS == */
-  --font-family: Jura, monospace;
-  --font-size: 16px;
-  --color: white;
-  --background-color: #0d0a11;
-  --border-color: #0bb3b3;
-  --border-width: 1px;
-  --border-cut: 22px;
-  --button-shape: polygon(100% 0, 100% 100%, var(--border-cut) 100%, 0 calc(100% - var(--border-cut)), 0 0);
-}
         .nav-link {
-            font-family: var(--font-family);
-  font-size: var(--font-size);
-  color: var(--color) !important;
-  border: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  justify-self: center;
-  align-self: center;
-  vertical-align: middle;
-  appearance: none;
-  box-sizing: border-box;
-  text-decoration: none;
-  position: relative;
-  word-spacing: 3px;
-  letter-spacing: 0.4px;
-  cursor: pointer;
-  transition: 0.3s;
-  line-height: initial;
-  min-height: 30px;
-  min-width: 70px;
-  white-space: nowrap;
-  z-index: 1;
-  user-select: none;
-  outline: 0;
-  padding: 15px 30px;
-  background-color: transparent;
+            position: relative;
+            display: inline-block;
+            padding: 12px 25px;
+            color: #00ffff;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: transparent;
+            border: 2px solid #00ffff;
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
+            transition: all 0.3s ease;
+            overflow: hidden;
         }
 
- .nav-link:before{
-  content: '';
-  position: absolute;
-  inset: 0 -10px 0 auto;
-  width: 5px;
-  background: var(--border-color);
-}
- .nav-link:after{
-  content: '';
-  position: absolute;
-  height: 6px;
-  width: 22px;
-  background: var(--border-color);
-  clip-path: polygon(5px 0%, calc(100% - 5px) 0%, 100% 100%, 0% 100%);
-  transform: rotate(-135deg);
-  bottom: 3px;
-  left: -5px;
-}
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
 
- .nav-link:after,
- .nav-link1:before{
-  content:'';
-  position: absolute;
-  inset: var(--border-width);
-  background: var(--background-color);
-  z-index: -1;
-  clip-path: var(--button-shape);
-  box-shadow: inset 0 0 25px -10px var(--border-color);
-}
+        .nav-link:hover {
+            color: #ff00ff;
+            border-color: #ff00ff;
+            box-shadow: 
+                0 0 20px rgba(255, 0, 255, 0.5),
+                inset 0 0 20px rgba(255, 0, 255, 0.1);
+            text-shadow: 0 0 10px #ff00ff;
+        }
 
- .nav-link:before{
-  inset: 0;
-  background: var(--border-color);
-}
+        .nav-link:hover::before {
+            left: 100%;
+        }
 
-[class*='nav-link'].disabled,
-[class*='nav-link']:disabled{
-  pointer-events:none;
-  opacity:0.5;
-  cursor:default;
-}
-
-
-/* Ripple Animation */
-[class*='nav-link'] ripple {
-  inset: 0;
-  position: absolute;
-  overflow: hidden;
-  -webkit-clip-path: var(--button-shape);
-          clip-path: var(--button-shape);
-}
-
-[class*='nav-link'].disabled ripple,
-[class*='nav-link']:disabled ripple{
-  display:none
-}
-
-[class*='nav-link'] ripple:after {
-  content: '';
-  --ripple-gradient: rgb(255, 255, 255);
-  position: absolute;
-  inset: 0 auto 0 -200%;
-  width: 200%;
-  transform: skewX(-20deg);
-  opacity: 0.5;
-  background-image: linear-gradient(to right, transparent, var(--ripple-gradient), transparent);
-}
-
-[mode*='light'] ripple:after {
-  --ripple-gradient: var(--border-color);
-}
-
-[class*='nav-link']:hover ripple:after {
-  left: 200%;
-  transition: 1.6s ease;
-}
-
-[class*='nav-link'] ripple:before {
-  content: '';
-  --ripple-color: rgb(255, 255, 255);
-  position: absolute;
-  inset: 50%;
-  transform: skewX(-10deg);
-  border-radius: 100vh;
-}
-
-[mode*='light'] ripple:before {
-  --ripple-color: var(--border-color);
-}
-
-[class*='nav-link']:focus ripple:before {
-  animation: ripple-animation 0.7s ease-in-out forwards;
-}
-
-[class*='nav-link']:active ripple:before {
-  animation: unset;
-}
-
-@keyframes ripple-animation {
-  0% {box-shadow: 0 0 0 0 var(--ripple-color); opacity:0.6}
-  100% {box-shadow: 0 0 0 150px var(--ripple-color); opacity:0}
-}
-
-
-/* Shine Animation */
-[class*='nav-link'] shine {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  -webkit-clip-path: var(--button-shape);
-          clip-path: var(--button-shape);
-}
-
-[class*='nav-link'].disabled shine,
-[class*='nav-link']:disabled shine {
-  display: none;
-}
-
-[class*='nav-link'] shine:after {
-  content: '';
-  position: absolute;
-  inset: 0 auto 0 -70px;
-  width: 30px;
-  opacity: 0.8;
-  background: rgb(255, 255, 255);
-  transition: all .3s linear;
-  transform: skewX(-15deg) translateX(0);
-  animation: shine 3.5s ease-in-out infinite;
-}
-
-[mode*='light'] shine:after {
-  opacity: 0.5;
-  background: var(--border-color);
-}
-
-[class*='nav-link']:hover shine:after {
-  animation: unset;
-}
-
-@keyframes shine {
-  70% {left: -70px}
-  100% {left: calc(100% + 70px)}
-}
         /* Hero Section */
         .hero {
             padding: 120px 0 80px;
@@ -612,7 +471,7 @@
             margin-bottom: 30px;
         }
 
-        .menu-btn, .cyber-btn {
+        .menu-btn {
             display: inline-block;
             padding: 15px 40px;
             background: linear-gradient(45deg, #00ffff, #ff00ff);
@@ -627,13 +486,13 @@
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
 
-        .menu-btn:hover, .cyber-btn:hover {
+        .menu-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 0 40px rgba(255, 0, 255, 0.8);
             color: #fff;
         }
 
-        .menu-btn::before, .cyber-btn::before {
+        .menu-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -644,7 +503,7 @@
             transition: left 0.5s;
         }
 
-        .menu-btn:hover::before, .cyber-btn:hover::before {
+        .menu-btn:hover::before {
             left: 100%;
         }
 
@@ -742,7 +601,7 @@
             gap: 25px;
         }
 
-        .project-btn, .cyber-project-btn {
+        .project-btn {
             display: block;
             padding: 20px;
             background: rgba(16, 21, 46, 0.8);
@@ -759,7 +618,7 @@
             backdrop-filter: blur(10px);
         }
 
-        .project-btn:hover, .cyber-project-btn:hover {
+        .project-btn:hover {
             transform: translateY(-5px);
             border-color: #ff00ff;
             box-shadow: 0 15px 30px rgba(255, 0, 255, 0.4);
@@ -783,7 +642,7 @@
             transition: left 0.6s ease;
         }
 
-        .project-btn:hover .btn-glow, .cyber-project-btn:hover .btn-glow {
+        .project-btn:hover .btn-glow {
             left: 100%;
         }
 
@@ -926,12 +785,12 @@
             }
             
             .nav {
-                gap: 15px;
+                gap: 10px;
             }
             
             .nav-link {
-                padding: 6px 12px;
-                font-size: 0.9rem;
+                padding: 8px 15px;
+                font-size: 12px;
             }
 
             .logo-section {
@@ -969,5 +828,14 @@
 
             .apple-logo img, .xai-logo img {
                 height: 25px;
+            }
+            
+            .nav {
+                gap: 5px;
+            }
+            
+            .nav-link {
+                padding: 6px 10px;
+                font-size: 10px;
             }
         }
