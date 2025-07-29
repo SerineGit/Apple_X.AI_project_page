@@ -7,7 +7,7 @@ class TeamManager {
             'project-manager': {
                 name: 'Sergey Efremov ',
                 role: 'Project Manager',
-                avatar: '👨‍💼',
+                photo: 'фотка',
                 details: 'Software QA Engineer. 14+ years experience in QA with Automation and Manual Testing for Web, Client/Server, Cloud Based, Desktop and Mobile Applications. Front and Back-end REST API Testing, CI/CD, code coverage analysis, relational databases End-to-End data tests. AI in QA.',
                 skills: ['Project Management', 'Agile/Scrum', 'Team Leadership', 'Strategic Planning', 'Risk Management', 'Stakeholder Communication'],
                 experience: '14+ years in project management and QA leadership across various industries',
@@ -20,7 +20,7 @@ class TeamManager {
             'qa-lead': {
                 name: 'Tatsiana Lentz',
                 role: 'QA Lead',
-                avatar: '👩‍💻',
+                photo: 'фотка',
                 details: 'Senior QA professional with deep expertise in test automation frameworks, API testing, and performance optimization. Passionate about building robust testing strategies that ensure exceptional software quality.',
                 skills: ['Test Automation', 'API Testing', 'Performance Testing', 'Team Leadership', 'CI/CD', 'Quality Strategy'],
                 experience: '4+ years in quality assurance with focus on automation and team leadership',
@@ -33,7 +33,7 @@ class TeamManager {
             'qa-engineer-1': {
                 name: 'Anton Buyanovski',
                 role: 'QA Engineer',
-                avatar: '👨‍💻',
+                photo: 'фотка',
                 details: 'Dedicated senior QA engineer with expertise in comprehensive testing strategies. Specializes in functional, regression, and integration testing with a keen eye for detail and user experience.',
                 skills: ['Manual Testing', 'Automation Testing', 'Bug Analysis', 'Test Planning', 'User Experience Testing', 'Documentation'],
                 experience: '4+ years in software quality assurance with focus on comprehensive testing',
@@ -47,7 +47,7 @@ class TeamManager {
             'qa-engineer-2': {
                 name: 'Assiya Beribassova',
                 role: 'QA Engineer',
-                avatar: '👩‍💻',
+                photo: 'фотка',
                 details: 'Detail-oriented QA engineer with strong expertise in mobile and web application testing. Passionate about delivering exceptional user experiences through comprehensive quality assurance.',
                 skills: ['Mobile Testing', 'Web Testing', 'Cross-browser Testing', 'Usability Testing', 'Responsive Design Testing', 'Accessibility Testing'],
                 experience: '3+ years specializing in mobile and web application testing',
@@ -61,7 +61,7 @@ class TeamManager {
             'qa-engineer-3': {
                 name: 'Daria Bataeva',
                 role: 'QA Engineer',
-                avatar: '👨‍💻',
+                photo: 'фотка',
                 details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
                 skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing', 'Integration Testing', 'Performance Analysis'],
                 experience: '3+ years in full-stack quality assurance and testing',
@@ -75,7 +75,7 @@ class TeamManager {
             'qa-engineer-4': {
                 name: 'Lina Gorelik',
                 role: 'QA Engineer',
-                avatar: '👩‍💻',
+                photo: 'фотка',
                 details: 'Enthusiastic QA engineer specializing in performance testing and load testing. Committed to ensuring applications perform optimally under various conditions and user loads.',
                 skills: ['Performance Testing', 'Load Testing', 'Stress Testing', 'JMeter', 'Performance Monitoring', 'Capacity Planning'],
                 experience: '2+ years focused on performance testing and optimization',
@@ -89,7 +89,7 @@ class TeamManager {
             'qa-engineer-5': {
                 name: 'Milana Binaminova',
                 role: 'QA Engineer',
-                avatar: '👨‍💻',
+                photo: 'фотка',
                 details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
                 skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing', 'Integration Testing', 'Performance Analysis'],
                 experience: '3+ years in full-stack quality assurance and testing',
@@ -103,7 +103,7 @@ class TeamManager {
             'qa-engineer-6': {
                 name: 'Sergeiy Borovich',
                 role: 'QA Engineer',
-                avatar: '👨‍💻',
+                photo: 'фотка',
                 details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
                 skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing', 'Integration Testing', 'Performance Analysis'],
                 experience: '3+ years in full-stack quality assurance and testing',
@@ -117,7 +117,7 @@ class TeamManager {
             'qa-engineer-7': {
                 name: 'Serine Zargaryan',
                 role: 'QA Engineer',
-                avatar: '👨‍💻',
+                photo: 'фотка',
                 details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
                 skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing', 'Integration Testing', 'Performance Analysis'],
                 experience: '3+ years in full-stack quality assurance and testing',
@@ -131,7 +131,7 @@ class TeamManager {
             'qa-engineer-8': {
                 name: 'Viktor Pervushkin',
                 role: 'QA Engineer',
-                avatar: '👨‍💻',
+                photo: 'фотка',
                 details: 'Versatile QA engineer with comprehensive experience in both backend and frontend testing. Strong background in API testing, database validation, and security testing.',
                 skills: ['API Testing', 'Database Testing', 'Security Testing', 'Backend Testing', 'Integration Testing', 'Performance Analysis'],
                 experience: '3+ years in full-stack quality assurance and testing',
