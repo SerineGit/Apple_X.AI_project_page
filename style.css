@@ -204,7 +204,7 @@ body {
 
 /* Hero Section */
 .hero {
-    padding: 140px 0 100px;
+    padding: 60px 0 10px;
     position: relative;
     overflow: hidden;
 }
@@ -742,6 +742,8 @@ body {
     text-decoration: none;
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 10;
 }
 
 .team-link:hover {
@@ -749,6 +751,7 @@ body {
     border-color: rgba(120, 119, 198, 0.3);
     color: #7877c6;
     transform: translateY(-2px);
+    z-index: 11; 
 }
 
 /* Other Projects Section */
