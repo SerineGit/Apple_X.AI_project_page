@@ -240,13 +240,14 @@ class TeamManager {
     });
 }
 
-    showModal(role) {
-        if (!this.modal || !this.teamData[role]) return;
+showModal(role) {
+    if (!this.modal || !this.teamData[role]) return;
 
-        const data = this.teamData[role];
+    const data = this.teamData[role];
         
         // Populate modal
-        this.modal.querySelector('.modal-avatar').textContent = data.avatar;
+        const modalAvatar = this.modal.querySelector('.modal-avatar');
+        modalAvatar.innerHTML = `<img src="${data.photo}" alt="${data.name}" class="modal-avatar-img">`;    
         this.modal.querySelector('.modal-name').textContent = data.name;
         this.modal.querySelector('.modal-role').textContent = data.role;
         this.modal.querySelector('.modal-text').textContent = data.details;
