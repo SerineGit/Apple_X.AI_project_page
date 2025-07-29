@@ -194,43 +194,51 @@ class TeamManager {
         // Team card clicks
         document.querySelectorAll('.team-card').forEach(card => {
             card.addEventListener('click', (e) => {
+            if (!e.target.closest('.team-link')) {
                 e.preventDefault();
                 const role = card.getAttribute('data-role');
                 this.showModal(role);
-            });
-
-            // Keyboard support
-            card.setAttribute('tabindex', '0');
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    const role = card.getAttribute('data-role');
-                    this.showModal(role);
-                }
-            });
+            }
         });
 
-        // Modal close events
-        if (this.modal) {
-            const closeBtn = this.modal.querySelector('.modal-close');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', () => this.hideModal());
+       // Keyboard support
+        card.setAttribute('tabindex', '0');
+        card.addEventListener('keydown', (e) => {
+            if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('.team-link')) {
+                e.preventDefault();
+                const role = card.getAttribute('data-role');
+                this.showModal(role);
             }
+        });
+    });
 
-            this.modal.addEventListener('click', (e) => {
-                if (e.target === this.modal) {
-                    this.hideModal();
-                }
-            });
+        document.querySelectorAll('.team-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.stopPropagation(); // Останавливаем всплытие к родительской карточке
+        });
+    });
+
+    // Modal close events
+    if (this.modal) {
+        const closeBtn = this.modal.querySelector('.modal-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => this.hideModal());
         }
 
-        // Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.modal?.classList.contains('active')) {
+        this.modal.addEventListener('click', (e) => {
+            if (e.target === this.modal) {
                 this.hideModal();
             }
         });
     }
+
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.modal?.classList.contains('active')) {
+            this.hideModal();
+        }
+    });
+}
 
     showModal(role) {
         if (!this.modal || !this.teamData[role]) return;
