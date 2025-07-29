@@ -584,7 +584,7 @@ body {
     box-shadow: 0 15px 35px rgba(120, 119, 198, 0.2);
 }
 
-/* Team Section - ИСПРАВЛЕНО */
+/* Team Section - */
 .team {
     padding: 100px 0;
     background: rgba(255, 255, 255, 0.02);
@@ -602,7 +602,7 @@ body {
 .team-leadership {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 30px;
     margin-bottom: 10px;
 }
 
@@ -610,6 +610,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
+    padding: 10px 0px;
     justify-items: center;
 }
 
