@@ -782,7 +782,7 @@ body {
     box-shadow: 0 15px 30px rgba(120, 119, 198, 0.1);
 }
 
-/* Modal Styles - Все через CSS */
+/* Modal Styles -*/
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -884,9 +884,20 @@ body {
 }
 
 .modal-avatar {
-    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 16px;
-    display: block;
+}
+
+.modal-avatar-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: 3px solid rgba(120, 119, 198, 0.3);
+    box-shadow: 0 0 20px rgba(120, 119, 198, 0.2);
 }
 
 .modal-name {
