@@ -281,72 +281,7 @@ body {
     max-width: 500px;
 }
 
-/* Android Showcase */
-.android-showcase {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 500px;
-}
 
-.android-container {
-    position: relative;
-    z-index: 2;
-}
-
-.android-main {
-    width: 300px;
-    height: 300px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(120, 200, 255, 0.3));
-    animation: android-float 4s ease-in-out infinite;
-}
-
-@keyframes android-float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(2deg); }
-}
-
-.android-effects {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-
-.effect-ring {
-    position: absolute;
-    border: 1px solid rgba(120, 200, 255, 0.2);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.ring-1 {
-    width: 200px;
-    height: 200px;
-    animation: ring-pulse 3s ease-in-out infinite;
-}
-
-.ring-2 {
-    width: 300px;
-    height: 300px;
-    animation: ring-pulse 3s ease-in-out infinite 1s;
-}
-
-.ring-3 {
-    width: 400px;
-    height: 400px;
-    animation: ring-pulse 3s ease-in-out infinite 2s;
-}
-
-@keyframes ring-pulse {
-    0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-    50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
 
 .interactive-shape {
     position: absolute;
