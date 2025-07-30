@@ -118,14 +118,14 @@ class TeamManager {
                 name: 'Serine Zargaryan',
                 role: 'QA Engineer',
                 photo: 'https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/team/Serine%20Zargaryan.jpg',
-                details: 'Dedicated QA engineer with expertise in automation testing and continuous integration. Focused on implementing efficient testing processes and maintaining high software quality standards.',
-                skills: ['Test Automation', 'CI/CD Integration', 'Selenium', 'Test Framework Development', 'Code Quality', 'Agile Testing'],
-                experience: '2+ years in test automation and quality engineering',
+                details: 'Engineer with experience in software/hardware testing and a solid foundation in C++ development. Skilled in manual and automated testing, CI/CD integration, and collaborative cross-functional work. Currently developing a personal 2D adventure game in C++ using SFML.',
+                skills: ['Test Automation', 'CI/CD Integration', 'Selenium', 'C++', 'Python', 'JavaScript', 'SQL', 'HTML5/CSS3'],
+                experience: '3+ years in QA, automation, and C++ development & 5+ in UI/UX Design',
                 achievements: [
                     'Developed automated test framework reducing regression testing time by 50%',
-                    'Integrated automated tests into CI/CD pipeline for 5 major projects',
+                    'Integrated automated tests into CI/CD pipeline for projects',
                     'Improved test coverage from 60% to 85% through strategic automation',
-                    'Trained team members on automation tools and best practices'
+                    'Helped team members on automation tools and best practices'
                 ]
             },
             'qa-engineer-8': {
