@@ -144,8 +144,7 @@ body {
 }
 
 .apple-logo img, .xai-logo img {
-    height: 40px;
-    width: auto;
+    width: 70px;
     filter: drop-shadow(0 0 8px rgba(120, 119, 198, 0.3));
     transition: all 0.3s ease;
 }
