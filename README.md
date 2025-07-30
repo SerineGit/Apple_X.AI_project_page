@@ -79,7 +79,9 @@
 </div>
 
 -----
-4. 
+4.
+
+
 <div align="center">
 
 # 🛸 INTERDIMENSIONAL PORTAL
@@ -116,6 +118,8 @@ graph TD
     F -->|12% chance| G[Successful return]
     F -->|88% chance| H[Stuck forever]
 
+
+</div>
 ----
 
 5. 
