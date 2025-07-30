@@ -164,8 +164,7 @@ body {
 /* Navigation */
 .nav {
     display: flex;
-   padding: 0px 70px 0;
-}
+  }
 
 .nav-link {
     font-size: 13px;
