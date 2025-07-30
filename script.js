@@ -1007,39 +1007,154 @@ class Rotating3DShapes {
         projectedVertices.forEach((vertex, index) => {
             if (!vertex) return;
             
-            const
-
-    drawVertices(projectedVertices, rotatedVertices) {
-        projectedVertices.forEach((vertex, index) => {
             const [x, y] = vertex;
             const z = rotatedVertices[index][2];
             const depth = (z + 200) / 400;
-            const size = 3 + depth * 4;
             
-            // Create gradient for vertex
-            const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, size * 2);
-            const hue = 220 + depth * 80;
-            gradient.addColorStop(0, `hsla(${hue}, 80%, 80%, ${0.8 + depth * 0.2})`);
-            gradient.addColorStop(1, `hsla(${hue}, 60%, 60%, 0)`);
+            // Shape-specific vertex styling
+            let size, hue, intensity;
+            switch (shapeType) {
+                case 'apple':
+                    size = 2 + depth * 3;
+                    hue = index < 50 ? 120 : 0; // Green stem/leaf, red apple
+                    intensity = 0.8 + depth * 0.2;
+                    break;
+                case 'brain':
+                    size = 1.5 + depth * 2.5;
+                    hue = 300 + Math.sin(index * 0.1) * 30; // Pink/purple variations
+                    intensity = 0.7 + depth * 0.3;
+                    break;
+                case 'airplane':
+                    size = 2.5 + depth * 3.5;
+                    hue = 200 + depth * 50; // Blue to cyan
+                    intensity = 0.9 + depth * 0.1;
+                    break;
+                case 'blackhole':
+                    size = depth > 0.6 ? 4 + depth * 4 : 1 + depth * 2;
+                    hue = depth > 0.5 ? 45 : 270; // Orange for outer, purple for inner
+                    intensity = depth > 0.3 ? 1 : 0.3 + depth;
+                    break;
+                default:
+                    size = 3 + depth * 4;
+                    hue = 220 + depth * 80;
+                    intensity = 0.8 + depth * 0.2;
+            }
+            
+            // Create advanced gradient for each vertex
+            const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, size * 2.5);
+            gradient.addColorStop(0, `hsla(${hue}, 80%, 80%, ${intensity})`);
+            gradient.addColorStop(0.5, `hsla(${hue}, 70%, 60%, ${intensity * 0.7})`);
+            gradient.addColorStop(1, `hsla(${hue}, 60%, 40%, 0)`);
             
             this.ctx.fillStyle = gradient;
             this.ctx.beginPath();
             this.ctx.arc(x, y, size, 0, Math.PI * 2);
             this.ctx.fill();
+            
+            // Add pulsing effect for key vertices
+            if (shapeType === 'blackhole' && depth < 0.3) {
+                const pulse = Math.sin(this.time * 3 + index * 0.1) * 0.3 + 0.7;
+                this.ctx.fillStyle = `hsla(270, 90%, 90%, ${pulse * 0.5})`;
+                this.ctx.beginPath();
+                this.ctx.arc(x, y, size * pulse, 0, Math.PI * 2);
+                this.ctx.fill();
+            }
+            
+            // Special effects for brain neurons
+            if (shapeType === 'brain' && Math.random() > 0.95) {
+                this.ctx.fillStyle = `hsla(${hue + 60}, 100%, 80%, 0.8)`;
+                this.ctx.beginPath();
+                this.ctx.arc(x, y, size * 1.5, 0, Math.PI * 2);
+                this.ctx.fill();
+            }
         });
     }
 
     drawShapeLabel() {
-        const shapeName = this.currentShape.charAt(0).toUpperCase() + this.currentShape.slice(1);
+        const shapeNames = {
+            apple: 'Apple Logo',
+            brain: 'Neural Network',
+            airplane: 'Stealth Fighter',
+            blackhole: 'Event Horizon'
+        };
         
-        this.ctx.font = '16px Arial';
-        this.ctx.fillStyle = 'rgba(120, 200, 255, 0.7)';
+        const shapeName = shapeNames[this.currentShape];
+        
+        // Main title with sci-fi glow
+        this.ctx.font = 'bold 18px "Courier New", monospace';
         this.ctx.textAlign = 'center';
-        this.ctx.fillText(`${shapeName} (click to change)`, 300, 480);
         
-        this.ctx.font = '12px Arial';
-        this.ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
-        this.ctx.fillText('Move mouse to rotate', 300, 30);
+        // Glow effect
+        this.ctx.shadowColor = 'rgba(120, 200, 255, 0.8)';
+        this.ctx.shadowBlur = 10;
+        this.ctx.fillStyle = 'rgba(120, 200, 255, 0.9)';
+        this.ctx.fillText(`[${shapeName}]`, 300, 480);
+        
+        // Reset shadow
+        this.ctx.shadowBlur = 0;
+        
+        // Subtitle
+        this.ctx.font = '12px "Courier New", monospace';
+        this.ctx.fillStyle = 'rgba(148, 163, 184, 0.7)';
+        this.ctx.fillText('> CLICK TO MORPH < MOUSE TO ROTATE', 300, 35);
+        
+        // Scan line effect
+        const scanY = (this.time * 100) % 500;
+        this.ctx.strokeStyle = 'rgba(0, 255, 100, 0.3)';
+        this.ctx.lineWidth = 1;
+        this.ctx.beginPath();
+        this.ctx.moveTo(0, scanY);
+        this.ctx.lineTo(600, scanY);
+        this.ctx.stroke();
+        
+        // Corner brackets (sci-fi UI)
+        this.ctx.strokeStyle = 'rgba(120, 200, 255, 0.5)';
+        this.ctx.lineWidth = 2;
+        const cornerSize = 20;
+        
+        // Top-left
+        this.ctx.beginPath();
+        this.ctx.moveTo(20, 20 + cornerSize);
+        this.ctx.lineTo(20, 20);
+        this.ctx.lineTo(20 + cornerSize, 20);
+        this.ctx.stroke();
+        
+        // Top-right
+        this.ctx.beginPath();
+        this.ctx.moveTo(580 - cornerSize, 20);
+        this.ctx.lineTo(580, 20);
+        this.ctx.lineTo(580, 20 + cornerSize);
+        this.ctx.stroke();
+        
+        // Bottom-left
+        this.ctx.beginPath();
+        this.ctx.moveTo(20, 480 - cornerSize);
+        this.ctx.lineTo(20, 480);
+        this.ctx.lineTo(20 + cornerSize, 480);
+        this.ctx.stroke();
+        
+        // Bottom-right
+        this.ctx.beginPath();
+        this.ctx.moveTo(580 - cornerSize, 480);
+        this.ctx.lineTo(580, 480);
+        this.ctx.lineTo(580, 480 - cornerSize);
+        this.ctx.stroke();
+        
+        // Data readout (sci-fi style)
+        this.ctx.font = '10px "Courier New", monospace';
+        this.ctx.fillStyle = 'rgba(0, 255, 100, 0.6)';
+        this.ctx.textAlign = 'left';
+        
+        const vertices = this.shapes[this.currentShape].vertices.length;
+        const edges = this.shapes[this.currentShape].edges.length;
+        
+        this.ctx.fillText(`VERTICES: ${vertices}`, 30, 460);
+        this.ctx.fillText(`EDGES: ${edges}`, 30, 445);
+        this.ctx.fillText(`ROTATION: [${this.rotationX.toFixed(2)}, ${this.rotationY.toFixed(2)}]`, 30, 430);
+        
+        // Time display
+        this.ctx.textAlign = 'right';
+        this.ctx.fillText(`TIME: ${this.time.toFixed(1)}s`, 570, 460);
     }
 
     destroy() {
