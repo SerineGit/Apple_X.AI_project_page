@@ -717,4 +717,18 @@ class InteractiveDotShape {
         }
     }
 }
+
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Starting application initialization...');
+    
+    // Initialize TeamManager
+    const teamManager = new TeamManager();
+    teamManager.init();
+    
+    // Initialize Interactive Dot Shape
+    const dotShape = new InteractiveDotShape();
+    dotShape.init();
+    
+    console.log('✅ Application initialized successfully');
 });
