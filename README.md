@@ -23,7 +23,7 @@ https://serinegit.github.io/project-page/
   /><img 
     src="https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img_for_readme/right.png" 
     alt="Image 3" 
-    style="width: 42%; display: block; margin: 0; padding: 0;" 
+    style="width: 41.9%; display: block; margin: 0; padding: 0;" 
   />
 
 </div>
