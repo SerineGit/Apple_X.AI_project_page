@@ -299,19 +299,27 @@ class TeamManager {
     }
 }
 
-// Calm Particle Swarm - Like bees, birds or fish following mouse
-class CalmParticleSwarm {
+// Rotating 3D Shapes - Following mouse movement
+class Rotating3DShapes {
     constructor() {
         this.canvas = null;
         this.ctx = null;
-        this.particles = [];
         this.mouseX = 300;
         this.mouseY = 250;
+        this.targetRotationX = 0;
+        this.targetRotationY = 0;
+        this.rotationX = 0;
+        this.rotationY = 0;
         this.animationId = null;
         this.time = 0;
-        this.isMouseInside = false;
-        this.targetX = 300;
-        this.targetY = 250;
+        this.currentShape = 'cube'; // 'cube', 'pyramid', 'octahedron', 'dodecahedron'
+        this.isTransitioning = false;
+        this.shapes = {
+            cube: this.getCubeVertices(),
+            pyramid: this.getPyramidVertices(),
+            octahedron: this.getOctahedronVertices(),
+            dodecahedron: this.getDodecahedronVertices()
+        };
     }
 
     init() {
@@ -320,11 +328,10 @@ class CalmParticleSwarm {
 
         this.ctx = this.canvas.getContext('2d');
         this.setupCanvas();
-        this.createParticles();
         this.bindEvents();
         this.animate();
         
-        console.log('✅ Calm Particle Swarm initialized');
+        console.log('✅ Rotating 3D Shapes initialized');
     }
 
     setupCanvas() {
@@ -340,34 +347,91 @@ class CalmParticleSwarm {
         this.canvas.style.height = height + 'px';
     }
 
-    createParticles() {
-        this.particles = [];
-        const centerX = 300;
-        const centerY = 250;
+    getCubeVertices() {
+        const size = 80;
+        return {
+            vertices: [
+                [-size, -size, -size], [size, -size, -size], [size, size, -size], [-size, size, -size],
+                [-size, -size, size], [size, -size, size], [size, size, size], [-size, size, size]
+            ],
+            edges: [
+                [0,1], [1,2], [2,3], [3,0], // Back face
+                [4,5], [5,6], [6,7], [7,4], // Front face
+                [0,4], [1,5], [2,6], [3,7]  // Connecting edges
+            ],
+            faces: [
+                [0,1,2,3], [4,7,6,5], [0,4,5,1], [2,6,7,3], [0,3,7,4], [1,5,6,2]
+            ]
+        };
+    }
+
+    getPyramidVertices() {
+        const size = 100;
+        return {
+            vertices: [
+                [0, -size, 0],           // Top
+                [-size, size, -size],    // Base corners
+                [size, size, -size],
+                [size, size, size],
+                [-size, size, size]
+            ],
+            edges: [
+                [0,1], [0,2], [0,3], [0,4], // Top to base
+                [1,2], [2,3], [3,4], [4,1]  // Base edges
+            ],
+            faces: [
+                [0,1,2], [0,2,3], [0,3,4], [0,4,1], [1,4,3,2]
+            ]
+        };
+    }
+
+    getOctahedronVertices() {
+        const size = 90;
+        return {
+            vertices: [
+                [0, -size, 0],    // Top
+                [0, size, 0],     // Bottom
+                [-size, 0, 0],    // Left
+                [size, 0, 0],     // Right
+                [0, 0, -size],    // Back
+                [0, 0, size]      // Front
+            ],
+            edges: [
+                [0,2], [0,3], [0,4], [0,5], // Top connections
+                [1,2], [1,3], [1,4], [1,5], // Bottom connections
+                [2,4], [4,3], [3,5], [5,2]  // Middle ring
+            ],
+            faces: [
+                [0,2,4], [0,4,3], [0,3,5], [0,5,2],
+                [1,4,2], [1,3,4], [1,5,3], [1,2,5]
+            ]
+        };
+    }
+
+    getDodecahedronVertices() {
+        const phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
+        const size = 50;
         
-        // Create fewer particles for calmer effect
-        for (let i = 0; i < 45; i++) {
-            // Start particles in a loose formation
-            const angle = (i / 45) * Math.PI * 2;
-            const radius = 40 + Math.random() * 60;
-            
-            this.particles.push({
-                x: centerX + Math.cos(angle) * radius,
-                y: centerY + Math.sin(angle) * radius,
-                vx: 0,
-                vy: 0,
-                size: 2 + Math.random() * 3,
-                baseSize: 2 + Math.random() * 3,
-                opacity: 0.4 + Math.random() * 0.4,
-                baseOpacity: 0.4 + Math.random() * 0.4,
-                hue: 200 + Math.random() * 160, // Blue to purple range
-                phase: Math.random() * Math.PI * 2,
-                followStrength: 0.02 + Math.random() * 0.03, // How strongly it follows mouse
-                cohesionRadius: 80 + Math.random() * 40, // How close it wants to be to others
-                separationRadius: 25 + Math.random() * 15, // Minimum distance from others
-                wanderAngle: Math.random() * Math.PI * 2 // For natural wandering
-            });
-        }
+        return {
+            vertices: [
+                // Cube vertices scaled
+                [-size, -size, -size], [size, -size, -size], [size, size, -size], [-size, size, -size],
+                [-size, -size, size], [size, -size, size], [size, size, size], [-size, size, size],
+                // Rectangle in xy plane
+                [0, -size*phi, -size/phi], [0, size*phi, -size/phi], [0, size*phi, size/phi], [0, -size*phi, size/phi],
+                // Rectangle in xz plane  
+                [-size/phi, 0, -size*phi], [size/phi, 0, -size*phi], [size/phi, 0, size*phi], [-size/phi, 0, size*phi],
+                // Rectangle in yz plane
+                [-size*phi, -size/phi, 0], [-size*phi, size/phi, 0], [size*phi, size/phi, 0], [size*phi, -size/phi, 0]
+            ],
+            edges: [
+                [0,8], [8,1], [1,13], [13,2], [2,9], [9,3], [3,12], [12,0],
+                [4,11], [11,5], [5,14], [14,6], [6,10], [10,7], [7,15], [15,4],
+                [0,16], [1,19], [2,18], [3,17], [4,15], [5,19], [6,18], [7,17],
+                [8,16], [9,18], [10,18], [11,16], [12,17], [13,19], [14,19], [15,17]
+            ],
+            faces: [] // Simplified for performance
+        };
     }
 
     bindEvents() {
@@ -376,20 +440,25 @@ class CalmParticleSwarm {
 
         heroSection.addEventListener('mousemove', (e) => {
             const rect = this.canvas.getBoundingClientRect();
-            this.targetX = e.clientX - rect.left;
-            this.targetY = e.clientY - rect.top;
-            this.isMouseInside = true;
-        });
-
-        heroSection.addEventListener('mouseenter', () => {
-            this.isMouseInside = true;
+            this.mouseX = e.clientX - rect.left;
+            this.mouseY = e.clientY - rect.top;
+            
+            // Convert mouse position to rotation angles
+            // Map mouse movement to rotation range
+            this.targetRotationY = ((this.mouseX - 300) / 300) * Math.PI * 0.6;
+            this.targetRotationX = ((this.mouseY - 250) / 250) * Math.PI * 0.4;
         });
 
         heroSection.addEventListener('mouseleave', () => {
-            this.isMouseInside = false;
-            // Return to center when mouse leaves
-            this.targetX = 300;
-            this.targetY = 250;
+            // Return to neutral position when mouse leaves
+            this.targetRotationX = 0;
+            this.targetRotationY = 0;
+        });
+
+        // Click to change shape
+        heroSection.addEventListener('click', (e) => {
+            if (e.target.closest('.hero-left') || e.target.closest('.modern-btn')) return;
+            this.switchShape();
         });
 
         // Touch support
@@ -397,183 +466,201 @@ class CalmParticleSwarm {
             e.preventDefault();
             const rect = this.canvas.getBoundingClientRect();
             const touch = e.touches[0];
-            this.targetX = touch.clientX - rect.left;
-            this.targetY = touch.clientY - rect.top;
-            this.isMouseInside = true;
+            this.mouseX = touch.clientX - rect.left;
+            this.mouseY = touch.clientY - rect.top;
+            
+            this.targetRotationY = ((this.mouseX - 300) / 300) * Math.PI * 0.6;
+            this.targetRotationX = ((this.mouseY - 250) / 250) * Math.PI * 0.4;
         });
 
         heroSection.addEventListener('touchend', () => {
-            this.isMouseInside = false;
-            this.targetX = 300;
-            this.targetY = 250;
+            this.targetRotationX = 0;
+            this.targetRotationY = 0;
         });
+    }
+
+    switchShape() {
+        if (this.isTransitioning) return;
+        
+        this.isTransitioning = true;
+        const shapeNames = ['cube', 'pyramid', 'octahedron', 'dodecahedron'];
+        const currentIndex = shapeNames.indexOf(this.currentShape);
+        this.currentShape = shapeNames[(currentIndex + 1) % shapeNames.length];
+        
+        setTimeout(() => {
+            this.isTransitioning = false;
+        }, 800);
+    }
+
+    rotatePoint(point, rotX, rotY, rotZ = 0) {
+        let [x, y, z] = point;
+        
+        // Rotate around X axis
+        let cosX = Math.cos(rotX);
+        let sinX = Math.sin(rotX);
+        let newY = y * cosX - z * sinX;
+        let newZ = y * sinX + z * cosX;
+        y = newY;
+        z = newZ;
+        
+        // Rotate around Y axis
+        let cosY = Math.cos(rotY);
+        let sinY = Math.sin(rotY);
+        let newX = x * cosY + z * sinY;
+        newZ = -x * sinY + z * cosY;
+        x = newX;
+        z = newZ;
+        
+        // Rotate around Z axis
+        let cosZ = Math.cos(rotZ);
+        let sinZ = Math.sin(rotZ);
+        newX = x * cosZ - y * sinZ;
+        newY = x * sinZ + y * cosZ;
+        
+        return [newX, newY, newZ];
+    }
+
+    projectPoint(point) {
+        const [x, y, z] = point;
+        const distance = 400; // Distance from camera
+        const scale = distance / (distance + z);
+        
+        return [
+            300 + x * scale, // Center X + projected X
+            250 + y * scale  // Center Y + projected Y
+        ];
     }
 
     animate() {
         this.time += 0.016;
         
-        // Smooth mouse following
-        this.mouseX += (this.targetX - this.mouseX) * 0.05;
-        this.mouseY += (this.targetY - this.mouseY) * 0.05;
+        // Smooth rotation interpolation
+        this.rotationX += (this.targetRotationX - this.rotationX) * 0.08;
+        this.rotationY += (this.targetRotationY - this.rotationY) * 0.08;
         
-        // Clear canvas with subtle gradient
+        // Add subtle idle rotation when not moving mouse
+        const idleRotation = this.time * 0.3;
+        const finalRotX = this.rotationX + Math.sin(idleRotation) * 0.1;
+        const finalRotY = this.rotationY + Math.cos(idleRotation * 0.7) * 0.1;
+        
+        // Clear canvas
         this.ctx.clearRect(0, 0, 600, 500);
         
-        // Update particles with flocking behavior
-        this.updateParticles();
+        // Draw current shape
+        this.drawShape(this.shapes[this.currentShape], finalRotX, finalRotY);
         
-        // Draw subtle connections between nearby particles
-        this.drawConnections();
-        
-        // Draw particles
-        this.drawParticles();
+        // Draw shape name
+        this.drawShapeLabel();
         
         this.animationId = requestAnimationFrame(() => this.animate());
     }
 
-    updateParticles() {
-        this.particles.forEach((particle, index) => {
-            // 1. Seek mouse (attraction)
-            const seekX = this.mouseX - particle.x;
-            const seekY = this.mouseY - particle.y;
-            const seekDistance = Math.sqrt(seekX * seekX + seekY * seekY);
+    drawShape(shape, rotX, rotY) {
+        // Rotate all vertices
+        const rotatedVertices = shape.vertices.map(vertex => 
+            this.rotatePoint(vertex, rotX, rotY)
+        );
+        
+        // Project to 2D
+        const projectedVertices = rotatedVertices.map(vertex => 
+            this.projectPoint(vertex)
+        );
+        
+        // Draw faces if available (filled shapes)
+        if (shape.faces && shape.faces.length > 0) {
+            this.drawFaces(shape.faces, projectedVertices, rotatedVertices);
+        }
+        
+        // Draw edges (wireframe)
+        this.drawEdges(shape.edges, projectedVertices, rotatedVertices);
+        
+        // Draw vertices as dots
+        this.drawVertices(projectedVertices, rotatedVertices);
+    }
+
+    drawFaces(faces, projectedVertices, rotatedVertices) {
+        // Sort faces by average Z depth for proper rendering order
+        const facesWithDepth = faces.map(face => {
+            const avgZ = face.reduce((sum, vertexIndex) => 
+                sum + rotatedVertices[vertexIndex][2], 0) / face.length;
+            return { face, avgZ };
+        });
+        
+        facesWithDepth.sort((a, b) => a.avgZ - b.avgZ);
+        
+        facesWithDepth.forEach(({ face }, index) => {
+            this.ctx.beginPath();
+            this.ctx.moveTo(projectedVertices[face[0]][0], projectedVertices[face[0]][1]);
             
-            let attractionX = 0;
-            let attractionY = 0;
-            
-            if (seekDistance > 0) {
-                attractionX = (seekX / seekDistance) * particle.followStrength;
-                attractionY = (seekY / seekDistance) * particle.followStrength;
+            for (let i = 1; i < face.length; i++) {
+                this.ctx.lineTo(projectedVertices[face[i]][0], projectedVertices[face[i]][1]);
             }
+            this.ctx.closePath();
             
-            // 2. Separation (avoid crowding)
-            let separationX = 0;
-            let separationY = 0;
-            let separationCount = 0;
+            // Subtle face coloring
+            const hue = (index * 40 + this.time * 10) % 360;
+            this.ctx.fillStyle = `hsla(${hue}, 50%, 60%, 0.1)`;
+            this.ctx.fill();
             
-            this.particles.forEach((other, otherIndex) => {
-                if (index !== otherIndex) {
-                    const dx = particle.x - other.x;
-                    const dy = particle.y - other.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < particle.separationRadius && distance > 0) {
-                        separationX += dx / distance;
-                        separationY += dy / distance;
-                        separationCount++;
-                    }
-                }
-            });
-            
-            if (separationCount > 0) {
-                separationX = (separationX / separationCount) * 0.01;
-                separationY = (separationY / separationCount) * 0.01;
-            }
-            
-            // 3. Cohesion (move toward center of nearby particles)
-            let cohesionX = 0;
-            let cohesionY = 0;
-            let cohesionCount = 0;
-            
-            this.particles.forEach((other, otherIndex) => {
-                if (index !== otherIndex) {
-                    const dx = other.x - particle.x;
-                    const dy = other.y - particle.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < particle.cohesionRadius) {
-                        cohesionX += other.x;
-                        cohesionY += other.y;
-                        cohesionCount++;
-                    }
-                }
-            });
-            
-            if (cohesionCount > 0) {
-                cohesionX = (cohesionX / cohesionCount - particle.x) * 0.005;
-                cohesionY = (cohesionY / cohesionCount - particle.y) * 0.005;
-            }
-            
-            // 4. Wander (natural movement)
-            particle.wanderAngle += (Math.random() - 0.5) * 0.3;
-            const wanderX = Math.cos(particle.wanderAngle) * 0.3;
-            const wanderY = Math.sin(particle.wanderAngle) * 0.3;
-            
-            // Apply forces
-            particle.vx += attractionX + separationX + cohesionX + wanderX;
-            particle.vy += attractionY + separationY + cohesionY + wanderY;
-            
-            // Limit velocity for smooth movement
-            const maxSpeed = 2;
-            const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
-            if (speed > maxSpeed) {
-                particle.vx = (particle.vx / speed) * maxSpeed;
-                particle.vy = (particle.vy / speed) * maxSpeed;
-            }
-            
-            // Apply velocity with damping
-            particle.x += particle.vx;
-            particle.y += particle.vy;
-            particle.vx *= 0.95; // Damping
-            particle.vy *= 0.95;
-            
-            // Keep particles within canvas bounds with soft edges
-            const margin = 50;
-            if (particle.x < margin) particle.vx += 0.1;
-            if (particle.x > 600 - margin) particle.vx -= 0.1;
-            if (particle.y < margin) particle.vy += 0.1;
-            if (particle.y > 500 - margin) particle.vy -= 0.1;
-            
-            // Subtle size and opacity changes based on movement
-            const velocity = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
-            particle.size = particle.baseSize + velocity * 0.5;
-            particle.opacity = particle.baseOpacity + velocity * 0.1;
-            
-            // Gentle floating animation
-            particle.size += Math.sin(this.time * 2 + particle.phase) * 0.3;
-            particle.opacity = Math.max(0.2, Math.min(0.9, particle.opacity + Math.cos(this.time + particle.phase) * 0.1));
+            this.ctx.strokeStyle = `hsla(${hue}, 60%, 70%, 0.3)`;
+            this.ctx.lineWidth = 1;
+            this.ctx.stroke();
         });
     }
 
-    drawConnections() {
-        for (let i = 0; i < this.particles.length; i++) {
-            for (let j = i + 1; j < this.particles.length; j++) {
-                const dx = this.particles[i].x - this.particles[j].x;
-                const dy = this.particles[i].y - this.particles[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                const maxConnectionDistance = 60;
-                if (distance < maxConnectionDistance) {
-                    const opacity = (maxConnectionDistance - distance) / maxConnectionDistance * 0.15;
-                    
-                    this.ctx.strokeStyle = `rgba(120, 200, 255, ${opacity})`;
-                    this.ctx.lineWidth = 1;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
-                    this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
-                    this.ctx.stroke();
-                }
-            }
-        }
+    drawEdges(edges, projectedVertices, rotatedVertices) {
+        edges.forEach((edge, index) => {
+            const [start, end] = edge;
+            const startPoint = projectedVertices[start];
+            const endPoint = projectedVertices[end];
+            
+            // Calculate edge depth for coloring
+            const avgZ = (rotatedVertices[start][2] + rotatedVertices[end][2]) / 2;
+            const depth = (avgZ + 200) / 400; // Normalize depth
+            
+            this.ctx.beginPath();
+            this.ctx.moveTo(startPoint[0], startPoint[1]);
+            this.ctx.lineTo(endPoint[0], endPoint[1]);
+            
+            const hue = 200 + depth * 100;
+            const opacity = 0.4 + depth * 0.4;
+            this.ctx.strokeStyle = `hsla(${hue}, 70%, 70%, ${opacity})`;
+            this.ctx.lineWidth = 2 + depth;
+            this.ctx.stroke();
+        });
     }
 
-    drawParticles() {
-        this.particles.forEach(particle => {
-            // Create subtle gradient for each particle
-            const gradient = this.ctx.createRadialGradient(
-                particle.x, particle.y, 0,
-                particle.x, particle.y, particle.size * 2
-            );
+    drawVertices(projectedVertices, rotatedVertices) {
+        projectedVertices.forEach((vertex, index) => {
+            const [x, y] = vertex;
+            const z = rotatedVertices[index][2];
+            const depth = (z + 200) / 400;
+            const size = 3 + depth * 4;
             
-            gradient.addColorStop(0, `hsla(${particle.hue}, 60%, 70%, ${particle.opacity})`);
-            gradient.addColorStop(0.7, `hsla(${particle.hue}, 50%, 60%, ${particle.opacity * 0.6})`);
-            gradient.addColorStop(1, `hsla(${particle.hue}, 40%, 50%, 0)`);
+            // Create gradient for vertex
+            const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, size * 2);
+            const hue = 220 + depth * 80;
+            gradient.addColorStop(0, `hsla(${hue}, 80%, 80%, ${0.8 + depth * 0.2})`);
+            gradient.addColorStop(1, `hsla(${hue}, 60%, 60%, 0)`);
             
             this.ctx.fillStyle = gradient;
             this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            this.ctx.arc(x, y, size, 0, Math.PI * 2);
             this.ctx.fill();
         });
+    }
+
+    drawShapeLabel() {
+        const shapeName = this.currentShape.charAt(0).toUpperCase() + this.currentShape.slice(1);
+        
+        this.ctx.font = '16px Arial';
+        this.ctx.fillStyle = 'rgba(120, 200, 255, 0.7)';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillText(`${shapeName} (click to change)`, 300, 480);
+        
+        this.ctx.font = '12px Arial';
+        this.ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
+        this.ctx.fillText('Move mouse to rotate', 300, 30);
     }
 
     destroy() {
@@ -585,11 +672,11 @@ class CalmParticleSwarm {
 
 // Replace the InteractiveDotShape initialization
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Starting calm particle swarm...');
+    console.log('🚀 Starting rotating 3D shapes...');
     
-    // Initialize Calm Particle Swarm instead of InteractiveDotShape
-    const particleSwarm = new CalmParticleSwarm();
-    particleSwarm.init();
+    // Initialize Rotating 3D Shapes instead of InteractiveDotShape
+    const rotating3D = new Rotating3DShapes();
+    rotating3D.init();
     
-    console.log('✅ Calm particle swarm initialized');
+    console.log('✅ Rotating 3D shapes initialized');
 });
