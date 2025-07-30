@@ -978,19 +978,19 @@ body {
 }
 
 /* project background */
-.project-nasa::before {
+.project-nasa::hover {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/nasa.png');
 }
-.project-spaceX::before {
+.project-spaceX::hover {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/spacex.png');
 }
-.project-xai::before {
+.project-xai::hover {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/xai.png');
 }
-.project-tesla::before {
+.project-tesla::hover {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/tesla.png');
 }
-.project-starlink::before {
+.project-starlink::hover {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/starlink.png');
 }
 
