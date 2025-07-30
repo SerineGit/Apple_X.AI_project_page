@@ -299,20 +299,19 @@ class TeamManager {
     }
 }
 
-// Interactive Dot Shape Class - Improved Version
-class InteractiveDotShape {
+// Calm Particle Swarm - Like bees, birds or fish following mouse
+class CalmParticleSwarm {
     constructor() {
         this.canvas = null;
         this.ctx = null;
-        this.dots = [];
-        this.mouseX = 0;
-        this.mouseY = 0;
+        this.particles = [];
+        this.mouseX = 300;
+        this.mouseY = 250;
         this.animationId = null;
-        this.currentShape = 'brain'; // 'brain', 'cube', 'wave', 'spiral'
-        this.isTransitioning = false;
-        this.mouseInfluence = 120; // Increased mouse influence radius
         this.time = 0;
         this.isMouseInside = false;
+        this.targetX = 300;
+        this.targetY = 250;
     }
 
     init() {
@@ -321,17 +320,15 @@ class InteractiveDotShape {
 
         this.ctx = this.canvas.getContext('2d');
         this.setupCanvas();
-        this.createDots();
+        this.createParticles();
         this.bindEvents();
         this.animate();
         
-        console.log('✅ Interactive Dot Shape initialized');
+        console.log('✅ Calm Particle Swarm initialized');
     }
 
     setupCanvas() {
         const dpr = window.devicePixelRatio || 1;
-        
-        // Increase canvas size for better visibility
         const width = 600;
         const height = 500;
         
@@ -343,81 +340,32 @@ class InteractiveDotShape {
         this.canvas.style.height = height + 'px';
     }
 
-    createDots() {
-        this.dots = [];
-        const centerX = 300; // Center of enlarged canvas
+    createParticles() {
+        this.particles = [];
+        const centerX = 300;
         const centerY = 250;
         
-        // Create more dots for more interesting effect
-        for (let i = 0; i < 120; i++) {
-            const angle = (i / 120) * Math.PI * 2;
-            const radius = 80 + Math.sin(angle * 4) * 30 + Math.cos(angle * 6) * 15;
+        // Create fewer particles for calmer effect
+        for (let i = 0; i < 45; i++) {
+            // Start particles in a loose formation
+            const angle = (i / 45) * Math.PI * 2;
+            const radius = 40 + Math.random() * 60;
             
-            const x = centerX + Math.cos(angle) * radius;
-            const y = centerY + Math.sin(angle) * radius * 0.9;
-            
-            this.dots.push({
-                originalX: x,
-                originalY: y,
-                x: x,
-                y: y,
-                targetX: x,
-                targetY: y,
-                size: Math.random() * 4 + 2,
-                opacity: Math.random() * 0.6 + 0.4,
-                speed: Math.random() * 0.08 + 0.02,
+            this.particles.push({
+                x: centerX + Math.cos(angle) * radius,
+                y: centerY + Math.sin(angle) * radius,
+                vx: 0,
+                vy: 0,
+                size: 2 + Math.random() * 3,
+                baseSize: 2 + Math.random() * 3,
+                opacity: 0.4 + Math.random() * 0.4,
+                baseOpacity: 0.4 + Math.random() * 0.4,
+                hue: 200 + Math.random() * 160, // Blue to purple range
                 phase: Math.random() * Math.PI * 2,
-                originalRadius: radius,
-                originalAngle: angle
-            });
-        }
-
-        // Add internal dots for volume effect
-        for (let i = 0; i < 60; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            const radius = Math.random() * 60;
-            
-            const x = centerX + Math.cos(angle) * radius;
-            const y = centerY + Math.sin(angle) * radius * 0.9;
-            
-            this.dots.push({
-                originalX: x,
-                originalY: y,
-                x: x,
-                y: y,
-                targetX: x,
-                targetY: y,
-                size: Math.random() * 3 + 1,
-                opacity: Math.random() * 0.4 + 0.2,
-                speed: Math.random() * 0.06 + 0.01,
-                phase: Math.random() * Math.PI * 2,
-                originalRadius: radius,
-                originalAngle: angle
-            });
-        }
-
-        // Add orbital dots
-        for (let i = 0; i < 40; i++) {
-            const angle = (i / 40) * Math.PI * 2;
-            const radius = 120 + Math.sin(angle * 2) * 20;
-            
-            const x = centerX + Math.cos(angle) * radius;
-            const y = centerY + Math.sin(angle) * radius * 0.7;
-            
-            this.dots.push({
-                originalX: x,
-                originalY: y,
-                x: x,
-                y: y,
-                targetX: x,
-                targetY: y,
-                size: Math.random() * 2 + 1,
-                opacity: Math.random() * 0.3 + 0.1,
-                speed: Math.random() * 0.04 + 0.01,
-                phase: Math.random() * Math.PI * 2,
-                originalRadius: radius,
-                originalAngle: angle,
-                isOrbital: true
+                followStrength: 0.02 + Math.random() * 0.03, // How strongly it follows mouse
+                cohesionRadius: 80 + Math.random() * 40, // How close it wants to be to others
+                separationRadius: 25 + Math.random() * 15, // Minimum distance from others
+                wanderAngle: Math.random() * Math.PI * 2 // For natural wandering
             });
         }
     }
@@ -426,15 +374,11 @@ class InteractiveDotShape {
         const heroSection = document.querySelector('.hero');
         if (!heroSection) return;
 
-        // Mouse movement - main interactivity
         heroSection.addEventListener('mousemove', (e) => {
             const rect = this.canvas.getBoundingClientRect();
-            this.mouseX = e.clientX - rect.left;
-            this.mouseY = e.clientY - rect.top;
+            this.targetX = e.clientX - rect.left;
+            this.targetY = e.clientY - rect.top;
             this.isMouseInside = true;
-            
-            // Immediately react to mouse movement
-            this.morphShape();
         });
 
         heroSection.addEventListener('mouseenter', () => {
@@ -443,271 +387,192 @@ class InteractiveDotShape {
 
         heroSection.addEventListener('mouseleave', () => {
             this.isMouseInside = false;
-            this.resetShape();
+            // Return to center when mouse leaves
+            this.targetX = 300;
+            this.targetY = 250;
         });
 
-        // Click to change shape
-        heroSection.addEventListener('click', (e) => {
-            if (e.target.closest('.hero-left') || e.target.closest('.modern-btn')) return;
-            this.switchShape();
-        });
-
-        // Add touch support for mobile devices
+        // Touch support
         heroSection.addEventListener('touchmove', (e) => {
             e.preventDefault();
             const rect = this.canvas.getBoundingClientRect();
             const touch = e.touches[0];
-            this.mouseX = touch.clientX - rect.left;
-            this.mouseY = touch.clientY - rect.top;
+            this.targetX = touch.clientX - rect.left;
+            this.targetY = touch.clientY - rect.top;
             this.isMouseInside = true;
-            this.morphShape();
         });
 
         heroSection.addEventListener('touchend', () => {
             this.isMouseInside = false;
-            this.resetShape();
-        });
-    }
-
-    morphShape() {
-        const centerX = 300;
-        const centerY = 250;
-        
-        this.dots.forEach((dot, index) => {
-            const dx = this.mouseX - dot.originalX;
-            const dy = this.mouseY - dot.originalY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            if (distance < this.mouseInfluence) {
-                const force = (this.mouseInfluence - distance) / this.mouseInfluence;
-                const angle = Math.atan2(dy, dx);
-                
-                // More pronounced mouse reaction
-                const pushDistance = force * 60;
-                const pullDistance = force * 30;
-                
-                if (this.currentShape === 'brain') {
-                    // Brain transforms into neural network
-                    dot.targetX = dot.originalX + Math.cos(angle) * pushDistance;
-                    dot.targetY = dot.originalY + Math.sin(angle) * pushDistance;
-                    
-                    // Add rotational effect
-                    const rotationForce = force * 0.5;
-                    const perpAngle = angle + Math.PI / 2;
-                    dot.targetX += Math.cos(perpAngle) * rotationForce * 20;
-                    dot.targetY += Math.sin(perpAngle) * rotationForce * 20;
-                    
-                } else if (this.currentShape === 'cube') {
-                    // Cube transforms into pyramid
-                    const pyramidY = dot.originalY - force * 50;
-                    dot.targetX = dot.originalX + (centerX - dot.originalX) * force * 0.4;
-                    dot.targetY = pyramidY;
-                    
-                } else if (this.currentShape === 'wave') {
-                    // Wave reacts to mouse
-                    dot.targetX = dot.originalX + Math.cos(angle) * pushDistance;
-                    dot.targetY = dot.originalY + Math.sin(angle + Math.PI/4) * pushDistance;
-                    
-                } else if (this.currentShape === 'spiral') {
-                    // Spiral curls more strongly
-                    const spiralAngle = angle + force * Math.PI;
-                    dot.targetX = dot.originalX + Math.cos(spiralAngle) * pushDistance;
-                    dot.targetY = dot.originalY + Math.sin(spiralAngle) * pushDistance;
-                }
-                
-                // Change size and opacity of dots under cursor
-                dot.size = (dot.size || 2) + force * 3;
-                dot.opacity = Math.min(1, (dot.opacity || 0.5) + force * 0.5);
-                
-            } else {
-                dot.targetX = dot.originalX;
-                dot.targetY = dot.originalY;
-                // Restore original size
-                dot.size = Math.max(1, (dot.size || 2) - 0.1);
-            }
-        });
-    }
-
-    switchShape() {
-        if (this.isTransitioning) return;
-        
-        this.isTransitioning = true;
-        const shapes = ['brain', 'cube', 'wave', 'spiral'];
-        const currentIndex = shapes.indexOf(this.currentShape);
-        this.currentShape = shapes[(currentIndex + 1) % shapes.length];
-        
-        const centerX = 300;
-        const centerY = 250;
-        
-        this.dots.forEach((dot, index) => {
-            switch (this.currentShape) {
-                case 'cube':
-                    this.transformToCube(dot, index, centerX, centerY);
-                    break;
-                case 'wave':
-                    this.transformToWave(dot, index, centerX, centerY);
-                    break;
-                case 'spiral':
-                    this.transformToSpiral(dot, index, centerX, centerY);
-                    break;
-                default: // brain
-                    this.transformToBrain(dot, index, centerX, centerY);
-                    break;
-            }
-        });
-        
-        setTimeout(() => {
-            this.isTransitioning = false;
-            this.dots.forEach(dot => {
-                dot.originalX = dot.targetX;
-                dot.originalY = dot.targetY;
-            });
-        }, 1500);
-    }
-
-    transformToCube(dot, index, centerX, centerY) {
-        const layer = Math.floor(index / 30);
-        const posInLayer = index % 30;
-        const size = 120;
-        
-        if (layer < 3) {
-            const x = centerX - size/2 + (posInLayer % 6) * (size/5);
-            const y = centerY - size/2 + Math.floor(posInLayer / 6) * (size/5);
-            const z = layer * 30;
-            
-            dot.targetX = x + z * 0.6;
-            dot.targetY = y - z * 0.4;
-        } else {
-            const progress = posInLayer / 29;
-            dot.targetX = centerX + Math.cos(progress * Math.PI * 2) * size * 0.7;
-            dot.targetY = centerY + Math.sin(progress * Math.PI * 2) * size * 0.5;
-        }
-    }
-
-    transformToWave(dot, index, centerX, centerY) {
-        const progress = index / this.dots.length;
-        const waveX = centerX - 150 + progress * 300;
-        const waveY = centerY + Math.sin(progress * Math.PI * 4) * 60 + Math.cos(progress * Math.PI * 6) * 20;
-        
-        dot.targetX = waveX;
-        dot.targetY = waveY;
-    }
-
-    transformToSpiral(dot, index, centerX, centerY) {
-        const progress = index / this.dots.length;
-        const angle = progress * Math.PI * 8;
-        const radius = progress * 100 + 20;
-        
-        dot.targetX = centerX + Math.cos(angle) * radius;
-        dot.targetY = centerY + Math.sin(angle) * radius * 0.8;
-    }
-
-    transformToBrain(dot, index, centerX, centerY) {
-        const angle = (index / this.dots.length) * Math.PI * 2;
-        const radius = 80 + Math.sin(angle * 4) * 30 + Math.cos(angle * 6) * 15;
-        
-        dot.targetX = centerX + Math.cos(angle) * radius;
-        dot.targetY = centerY + Math.sin(angle) * radius * 0.9;
-    }
-
-    resetShape() {
-        this.dots.forEach(dot => {
-            dot.targetX = dot.originalX;
-            dot.targetY = dot.originalY;
+            this.targetX = 300;
+            this.targetY = 250;
         });
     }
 
     animate() {
         this.time += 0.016;
         
-        // Очищаем canvas с градиентным фоном
-        const gradient = this.ctx.createRadialGradient(300, 250, 0, 300, 250, 300);
-        gradient.addColorStop(0, 'rgba(15, 23, 42, 0.02)');
-        gradient.addColorStop(1, 'rgba(15, 23, 42, 0)');
-        this.ctx.fillStyle = gradient;
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        // Smooth mouse following
+        this.mouseX += (this.targetX - this.mouseX) * 0.05;
+        this.mouseY += (this.targetY - this.mouseY) * 0.05;
         
-        // Update dot positions
-        this.dots.forEach((dot, index) => {
-            // Smooth movement to target
-            dot.x += (dot.targetX - dot.x) * dot.speed;
-            dot.y += (dot.targetY - dot.y) * dot.speed;
-            
-            // Add organic movement
-            const floatAmplitude = dot.isOrbital ? 1 : 2;
-            dot.x += Math.sin(this.time * 0.5 + dot.phase) * floatAmplitude;
-            dot.y += Math.cos(this.time * 0.3 + dot.phase * 1.5) * floatAmplitude;
-            
-            // Size pulsation
-            const sizePulse = Math.sin(this.time + dot.phase) * 0.5;
-            dot.currentSize = (dot.size || 2) + sizePulse;
-        });
+        // Clear canvas with subtle gradient
+        this.ctx.clearRect(0, 0, 600, 500);
         
-        // Draw connections with improved logic
+        // Update particles with flocking behavior
+        this.updateParticles();
+        
+        // Draw subtle connections between nearby particles
         this.drawConnections();
         
-        // Draw dots with enhanced effects
-        this.drawDots();
+        // Draw particles
+        this.drawParticles();
         
         this.animationId = requestAnimationFrame(() => this.animate());
     }
 
+    updateParticles() {
+        this.particles.forEach((particle, index) => {
+            // 1. Seek mouse (attraction)
+            const seekX = this.mouseX - particle.x;
+            const seekY = this.mouseY - particle.y;
+            const seekDistance = Math.sqrt(seekX * seekX + seekY * seekY);
+            
+            let attractionX = 0;
+            let attractionY = 0;
+            
+            if (seekDistance > 0) {
+                attractionX = (seekX / seekDistance) * particle.followStrength;
+                attractionY = (seekY / seekDistance) * particle.followStrength;
+            }
+            
+            // 2. Separation (avoid crowding)
+            let separationX = 0;
+            let separationY = 0;
+            let separationCount = 0;
+            
+            this.particles.forEach((other, otherIndex) => {
+                if (index !== otherIndex) {
+                    const dx = particle.x - other.x;
+                    const dy = particle.y - other.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < particle.separationRadius && distance > 0) {
+                        separationX += dx / distance;
+                        separationY += dy / distance;
+                        separationCount++;
+                    }
+                }
+            });
+            
+            if (separationCount > 0) {
+                separationX = (separationX / separationCount) * 0.01;
+                separationY = (separationY / separationCount) * 0.01;
+            }
+            
+            // 3. Cohesion (move toward center of nearby particles)
+            let cohesionX = 0;
+            let cohesionY = 0;
+            let cohesionCount = 0;
+            
+            this.particles.forEach((other, otherIndex) => {
+                if (index !== otherIndex) {
+                    const dx = other.x - particle.x;
+                    const dy = other.y - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < particle.cohesionRadius) {
+                        cohesionX += other.x;
+                        cohesionY += other.y;
+                        cohesionCount++;
+                    }
+                }
+            });
+            
+            if (cohesionCount > 0) {
+                cohesionX = (cohesionX / cohesionCount - particle.x) * 0.005;
+                cohesionY = (cohesionY / cohesionCount - particle.y) * 0.005;
+            }
+            
+            // 4. Wander (natural movement)
+            particle.wanderAngle += (Math.random() - 0.5) * 0.3;
+            const wanderX = Math.cos(particle.wanderAngle) * 0.3;
+            const wanderY = Math.sin(particle.wanderAngle) * 0.3;
+            
+            // Apply forces
+            particle.vx += attractionX + separationX + cohesionX + wanderX;
+            particle.vy += attractionY + separationY + cohesionY + wanderY;
+            
+            // Limit velocity for smooth movement
+            const maxSpeed = 2;
+            const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
+            if (speed > maxSpeed) {
+                particle.vx = (particle.vx / speed) * maxSpeed;
+                particle.vy = (particle.vy / speed) * maxSpeed;
+            }
+            
+            // Apply velocity with damping
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.vx *= 0.95; // Damping
+            particle.vy *= 0.95;
+            
+            // Keep particles within canvas bounds with soft edges
+            const margin = 50;
+            if (particle.x < margin) particle.vx += 0.1;
+            if (particle.x > 600 - margin) particle.vx -= 0.1;
+            if (particle.y < margin) particle.vy += 0.1;
+            if (particle.y > 500 - margin) particle.vy -= 0.1;
+            
+            // Subtle size and opacity changes based on movement
+            const velocity = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
+            particle.size = particle.baseSize + velocity * 0.5;
+            particle.opacity = particle.baseOpacity + velocity * 0.1;
+            
+            // Gentle floating animation
+            particle.size += Math.sin(this.time * 2 + particle.phase) * 0.3;
+            particle.opacity = Math.max(0.2, Math.min(0.9, particle.opacity + Math.cos(this.time + particle.phase) * 0.1));
+        });
+    }
+
     drawConnections() {
-        for (let i = 0; i < this.dots.length; i++) {
-            for (let j = i + 1; j < this.dots.length; j++) {
-                const dx = this.dots[i].x - this.dots[j].x;
-                const dy = this.dots[i].y - this.dots[j].y;
+        for (let i = 0; i < this.particles.length; i++) {
+            for (let j = i + 1; j < this.particles.length; j++) {
+                const dx = this.particles[i].x - this.particles[j].x;
+                const dy = this.particles[i].y - this.particles[j].y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 
-                const maxDistance = 80;
-                if (distance < maxDistance) {
-                    const opacity = (maxDistance - distance) / maxDistance * 0.4;
+                const maxConnectionDistance = 60;
+                if (distance < maxConnectionDistance) {
+                    const opacity = (maxConnectionDistance - distance) / maxConnectionDistance * 0.15;
                     
-                    // Dynamic connection colors
-                    const hue = (this.time * 10 + distance) % 360;
-                    this.ctx.strokeStyle = `hsla(${hue}, 60%, 70%, ${opacity})`;
-                    this.ctx.lineWidth = opacity * 2;
-                    
+                    this.ctx.strokeStyle = `rgba(120, 200, 255, ${opacity})`;
+                    this.ctx.lineWidth = 1;
                     this.ctx.beginPath();
-                    this.ctx.moveTo(this.dots[i].x, this.dots[i].y);
-                    this.ctx.lineTo(this.dots[j].x, this.dots[j].y);
+                    this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                    this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
                     this.ctx.stroke();
                 }
             }
         }
     }
 
-    drawDots() {
-        this.dots.forEach((dot, index) => {
-            // Create radial gradient for each dot
+    drawParticles() {
+        this.particles.forEach(particle => {
+            // Create subtle gradient for each particle
             const gradient = this.ctx.createRadialGradient(
-                dot.x, dot.y, 0,
-                dot.x, dot.y, dot.currentSize * 2
+                particle.x, particle.y, 0,
+                particle.x, particle.y, particle.size * 2
             );
             
-            // Dynamic dot colors
-            const hue = (this.time * 5 + index * 10) % 360;
-            const saturation = this.isMouseInside ? 80 : 60;
-            const lightness = 60 + Math.sin(this.time + index) * 20;
-            
-            gradient.addColorStop(0, `hsla(${hue}, ${saturation}%, ${lightness}%, ${dot.opacity})`);
-            gradient.addColorStop(0.7, `hsla(${hue}, ${saturation}%, ${lightness - 20}%, ${dot.opacity * 0.6})`);
-            gradient.addColorStop(1, `hsla(${hue}, ${saturation}%, ${lightness - 40}%, 0)`);
+            gradient.addColorStop(0, `hsla(${particle.hue}, 60%, 70%, ${particle.opacity})`);
+            gradient.addColorStop(0.7, `hsla(${particle.hue}, 50%, 60%, ${particle.opacity * 0.6})`);
+            gradient.addColorStop(1, `hsla(${particle.hue}, 40%, 50%, 0)`);
             
             this.ctx.fillStyle = gradient;
             this.ctx.beginPath();
-            this.ctx.arc(dot.x, dot.y, dot.currentSize, 0, Math.PI * 2);
+            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
             this.ctx.fill();
-            
-            // Add glow for large dots
-            if (dot.currentSize > 3) {
-                this.ctx.shadowColor = `hsla(${hue}, ${saturation}%, ${lightness}%, 0.5)`;
-                this.ctx.shadowBlur = dot.currentSize * 2;
-                this.ctx.beginPath();
-                this.ctx.arc(dot.x, dot.y, dot.currentSize * 0.5, 0, Math.PI * 2);
-                this.ctx.fill();
-                this.ctx.shadowBlur = 0;
-            }
         });
     }
 
@@ -718,17 +583,13 @@ class InteractiveDotShape {
     }
 }
 
-// Initialize everything when DOM is ready
+// Replace the InteractiveDotShape initialization
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Starting application initialization...');
+    console.log('🚀 Starting calm particle swarm...');
     
-    // Initialize TeamManager
-    const teamManager = new TeamManager();
-    teamManager.init();
+    // Initialize Calm Particle Swarm instead of InteractiveDotShape
+    const particleSwarm = new CalmParticleSwarm();
+    particleSwarm.init();
     
-    // Initialize Interactive Dot Shape
-    const dotShape = new InteractiveDotShape();
-    dotShape.init();
-    
-    console.log('✅ Application initialized successfully');
+    console.log('✅ Calm particle swarm initialized');
 });
