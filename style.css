@@ -9,11 +9,10 @@ body {
     background: #0f1419;
     color: #e6edf3;
     overflow-x: hidden;
+    line-height: 1.6;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    line-height: 1.6;
     min-height: 100vh;
-    position: relative;
 }
 
 /* iOS Fix  */
@@ -23,19 +22,20 @@ html {
 }
 
 body {
-    min-height: 100vh;
+    position: relative;
+    height: auto;
 }
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
 /* Gradient Background */
 #gradient-background {
     position: fixed;
-    pointer-events: none;
+     pointer-events: none;
     top: 0;
     left: 0;
     width: 100%;
@@ -177,13 +177,14 @@ body {
 .hero {
     padding: 120px 0 60px;
     position: relative;
+    overflow: hidden;
     min-height: 80vh;
 }
 
 .hero::before {
     content: '';
     position: absolute;
-    pointer-events: none;
+     pointer-events: none;
     top: 0;
     left: 0;
     right: 0;
@@ -309,8 +310,8 @@ body {
 }
 
 #dotShape {
-    width: 600px;
-    height: 500px;
+    width: 600px !important;
+    height: 500px !important;
     filter: drop-shadow(0 0 30px rgba(120, 119, 198, 0.4));
     transition: filter 0.3s ease;
     border-radius: 20px;
@@ -733,7 +734,6 @@ body {
     gap: 20px;
 }
 
-/* Project card base styles */
 .project-card {
     padding: 24px;
     border-radius: 16px;
@@ -743,70 +743,35 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Pseudo-element for background image */
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-    pointer-events: none;
-    will-change: opacity;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
 
-/* Text inside the card */
-.project-card > * {
-    position: relative;
-    z-index: 2;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
-
-/* Hover effects */
 .project-card:hover {
+    background: rgba(255, 255, 255, 0.06);
     transform: translateY(-4px);
     box-shadow: 0 15px 30px rgba(120, 119, 198, 0.1);
 }
 
-.project-card:hover::before {
-    opacity: 1; /* Show background image */
-}
-
-.project-card:hover > * {
-    opacity: 0; /* Hide text on hover */
-}
-
-/* Background images for each project */
-.project-nasa::before {
+.project-nasa {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/nasa.png');
 }
 
-.project-spaceX::before {
+.project-spaceX {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/spacex.png');
 }
 
-.project-xai::before {
+.project-xai {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/xai.png');
 }
 
-.project-tesla::before {
+.project-tesla {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/tesla.png');
 }
 
-.project-starlink::before {
+.project-starlink {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/starlink.png');
 }
 
@@ -1052,8 +1017,8 @@ body {
     }
     
     #dotShape {
-        width: 500px;
-        height: 420px;
+        width: 500px !important;
+        height: 420px !important;
     }
     
     .content-grid {
@@ -1123,8 +1088,8 @@ body {
     }
     
     #dotShape {
-        width: 450px;
-        height: 380px;
+        width: 450px !important;
+        height: 380px !important;
     }
     
     .content-grid {
@@ -1161,32 +1126,35 @@ body {
 
 /* Large Mobile / Small Tablet - up to 768px */
 @media (max-width: 768px) {
+    .header {
+        padding: 12px 0;
+    }
+    
     .header-content {
-        padding: 10px 15px;
+        padding: 0 10px;
     }
     
     .logo-section {
-        gap: 15px;
+        gap: 10px;
         font-size: 20px;
-    }
-    
-    .apple-logo img, .xai-logo img {
-        width: 50px;
     }
     
     .logo-divider {
         font-size: 24px;
     }
     
+    .apple-logo img, .xai-logo img {
+        height: 30px;
+    }
+    
     .nav {
-        gap: 5px;
+        gap: 8px;
     }
     
     .nav-link {
+        padding: 6px 12px;
         font-size: 11px;
-        padding: 8px 12px;
     }
-}
     
     .hero {
         padding: 80px 0 30px;
@@ -1219,8 +1187,8 @@ body {
     }
     
     #dotShape {
-        width: 400px;
-        height: 320px;
+        width: 400px !important;
+        height: 320px !important;
     }
     
     .main-content {
