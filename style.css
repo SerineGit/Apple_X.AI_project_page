@@ -718,6 +718,8 @@ body {
 }
 
 /* Other Projects Section */
+
+
 .other-projects {
     padding: 80px 0;
 }
@@ -735,6 +737,7 @@ body {
 }
 
 /* Project card base styles */
+
 .project-card {
     padding: 24px;
     border-radius: 16px;
@@ -747,7 +750,6 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
-    /* Removed background: transparent - this was causing the issue */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
