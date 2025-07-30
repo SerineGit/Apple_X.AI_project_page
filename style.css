@@ -23,20 +23,19 @@ html {
 }
 
 body {
-min-height: 100vh;
+    min-height: 100vh;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    
 }
 
 /* Gradient Background */
 #gradient-background {
     position: fixed;
-     pointer-events: none;
+    pointer-events: none;
     top: 0;
     left: 0;
     width: 100%;
@@ -184,7 +183,7 @@ min-height: 100vh;
 .hero::before {
     content: '';
     position: absolute;
-     pointer-events: none;
+    pointer-events: none;
     top: 0;
     left: 0;
     right: 0;
@@ -718,8 +717,6 @@ min-height: 100vh;
 }
 
 /* Other Projects Section */
-
-
 .other-projects {
     padding: 80px 0;
 }
@@ -737,7 +734,6 @@ min-height: 100vh;
 }
 
 /* Project card base styles */
-
 .project-card {
     padding: 24px;
     border-radius: 16px;
