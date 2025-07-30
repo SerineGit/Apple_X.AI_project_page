@@ -1069,7 +1069,10 @@ body {
         padding: 0 15px;
     }
     
-       
+    .projects-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
     .apple-logo img, .xai-logo img {
         height: 35px;
     }
