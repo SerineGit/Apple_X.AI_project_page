@@ -286,7 +286,7 @@ body {
 .interactive-shape {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 75%;
     transform: translate(-50%, -50%);
     z-index: 1;
     pointer-events: none;
@@ -1067,14 +1067,14 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .interactive-shape {
         transform: translate(-50%, -50%) scale(0.5);
     }
     
     #dotShape {
-        width: 250px;
-        height: 200px;
+        width: 500px;
+        height: 500px;
     }
 }
 
