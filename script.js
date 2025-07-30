@@ -365,77 +365,67 @@ class Rotating3DShapes {
         }
     }
 
-    getAppleVertices() {
-        const vertices = [];
-        const edges = [];
-        const faces = [];
-        
-        // Apple body - more detailed sphere with bite
-        const segments = 24;
-        const rings = 16;
-        const radius = 70;
-        
-        // Generate apple body vertices
-        for (let ring = 0; ring <= rings; ring++) {
-            const phi = (ring / rings) * Math.PI;
-            const y = -Math.cos(phi) * radius;
-            const ringRadius = Math.sin(phi) * radius;
-            
-            for (let seg = 0; seg <= segments; seg++) {
-                const theta = (seg / segments) * Math.PI * 2;
-                let x = Math.cos(theta) * ringRadius;
-                let z = Math.sin(theta) * ringRadius;
-                
-                // Create bite effect on one side
-                if (x > 20 && z > -30 && z < 30) {
-                    const biteDepth = Math.pow((x - 20) / 50, 2) * 40;
-                    const biteWidth = Math.pow(1 - Math.abs(z) / 30, 2);
-                    x -= biteDepth * biteWidth;
-                }
-                
-                // Apple shape modification (more oval)
-                y *= 1.1;
-                if (y > 0) y *= 0.8; // Narrow top
-                
-                vertices.push([x, y, z]);
+getAppleVertices(radius = 1, segments = 32, rings = 16) {
+    const vertices = [];
+    const faces = [];
+
+    for (let ring = 0; ring <= rings; ring++) {
+        const phi = (ring / rings) * Math.PI;
+        const baseY = -Math.cos(phi) * radius;
+        const ringRadius = Math.sin(phi) * radius;
+
+        // Deform Y to get apple-like shape (flattened bottom/top)
+        let y = baseY * 1.1;
+        if (y > 0) y *= 0.8;
+
+        for (let segment = 0; segment <= segments; segment++) {
+            const theta = (segment / segments) * 2 * Math.PI;
+
+            let x = Math.cos(theta) * ringRadius;
+            let z = Math.sin(theta) * ringRadius;
+
+            // Create bite: remove a slice of the apple on one side
+            const biteThreshold = 0.3;
+            const biteOffset = 0.1;
+            if (x > radius * (1 - biteThreshold) && z > -biteOffset && z < biteOffset && y > 0) {
+                continue; // skip vertex to simulate a bite
             }
+
+            vertices.push({ x, y, z });
         }
-        
-        // Apple stem
-        vertices.push([0, -radius * 1.2, 0]);
-        vertices.push([-3, -radius * 1.4, 0]);
-        vertices.push([3, -radius * 1.4, 0]);
-        
-        // Leaf vertices
-        vertices.push([8, -radius * 1.3, -5]);
-        vertices.push([15, -radius * 1.25, -8]);
-        vertices.push([12, -radius * 1.35, -3]);
-        
-        // Generate edges for wireframe
-        for (let ring = 0; ring < rings; ring++) {
-            for (let seg = 0; seg < segments; seg++) {
-                const current = ring * (segments + 1) + seg;
-                const next = current + segments + 1;
-                
-                // Horizontal edges
-                edges.push([current, current + 1]);
-                // Vertical edges
-                if (ring < rings) {
-                    edges.push([current, next]);
-                }
-            }
-        }
-        
-        // Stem and leaf edges
-        const stemStart = vertices.length - 6;
-        edges.push([stemStart, stemStart + 1]);
-        edges.push([stemStart, stemStart + 2]);
-        edges.push([stemStart + 3, stemStart + 4]);
-        edges.push([stemStart + 4, stemStart + 5]);
-        edges.push([stemStart + 5, stemStart + 3]);
-        
-        return { vertices, edges, faces, type: 'apple' };
     }
+
+    // Generate triangle faces between rings
+    const ringVertexCount = segments + 1;
+    for (let ring = 0; ring < rings; ring++) {
+        for (let seg = 0; seg < segments; seg++) {
+            const current = ring * ringVertexCount + seg;
+            const next = current + ringVertexCount;
+
+            // Avoid faces if bite skipped some vertices
+            if (
+                vertices[current] && vertices[current + 1] &&
+                vertices[next] && vertices[next + 1]
+            ) {
+                faces.push([current, current + 1, next]);
+                faces.push([current + 1, next + 1, next]);
+            }
+        }
+    }
+
+    // Add apple stem
+    vertices.push({ x: 0, y: radius * 1.2, z: 0 });           // base of stem
+    vertices.push({ x: 0, y: radius * 1.5, z: 0 });           // tip of stem
+
+    // Add leaf (flat rectangle sticking out)
+    const leafY = radius * 1.4;
+    vertices.push({ x: 0.1, y: leafY, z: 0 });
+    vertices.push({ x: 0.3, y: leafY + 0.05, z: 0 });
+    vertices.push({ x: 0.1, y: leafY - 0.05, z: 0 });
+
+    return { vertices, faces };
+}
+
 
     getBrainVertices() {
         const vertices = [];
