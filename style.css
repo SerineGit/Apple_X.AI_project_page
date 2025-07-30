@@ -984,107 +984,107 @@ body {
 }
 
 /* Responsive Design */
+
+/* Media query for screens up to 1200px wide (e.g., desktops, large tablets) */
 @media (max-width: 1200px) {
+    /* Content Grid adjustments */
     .content-grid {
         grid-template-columns: repeat(3, minmax(340px, 1fr));
         gap: 25px;
         padding: 0 20px;
     }
-    
+
+    /* Hero section refinements */
     .hero-content {
         gap: 40px;
     }
-    
+
     .hero-title {
         font-size: 3.5rem;
     }
-    
+
+    /* Interactive shape sizing */
     .interactive-shape {
         width: 500px;
         height: 420px;
     }
-    
+
+    /* Important rule for dotShape, likely overriding inline styles or higher specificity */
     #dotShape {
         width: 500px !important;
         height: 420px !important;
     }
-}
 
-
-    
+    /* Glass card general adjustments */
     .glass-card {
         max-width: none;
         min-width: 300px;
+        padding: 24px; /* Grouped with other glass-card properties for consistency */
     }
-    
- .hero-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 60px;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-    
+
+    /* Hero layout reordering for smaller screens */
     .hero-left {
         padding-right: 0;
         order: 1;
     }
-    
+
     .hero-right {
         order: 2;
         justify-content: center;
     }
-    
-    .hero-title {
+
+    /* Further hero title adjustment (duplicate, consider consolidating) */
+    .hero-title { /* This is a duplicate; consider removing if 3.5rem is preferred at 1200px */
         font-size: 3rem;
     }
-    
-    .interactive-shape {
+
+    /* More interactive shape adjustments (duplicate, consider consolidating) */
+    .interactive-shape { /* This is a duplicate; consider removing if 500px is preferred at 1200px */
         width: 450px;
         height: 380px;
         margin: 0 auto;
     }
-    
-    #dotShape {
+
+    #dotShape { /* This is a duplicate; consider removing if 500px is preferred at 1200px */
         width: 450px !important;
         height: 380px !important;
     }
-    
+
+    /* Team section layout for leadership */
     .team-leadership {
         flex-direction: column;
         align-items: center;
         gap: 20px;
     }
-    
+
+    /* Team row grid for two columns */
     .team-row {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
-    
+
+    /* Navigation adjustments */
     .nav {
         gap: 8px;
     }
-    
+
     .nav-link {
         padding: 8px 16px;
         font-size: 12px;
     }
 
+    /* Logo section spacing */
     .logo-section {
         gap: 10px;
     }
 
-    .apple-logo img, .xai-logo img {
+    /* Logo image sizing */
+    .apple-logo img,
+    .xai-logo img {
         height: 30px;
     }
 
-    .glass-card {
-        padding: 24px;
-    }
-
+    /* Modal dialog adjustments */
     .modal-content {
         width: 95%;
         margin: 20px;
@@ -1098,6 +1098,7 @@ body {
         font-size: 1.3rem;
     }
 
+    /* Team card styling */
     .team-card {
         max-width: none;
         padding: 20px;
@@ -1121,101 +1122,131 @@ body {
     }
 }
 
+---
+
+/* Media query for screens up to 768px wide (e.g., tablets in portrait, small laptops) */
 @media (max-width: 768px) {
+    /* Content grid for single column layout */
     .content-grid {
         grid-template-columns: 1fr;
         gap: 20px;
         padding: 0 15px;
     }
-    
+
+    /* Glass card sizing and centering */
     .glass-card {
         max-width: none;
         min-width: auto;
         margin: 0 auto;
     }
-    
+
+    /* Hero section padding */
     .hero {
         padding: 60px 0 20px;
     }
-    
+
+    /* Hero title font size */
     .hero-title {
         font-size: 2.5rem;
     }
-    
-    .to-text, .project-label {
+
+    /* Font sizes for specific text elements */
+    .to-text,
+    .project-label {
         font-size: 1.8rem;
     }
-    
+
+    /* Hero description font size */
     .hero-description {
         font-size: 1.1rem;
     }
-    
+
+    /* Interactive shape sizing */
     .interactive-shape {
         width: 400px;
         height: 320px;
     }
-    
+
     #dotShape {
         width: 400px !important;
         height: 320px !important;
     }
 }
 
+---
+
+/* Media query for screens up to 600px wide (e.g., larger smartphones) */
 @media (max-width: 600px) {
+    /* Hero title font size */
     .hero-title {
         font-size: 2rem;
     }
-    
-    .to-text, .project-label {
+
+    /* Font sizes for specific text elements */
+    .to-text,
+    .project-label {
         font-size: 1.5rem;
     }
-    
+
+    /* Hero description font size */
     .hero-description {
         font-size: 1rem;
     }
-    
+
+    /* Interactive shape sizing */
     .interactive-shape {
         width: 350px;
         height: 280px;
     }
-    
+
     #dotShape {
         width: 350px !important;
         height: 280px !important;
     }
 }
 
+---
+
+/* Media query for screens up to 480px wide (e.g., most smartphones) */
 @media (max-width: 480px) {
+    /* Content grid adjustments */
     .content-grid {
         gap: 15px;
         padding: 0 10px;
     }
-    
+
+    /* Glass card padding */
     .glass-card {
         padding: 24px 20px;
     }
-    
-    .hero-title {
+
+    /* Hero title (duplicate, consider consolidating or refining) */
+    .hero-title { /* This is a duplicate; consider removing if 2.5rem or 2rem is preferred */
         font-size: 2rem;
     }
 
-    .apple-logo img, .xai-logo img {
+    /* Logo image sizing */
+    .apple-logo img,
+    .xai-logo img {
         height: 25px;
     }
-      
+
+    /* Navigation adjustments */
     .nav {
         gap: 5px;
     }
-    
+
     .nav-link {
         padding: 6px 12px;
         font-size: 11px;
     }
 
-    .glass-card {
+    /* Glass card padding (duplicate, consider consolidating) */
+    .glass-card { /* This is a duplicate; consider removing if 24px 20px is preferred */
         padding: 20px;
     }
 
+    /* Modal dialog adjustments */
     .modal-content {
         width: 98%;
         margin: 10px;
@@ -1233,20 +1264,24 @@ body {
         font-size: 1.2rem;
     }
 
-    .hero-description {
+    /* Hero description (duplicate, consider consolidating) */
+    .hero-description { /* This is a duplicate; consider removing if 1.1rem or 1rem is preferred */
         font-size: 1rem;
     }
 
+    /* Team leadership spacing */
     .team-leadership {
         gap: 15px;
     }
-    
+
+    /* Team row for single column, centered, and max-width */
     .team-row {
         grid-template-columns: 1fr;
         max-width: 300px;
         margin: 0 auto;
     }
 
+    /* Team avatar sizing */
     .team-avatar {
         width: 45px;
         height: 45px;
@@ -1256,6 +1291,7 @@ body {
         font-size: 1.3rem;
     }
 
+    /* Team name and role font sizes */
     .team-name {
         font-size: 0.8rem;
     }
@@ -1264,6 +1300,7 @@ body {
         font-size: 0.65rem;
     }
 
+    /* Team links sizing */
     .team-links {
         gap: 6px;
     }
@@ -1272,12 +1309,13 @@ body {
         width: 28px;
         height: 28px;
     }
-    
+
+    /* Interactive shape sizing */
     .interactive-shape {
         width: 300px;
         height: 240px;
     }
-    
+
     #dotShape {
         width: 300px !important;
         height: 240px !important;
