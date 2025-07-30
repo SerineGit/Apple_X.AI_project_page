@@ -164,7 +164,7 @@ body {
 /* Navigation */
 .nav {
     display: flex;
-    gap: 15px;
+   padding: 0px 70px 0;
 }
 
 .nav-link {
@@ -800,7 +800,7 @@ body {
 
 .modal-content {
     position: relative;
-    background: rgba(15, 20, 25, 0.95);
+    background: rgb(43 37 57 / 54%);
     backdrop-filter: blur(30px);
     width: 90%;
     max-width: 600px;
