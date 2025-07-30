@@ -9,10 +9,11 @@ body {
     background: #0f1419;
     color: #e6edf3;
     overflow-x: hidden;
-    line-height: 1.6;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    line-height: 1.6;
     min-height: 100vh;
+    position: relative;
 }
 
 /* iOS Fix  */
@@ -22,14 +23,14 @@ html {
 }
 
 body {
-    position: relative;
-    height: auto;
+min-height: 100vh;
 }
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    box-sizing: border-box;
+    
 }
 
 /* Gradient Background */
@@ -177,7 +178,6 @@ body {
 .hero {
     padding: 120px 0 60px;
     position: relative;
-    overflow: hidden;
     min-height: 80vh;
 }
 
@@ -310,8 +310,8 @@ body {
 }
 
 #dotShape {
-    width: 600px !important;
-    height: 500px !important;
+    width: 600px;
+    height: 500px;
     filter: drop-shadow(0 0 30px rgba(120, 119, 198, 0.4));
     transition: filter 0.3s ease;
     border-radius: 20px;
@@ -1056,8 +1056,8 @@ body {
     }
     
     #dotShape {
-        width: 500px !important;
-        height: 420px !important;
+        width: 500px;
+        height: 420px;
     }
     
     .content-grid {
@@ -1127,8 +1127,8 @@ body {
     }
     
     #dotShape {
-        width: 450px !important;
-        height: 380px !important;
+        width: 450px;
+        height: 380px;
     }
     
     .content-grid {
@@ -1223,8 +1223,8 @@ body {
     }
     
     #dotShape {
-        width: 400px !important;
-        height: 320px !important;
+        width: 400px;
+        height: 320px;
     }
     
     .main-content {
