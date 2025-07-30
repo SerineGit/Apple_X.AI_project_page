@@ -963,22 +963,13 @@ body {
     .section-title {
         font-size: 2rem;
     }
-    
-    .android-main {
-        width: 150px;
-        height: 150px;
-    }
+
 
     .apple-logo img, .xai-logo img {
         height: 25px;
     }
 
-    .android-character {
-        right: -70px;
-        width: 50px;
-        height: 50px;
-    }
-    
+      
     .nav {
         gap: 5px;
     }
