@@ -564,11 +564,12 @@ body {
 }
 
 .team-leadership {
-    display: grid;    
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    gap: 10px;
     justify-items: center;
     margin-bottom: 40px;
+    padding: 0px 100px 0;
 }
 
 .team-row {
