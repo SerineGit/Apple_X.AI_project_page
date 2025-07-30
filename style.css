@@ -980,7 +980,7 @@ body {
 /* Responsive Design */
 @media (max-width: 1200px) {
     .content-grid {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        grid-template-columns: repeat(3, minmax(350px, 1fr));
         gap: 25px;
         padding: 0 20px;
     }
