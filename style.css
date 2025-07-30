@@ -999,26 +999,27 @@ body {
     }
 
     .hero-title {
-        font-size: 3.5rem;
+        font-size: 3rem; /* Consolidated from two hero-title declarations */
     }
 
     /* Interactive shape sizing */
     .interactive-shape {
-        width: 500px;
-        height: 420px;
+        width: 450px; /* Consolidated from two interactive-shape declarations */
+        height: 380px; /* Consolidated from two interactive-shape declarations */
+        margin: 0 auto;
     }
 
     /* Important rule for dotShape, likely overriding inline styles or higher specificity */
     #dotShape {
-        width: 500px !important;
-        height: 420px !important;
+        width: 450px !important; /* Consolidated from two dotShape declarations */
+        height: 380px !important; /* Consolidated from two dotShape declarations */
     }
 
     /* Glass card general adjustments */
     .glass-card {
         max-width: none;
         min-width: 300px;
-        padding: 24px; /* Grouped with other glass-card properties for consistency */
+        padding: 24px;
     }
 
     /* Hero layout reordering for smaller screens */
@@ -1031,25 +1032,6 @@ body {
         order: 2;
         justify-content: center;
     }
-
-    /* Further hero title adjustment (duplicate, consider consolidating) */
-    .hero-title { /* This is a duplicate; consider removing if 3.5rem is preferred at 1200px */
-        font-size: 3rem;
-    }
-
-    /* More interactive shape adjustments (duplicate, consider consolidating) */
-    .interactive-shape { /* This is a duplicate; consider removing if 500px is preferred at 1200px */
-        width: 450px;
-        height: 380px;
-        margin: 0 auto;
-    }
-
-    #dotShape { /* This is a duplicate; consider removing if 500px is preferred at 1200px */
-        width: 450px !important;
-        height: 380px !important;
-    }
-
-
 
     /* Navigation adjustments */
     .nav {
@@ -1107,6 +1089,16 @@ body {
     .team-role {
         font-size: 0.7rem;
     }
+
+    /*
+    Consider adding styles for .team-leadership and .team-row here if they need to change
+    from their default or larger breakpoint styles before 768px.
+    Example:
+    .team-leadership,
+    .team-row {
+        grid-template-columns: repeat(2, 1fr); // Example: two columns for larger tablets
+    }
+    */
 }
 
 ---
@@ -1125,6 +1117,7 @@ body {
         max-width: none;
         min-width: auto;
         margin: 0 auto;
+        /* Padding is inherited from 1200px unless specifically changed here */
     }
 
     /* Hero section padding */
@@ -1158,6 +1151,12 @@ body {
         width: 400px !important;
         height: 320px !important;
     }
+
+    .team-leadership,
+    .team-row {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
 }
 
 ---
@@ -1190,6 +1189,13 @@ body {
         width: 350px !important;
         height: 280px !important;
     }
+
+   
+    .team-leadership,
+    .team-row {
+        grid-template-columns: 1fr;
+    }
+    
 }
 
 ---
@@ -1202,15 +1208,13 @@ body {
         padding: 0 10px;
     }
 
-    /* Glass card padding */
+    /* Glass card padding - choose one value, consolidate with previous 24px */
     .glass-card {
-        padding: 24px 20px;
+        padding: 20px; /* Consolidated from two glass-card padding declarations */
     }
 
-    /* Hero title (duplicate, consider consolidating or refining) */
-    .hero-title { /* This is a duplicate; consider removing if 2.5rem or 2rem is preferred */
-        font-size: 2rem;
-    }
+    /* Hero title font size (no need to redeclare if 2rem from 600px is desired) */
+    /* .hero-title { font-size: 2rem; } */
 
     /* Logo image sizing */
     .apple-logo img,
@@ -1226,11 +1230,6 @@ body {
     .nav-link {
         padding: 6px 12px;
         font-size: 11px;
-    }
-
-    /* Glass card padding (duplicate, consider consolidating) */
-    .glass-card { /* This is a duplicate; consider removing if 24px 20px is preferred */
-        padding: 20px;
     }
 
     /* Modal dialog adjustments */
@@ -1251,22 +1250,18 @@ body {
         font-size: 1.2rem;
     }
 
-    /* Hero description (duplicate, consider consolidating) */
-    .hero-description { /* This is a duplicate; consider removing if 1.1rem or 1rem is preferred */
-        font-size: 1rem;
-    }
+    /* Hero description (no need to redeclare if 1rem from 600px is desired) */
+    /* .hero-description { font-size: 1rem; } */
 
     /* Team leadership spacing */
     .team-leadership {
         grid-template-columns: 1fr;
-        max-width: 300px;
         margin: 0 auto;
     }
 
     /* Team row for single column, centered, and max-width */
     .team-row {
         grid-template-columns: 1fr;
-        max-width: 300px;
         margin: 0 auto;
     }
 
