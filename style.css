@@ -197,7 +197,7 @@ body {
 
 .hero-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 60px;
     align-items: center;
     position: relative;
@@ -572,7 +572,11 @@ body {
     box-shadow: 0 15px 35px rgba(120, 119, 198, 0.2);
 }
 
+
+
 /* Team Section */
+
+
 .team {
     padding: 60px 0;
     background: rgba(255, 255, 255, 0.02);
@@ -587,9 +591,10 @@ body {
 }
 
 .team-leadership {
-    display: flex;
-    justify-content: center;
+    display: grid;    
+    grid-template-columns: repeat(2, 1fr);
     gap: 70px;
+    justify-content: center;
     margin-bottom: 10px;
 }
 
@@ -1012,11 +1017,16 @@ body {
         min-width: 300px;
     }
     
-    .hero-content {
-        grid-template-columns: 1fr;
-        gap: 50px;
-        text-align: center;
-    }
+ .hero-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+}
     
     .hero-left {
         padding-right: 0;
