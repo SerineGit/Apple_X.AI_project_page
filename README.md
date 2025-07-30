@@ -2,7 +2,7 @@
 
 https://serinegit.github.io/project-page/
 
-<!-- Верхняя картинка -->
+<body style="background-color: #121212; margin: 0; padding: 0;">
 <img 
   src="https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img_for_readme/top.png" 
   alt="Top Image" 
@@ -22,3 +22,4 @@ https://serinegit.github.io/project-page/
   />
 
 </div>
+</body>
