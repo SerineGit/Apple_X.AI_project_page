@@ -592,7 +592,7 @@ body {
 .team-leadership {
     display: grid;    
     grid-template-columns: repeat(2, 1fr);
-    gap: 70px;
+    gap: 40px;
     justify-content: center;
     margin-bottom: 10px;
 }
