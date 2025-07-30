@@ -313,8 +313,18 @@ body {
 
 .content-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
     gap: 30px;
+    max-width: 1200px;  
+    margin: 0 auto;  
+}
+
+.content-grid-alternative {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; 
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .glass-card {
@@ -328,6 +338,11 @@ body {
     overflow: hidden;
     max-height: 400px;
     overflow-y: auto;
+
+    min-width: 320px;
+    max-width: 450px;
+    width: 100%;
+    justify-self: center; 
 }
 
 .glass-card::-webkit-scrollbar {
@@ -914,12 +929,98 @@ body {
 /* Responsive Design */
 
 
-    
-    .content-grid,
-    .stats-grid,
-    .projects-grid {
-        grid-template-columns: 1fr;
+@media (max-width: 1200px) {
+    .content-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        padding: 0 20px;
     }
+}
+
+@media (max-width: 968px) {
+    .content-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 20px;
+    }
+    
+    .glass-card {
+        max-width: none; /* Убираем ограничение на средних экранах */
+        min-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr; /* Одна колонка на мобильных */
+        gap: 20px;
+        padding: 0 15px;
+    }
+    
+    .glass-card {
+        max-width: none;
+        min-width: auto;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-grid {
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .glass-card {
+        padding: 24px 20px;
+    }
+}
+
+/* ДОПОЛНИТЕЛЬНОЕ ИСПРАВЛЕНИЕ - если проблема в контейнере */
+.main-content {
+    padding: 60px 0;
+    position: relative;
+    width: 100%;
+    overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку */
+}
+
+.main-content .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+/* АЛЬТЕРНАТИВНОЕ РЕШЕНИЕ - Flexbox вместо Grid */
+.content-grid-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content-grid-flex .glass-card {
+    flex: 0 1 350px; /* Не растягиваются, но могут сжиматься, базовая ширина 350px */
+    max-width: 400px;
+    min-width: 320px;
+}
+
+/* ЭКСТРЕННОЕ ИСПРАВЛЕНИЕ - если ничего не помогает */
+.glass-card.force-width {
+    width: 350px !important;
+    max-width: 350px !important;
+    flex-shrink: 0 !important;
+}
+
+/* Проверка на случай конфликта с другими стилями */
+.glass-card {
+    box-sizing: border-box !important;
+}
+
+/* Убеждаемся что контейнер не растягивается */
+.container {
+    box-sizing: border-box;
+}
     
     .team-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -963,9 +1064,7 @@ body {
         font-size: 1.3rem;
     }
 
-    .floating-icon {
-        font-size: 30px;
-    }
+   
 
     .team-card {
         max-width: none;
