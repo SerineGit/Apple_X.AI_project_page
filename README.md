@@ -4,7 +4,7 @@
 
 [![Visit](https://img.shields.io/badge/Visit-Site-orange?style=plastic&logo=github)](https://serinegit.github.io/project-page/)
 
-[![Repo](https://img.shields.io/badge/Repo-GitHub-black?style=social&logo=github)](https://serinegit.github.io/project-page/)
+
 
 
 
