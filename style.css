@@ -756,23 +756,23 @@ body {
 }
 
 .project-nasa {
-    background-image: url('https://example.com/nasa.jpg');
+    background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/nasa.png');
 }
 
 .project-spaceX {
-    background-image: url('https://example.com/spacex.jpg');
+    background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/spacex.png');
 }
 
 .project-xai {
-    background-image: url('https://example.com/xai.jpg');
+    background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/xai.png');
 }
 
 .project-tesla {
-    background-image: url('https://example.com/tesla.jpg');
+    background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/tesla.png');
 }
 
 .project-starlink {
-    background-image: url('https://example.com/starlink.jpg');
+    background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/starlink.png');
 }
 
 /* Modal Styles */
