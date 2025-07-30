@@ -1,9 +1,10 @@
+1.
 [![Demo](https://img.shields.io/badge/Demo-Project-red?style=flat-square&logo=github)](https://serinegit.github.io/project-page/)
 ![WELCOME](https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img_for_readme/top.jpg)
 
 
 ----
-
+2. 
 <div align="center">
 
 # 🚨 DANGER ZONE 🚨
@@ -31,7 +32,7 @@
 
 
 -----
-
+3.
 <div align="center">
 
 # 🎮 QUEST: Virtual Reality Portal
@@ -78,7 +79,7 @@
 </div>
 
 -----
-
+4. 
 <div align="center">
 
 # 🛸 INTERDIMENSIONAL PORTAL
@@ -114,3 +115,57 @@ graph TD
     E --> F{Return possible?}
     F -->|12% chance| G[Successful return]
     F -->|88% chance| H[Stuck forever]
+
+----
+
+5. 
+
+<div align="center">
+
+# 🕹️ GAME OVER... OR NOT?
+
+<details>
+<summary>🎲 <strong>Choose your action</strong></summary>
+
+<br>
+
+### 🎯 Battle Statistics
+
+<table>
+<tr>
+<td align="center">
+
+**🏃‍♂️ ESCAPE**  
+Success: 85%  
+![Escape](https://geps.dev/progress/85)
+
+</td>
+<td align="center">
+
+**⚔️ ENTER PORTAL**  
+Success: 15%  
+![Fight](https://geps.dev/progress/15)
+
+</td>
+</tr>
+</table>
+
+---
+
+### 💭 What will you choose?
+
+> 🧙‍♂️ **Wise Wizard says:**  
+> "Many have entered this portal, young traveler.  
+> Few have returned to tell the tale..."
+
+<br>
+
+**🎮 BOSS BATTLE:**
+
+[![ENTER THE DUNGEON](https://img.shields.io/badge/🏰_ENTER_THE_DUNGEON-8B0000?style=for-the-badge&logo=gamepad&logoColor=white)](https://serinegit.github.io/project-page/)
+
+*Press START to continue... if you dare* 🕹️
+
+</details>
+
+</div>
