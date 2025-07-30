@@ -744,7 +744,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.03);
+    background-size: cover;
+    background-position: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
 }
@@ -753,6 +754,26 @@ body {
     background: rgba(255, 255, 255, 0.06);
     transform: translateY(-4px);
     box-shadow: 0 15px 30px rgba(120, 119, 198, 0.1);
+}
+
+.project-nasa {
+    background-image: url('https://example.com/nasa.jpg');
+}
+
+.project-spaceX {
+    background-image: url('https://example.com/spacex.jpg');
+}
+
+.project-xai {
+    background-image: url('https://example.com/xai.jpg');
+}
+
+.project-tesla {
+    background-image: url('https://example.com/tesla.jpg');
+}
+
+.project-starlink {
+    background-image: url('https://example.com/starlink.jpg');
 }
 
 /* Modal Styles */
