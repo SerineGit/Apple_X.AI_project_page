@@ -587,8 +587,7 @@ body {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 30px;
-}
+    }
 
 .team-leadership {
     display: grid;    
@@ -1050,18 +1049,7 @@ body {
         height: 380px !important;
     }
 
-    /* Team section layout for leadership */
-    .team-leadership {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
 
-    /* Team row grid for two columns */
-    .team-row {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
 
     /* Navigation adjustments */
     .nav {
