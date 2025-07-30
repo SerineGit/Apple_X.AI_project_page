@@ -747,11 +747,11 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
-    /* Удалили background: transparent - это была причина проблемы */
+    /* Removed background: transparent - this was causing the issue */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Псевдоэлемент для фонового изображения */
+/* Pseudo-element for background image */
 .project-card::before {
     content: '';
     position: absolute;
@@ -769,7 +769,7 @@ body {
     will-change: opacity;
 }
 
-/* Текст внутри карточки */
+/* Text inside the card */
 .project-card > * {
     position: relative;
     z-index: 2;
@@ -777,21 +777,21 @@ body {
     transition: opacity 0.3s ease;
 }
 
-/* Эффекты при наведении */
+/* Hover effects */
 .project-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 15px 30px rgba(120, 119, 198, 0.1);
 }
 
 .project-card:hover::before {
-    opacity: 1; /* Показываем фоновое изображение */
+    opacity: 1; /* Show background image */
 }
 
 .project-card:hover > * {
-    opacity: 0; /* Скрываем текст при наведении */
+    opacity: 0; /* Hide text on hover */
 }
 
-/* Фоновые изображения для каждого проекта */
+/* Background images for each project */
 .project-nasa::before {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/nasa.png');
 }
