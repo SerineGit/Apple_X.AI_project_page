@@ -151,7 +151,7 @@ body {
 
 .apple-logo img:hover, .xai-logo img:hover {
     filter: drop-shadow(0 0 15px rgba(120, 119, 198, 0.5));
-    transform: scale(1.05);
+    transform: scale(1.75);
 }
 
 .logo-divider {
