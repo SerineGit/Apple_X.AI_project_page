@@ -117,9 +117,8 @@ graph TD
     F -->|12% chance| G[Successful return]
     F -->|88% chance| H[Stuck forever]
 
-</div>
 ```
-
+</div>
 
 
 5. 
