@@ -141,6 +141,7 @@ body {
     gap: 15px;
     font-size: 24px;
     position: relative;
+    flex-shrink: 0; /* Предотвращает сжатие логотипа */
 }
 
 .apple-logo img, .xai-logo img {
@@ -164,12 +165,16 @@ body {
 /* Navigation */
 .nav {
     display: flex;
-  }
+    gap: 15px;  
+    flex-wrap: nowrap; 
+}
 
 .nav-link {
     font-size: 13px;
     padding: 10px 20px;
     border-radius: 8px;
+    white-space: nowrap;  
+    flex-shrink: 0;  
 }
 
 /* Hero Section */
@@ -985,15 +990,11 @@ body {
 
 /* RESPONSIVE DESIGN */
 
-/* Large Desktop - 1400px and up (default styles above) */
 
-/* Desktop - up to 1200px */
-@media (max-width: 1200px) {
+
+/* Desktop - up to 1000px */
+@media (max-width: 1000px) {
     .container {
-        padding: 0 15px;
-    }
-    
-    .header-content {
         padding: 0 15px;
     }
     
@@ -1041,8 +1042,12 @@ body {
         height: 35px;
     }
     
+    .header-content {
+        padding: 0 15px;
+    }
+    
     .nav {
-        gap: 10px;
+        gap: 12px; 
     }
     
     .nav-link {
@@ -1114,6 +1119,14 @@ body {
     .glass-card {
         padding: 25px;
     }
+    .nav {
+        gap: 10px;
+    }
+    
+    .nav-link {
+        padding: 8px 14px;
+        font-size: 11px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1125,17 +1138,19 @@ body {
 
 /* Large Mobile / Small Tablet - up to 768px */
 @media (max-width: 768px) {
-    .header {
+      .header {
         padding: 12px 0;
     }
     
     .header-content {
         padding: 0 10px;
+        gap: 10px; /* Добавил gap между логотипом и навигацией */
     }
     
     .logo-section {
-        gap: 10px;
+        gap: 8px;
         font-size: 20px;
+        min-width: 0; 
     }
     
     .logo-divider {
@@ -1144,16 +1159,20 @@ body {
     
     .apple-logo img, .xai-logo img {
         height: 30px;
+        width: auto; 
     }
     
     .nav {
-        gap: 8px;
+        gap: 6px;
+        flex-shrink: 0; 
     }
     
     .nav-link {
-        padding: 6px 12px;
-        font-size: 11px;
+        padding: 6px 10px;
+        font-size: 10px;
+        min-width: 0; 
     }
+
     
     .hero {
         padding: 80px 0 30px;
@@ -1322,7 +1341,25 @@ body {
     .projects-grid {
         grid-template-columns: 1fr;
     }
+   .header-content {
+        padding: 0 8px;
+    }
+    
+    .logo-section {
+        gap: 6px;
+        font-size: 18px;
+    }
+    
+    .nav {
+        gap: 4px;
+    }
+    
+    .nav-link {
+        padding: 5px 8px;
+        font-size: 9px;
+    }
 }
+
 
 /* Small Mobile - up to 480px */
 @media (max-width: 480px) {
@@ -1331,31 +1368,33 @@ body {
     }
     
     .header-content {
-        padding: 0 10px;
+        padding: 0 8px;
+        min-height: 50px; /* Минимальная высота для предотвращения сжатия */
     }
     
     .logo-section {
-        gap: 8px;
-        font-size: 18px;
+        gap: 6px;
+        font-size: 16px;
     }
     
     .logo-divider {
-        font-size: 20px;
+        font-size: 18px;
     }
     
     .apple-logo img, .xai-logo img {
-        height: 25px;
+        height: 24px;
     }
     
     .nav {
-        gap: 5px;
+        gap: 3px;
     }
     
     .nav-link {
-        padding: 5px 10px;
-        font-size: 10px;
+        padding: 4px 6px;
+        font-size: 8px;
+        border-radius: 4px;
     }
-    
+
     .hero {
         padding: 70px 0 20px;
     }
@@ -1569,5 +1608,31 @@ body {
     
     .modal-body {
         padding: 16px;
+    }
+  .header-content {
+        padding: 0 6px;
+    }
+    
+    .logo-section {
+        font-size: 14px;
+        gap: 4px;
+    }
+    
+    .logo-divider {
+        font-size: 16px;
+    }
+    
+    .apple-logo img, .xai-logo img {
+        height: 20px;
+    }
+    
+    .nav {
+        gap: 2px;
+    }
+    
+    .nav-link {
+        padding: 3px 5px;
+        font-size: 7px;
+        border-radius: 3px;
     }
 }
