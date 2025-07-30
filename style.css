@@ -345,10 +345,10 @@ body {
 }
 
 .content-grid {
+    max-width: 1200px;  
     display: grid;
     grid-template-columns: repeat(3, minmax(340px, 1fr)); 
     gap: 25px;
-    max-width: 1200px;  
     margin: 0 auto;  
 }
 
@@ -382,14 +382,11 @@ body {
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    padding: 32px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     max-height: 400px;
     overflow-y: auto;
-    min-width: 320px;
-    max-width: 450px;
     width: 100%;
     justify-self: center;
     box-sizing: border-box !important;
@@ -986,12 +983,7 @@ body {
 
 /* Media query for screens up to 1200px wide (e.g., desktops, large tablets) */
 @media (max-width: 1200px) {
-    /* Content Grid adjustments */
-    .content-grid {
-        grid-template-columns: repeat(3, minmax(340px, 1fr));
-        gap: 25px;
-        padding: 0 20px;
-    }
+  
 
     /* Hero section refinements */
     .hero-content {
