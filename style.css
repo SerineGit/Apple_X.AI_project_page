@@ -747,11 +747,11 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
-    background: transparent; /* Prevent background from hiding the pseudo-element */
+    /* Удалили background: transparent - это была причина проблемы */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Pseudo-element for background image */
+/* Псевдоэлемент для фонового изображения */
 .project-card::before {
     content: '';
     position: absolute;
@@ -765,11 +765,11 @@ body {
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 1;
-    pointer-events: none; /* Make sure hover events pass through */
-    will-change: opacity; /* Improves animation performance */
+    pointer-events: none;
+    will-change: opacity;
 }
 
-/* Text inside the card */
+/* Текст внутри карточки */
 .project-card > * {
     position: relative;
     z-index: 2;
@@ -777,21 +777,21 @@ body {
     transition: opacity 0.3s ease;
 }
 
-/* Hover effects */
+/* Эффекты при наведении */
 .project-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 15px 30px rgba(120, 119, 198, 0.1);
 }
 
 .project-card:hover::before {
-    opacity: 1; /* Reveal background image */
+    opacity: 1; /* Показываем фоновое изображение */
 }
 
 .project-card:hover > * {
-    opacity: 0; /* Hide text on hover */
+    opacity: 0; /* Скрываем текст при наведении */
 }
 
-/* Background images for each project */
+/* Фоновые изображения для каждого проекта */
 .project-nasa::before {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/nasa.png');
 }
@@ -811,7 +811,6 @@ body {
 .project-starlink::before {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/starlink.png');
 }
-
 
 /* Modal Styles */
 .modal-overlay {
