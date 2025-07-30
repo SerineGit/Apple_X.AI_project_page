@@ -15,7 +15,7 @@ https://serinegit.github.io/project-page/
   <img 
     src="https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img_for_readme/left.png" 
     alt="Image 1" 
-    style="width: 44%; display: block; margin: 0; padding: 0;" 
+    style="width: 45%; display: block; margin: 0; padding: 0;" 
   /><img 
     src="https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img_for_readme/midle.png" 
     alt="Image 2" 
