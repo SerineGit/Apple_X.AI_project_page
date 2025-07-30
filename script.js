@@ -670,13 +670,17 @@ class Rotating3DShapes {
     }
 }
 
-// Replace the InteractiveDotShape initialization
+// Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Starting rotating 3D shapes...');
+    console.log('🚀 Starting application initialization...');
     
-    // Initialize Rotating 3D Shapes instead of InteractiveDotShape
+    // Initialize TeamManager
+    const teamManager = new TeamManager();
+    teamManager.init();
+    
+    // Initialize Rotating 3D Shapes
     const rotating3D = new Rotating3DShapes();
     rotating3D.init();
     
-    console.log('✅ Rotating 3D shapes initialized');
+    console.log('✅ Application initialized successfully');
 });
