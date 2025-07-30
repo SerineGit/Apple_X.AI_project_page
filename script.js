@@ -299,7 +299,7 @@ class TeamManager {
     }
 }
 
-// Rotating 3D Shapes - Following mouse movement
+// Enhanced Rotating 3D Shapes - Sci-Fi Edition
 class Rotating3DShapes {
     constructor() {
         this.canvas = null;
@@ -312,13 +312,14 @@ class Rotating3DShapes {
         this.rotationY = 0;
         this.animationId = null;
         this.time = 0;
-        this.currentShape = 'cube'; // 'cube', 'pyramid', 'octahedron', 'dodecahedron'
+        this.currentShape = 'apple'; // 'apple', 'brain', 'airplane', 'blackhole'
         this.isTransitioning = false;
+        this.particles = [];
         this.shapes = {
-            cube: this.getCubeVertices(),
-            pyramid: this.getPyramidVertices(),
-            octahedron: this.getOctahedronVertices(),
-            dodecahedron: this.getDodecahedronVertices()
+            apple: this.getAppleVertices(),
+            brain: this.getBrainVertices(),
+            airplane: this.getAirplaneVertices(),
+            blackhole: this.getBlackHoleVertices()
         };
     }
 
@@ -329,9 +330,10 @@ class Rotating3DShapes {
         this.ctx = this.canvas.getContext('2d');
         this.setupCanvas();
         this.bindEvents();
+        this.initParticles();
         this.animate();
         
-        console.log('✅ Rotating 3D Shapes initialized');
+        console.log('✅ Enhanced Sci-Fi 3D Shapes initialized');
     }
 
     setupCanvas() {
@@ -347,91 +349,400 @@ class Rotating3DShapes {
         this.canvas.style.height = height + 'px';
     }
 
-    getCubeVertices() {
-        const size = 80;
-        return {
-            vertices: [
-                [-size, -size, -size], [size, -size, -size], [size, size, -size], [-size, size, -size],
-                [-size, -size, size], [size, -size, size], [size, size, size], [-size, size, size]
-            ],
-            edges: [
-                [0,1], [1,2], [2,3], [3,0], // Back face
-                [4,5], [5,6], [6,7], [7,4], // Front face
-                [0,4], [1,5], [2,6], [3,7]  // Connecting edges
-            ],
-            faces: [
-                [0,1,2,3], [4,7,6,5], [0,4,5,1], [2,6,7,3], [0,3,7,4], [1,5,6,2]
-            ]
-        };
+    initParticles() {
+        this.particles = [];
+        for (let i = 0; i < 50; i++) {
+            this.particles.push({
+                x: Math.random() * 600,
+                y: Math.random() * 500,
+                z: Math.random() * 400 - 200,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                vz: (Math.random() - 0.5) * 0.5,
+                life: Math.random(),
+                maxLife: 1 + Math.random() * 2
+            });
+        }
     }
 
-    getPyramidVertices() {
-        const size = 100;
-        return {
-            vertices: [
-                [0, -size, 0],           // Top
-                [-size, size, -size],    // Base corners
-                [size, size, -size],
-                [size, size, size],
-                [-size, size, size]
-            ],
-            edges: [
-                [0,1], [0,2], [0,3], [0,4], // Top to base
-                [1,2], [2,3], [3,4], [4,1]  // Base edges
-            ],
-            faces: [
-                [0,1,2], [0,2,3], [0,3,4], [0,4,1], [1,4,3,2]
-            ]
-        };
-    }
-
-    getOctahedronVertices() {
-        const size = 90;
-        return {
-            vertices: [
-                [0, -size, 0],    // Top
-                [0, size, 0],     // Bottom
-                [-size, 0, 0],    // Left
-                [size, 0, 0],     // Right
-                [0, 0, -size],    // Back
-                [0, 0, size]      // Front
-            ],
-            edges: [
-                [0,2], [0,3], [0,4], [0,5], // Top connections
-                [1,2], [1,3], [1,4], [1,5], // Bottom connections
-                [2,4], [4,3], [3,5], [5,2]  // Middle ring
-            ],
-            faces: [
-                [0,2,4], [0,4,3], [0,3,5], [0,5,2],
-                [1,4,2], [1,3,4], [1,5,3], [1,2,5]
-            ]
-        };
-    }
-
-    getDodecahedronVertices() {
-        const phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
-        const size = 50;
+    getAppleVertices() {
+        const vertices = [];
+        const edges = [];
+        const faces = [];
         
-        return {
-            vertices: [
-                // Cube vertices scaled
-                [-size, -size, -size], [size, -size, -size], [size, size, -size], [-size, size, -size],
-                [-size, -size, size], [size, -size, size], [size, size, size], [-size, size, size],
-                // Rectangle in xy plane
-                [0, -size*phi, -size/phi], [0, size*phi, -size/phi], [0, size*phi, size/phi], [0, -size*phi, size/phi],
-                // Rectangle in xz plane  
-                [-size/phi, 0, -size*phi], [size/phi, 0, -size*phi], [size/phi, 0, size*phi], [-size/phi, 0, size*phi],
-                // Rectangle in yz plane
-                [-size*phi, -size/phi, 0], [-size*phi, size/phi, 0], [size*phi, size/phi, 0], [size*phi, -size/phi, 0]
-            ],
-            edges: [
-                [0,8], [8,1], [1,13], [13,2], [2,9], [9,3], [3,12], [12,0],
-                [4,11], [11,5], [5,14], [14,6], [6,10], [10,7], [7,15], [15,4],
-                [0,16], [1,19], [2,18], [3,17], [4,15], [5,19], [6,18], [7,17],
-                [8,16], [9,18], [10,18], [11,16], [12,17], [13,19], [14,19], [15,17]
-            ],
-            faces: [] // Simplified for performance
-        };
+        // Apple body - more detailed sphere with bite
+        const segments = 24;
+        const rings = 16;
+        const radius = 70;
+        
+        // Generate apple body vertices
+        for (let ring = 0; ring <= rings; ring++) {
+            const phi = (ring / rings) * Math.PI;
+            const y = -Math.cos(phi) * radius;
+            const ringRadius = Math.sin(phi) * radius;
+            
+            for (let seg = 0; seg <= segments; seg++) {
+                const theta = (seg / segments) * Math.PI * 2;
+                let x = Math.cos(theta) * ringRadius;
+                let z = Math.sin(theta) * ringRadius;
+                
+                // Create bite effect on one side
+                if (x > 20 && z > -30 && z < 30) {
+                    const biteDepth = Math.pow((x - 20) / 50, 2) * 40;
+                    const biteWidth = Math.pow(1 - Math.abs(z) / 30, 2);
+                    x -= biteDepth * biteWidth;
+                }
+                
+                // Apple shape modification (more oval)
+                y *= 1.1;
+                if (y > 0) y *= 0.8; // Narrow top
+                
+                vertices.push([x, y, z]);
+            }
+        }
+        
+        // Apple stem
+        vertices.push([0, -radius * 1.2, 0]);
+        vertices.push([-3, -radius * 1.4, 0]);
+        vertices.push([3, -radius * 1.4, 0]);
+        
+        // Leaf vertices
+        vertices.push([8, -radius * 1.3, -5]);
+        vertices.push([15, -radius * 1.25, -8]);
+        vertices.push([12, -radius * 1.35, -3]);
+        
+        // Generate edges for wireframe
+        for (let ring = 0; ring < rings; ring++) {
+            for (let seg = 0; seg < segments; seg++) {
+                const current = ring * (segments + 1) + seg;
+                const next = current + segments + 1;
+                
+                // Horizontal edges
+                edges.push([current, current + 1]);
+                // Vertical edges
+                if (ring < rings) {
+                    edges.push([current, next]);
+                }
+            }
+        }
+        
+        // Stem and leaf edges
+        const stemStart = vertices.length - 6;
+        edges.push([stemStart, stemStart + 1]);
+        edges.push([stemStart, stemStart + 2]);
+        edges.push([stemStart + 3, stemStart + 4]);
+        edges.push([stemStart + 4, stemStart + 5]);
+        edges.push([stemStart + 5, stemStart + 3]);
+        
+        return { vertices, edges, faces, type: 'apple' };
+    }
+
+    getBrainVertices() {
+        const vertices = [];
+        const edges = [];
+        const faces = [];
+        
+        // Brain hemispheres with wrinkles
+        const segments = 20;
+        const rings = 12;
+        const radius = 80;
+        
+        // Left hemisphere
+        for (let ring = 0; ring <= rings; ring++) {
+            const phi = (ring / rings) * Math.PI;
+            let y = -Math.cos(phi) * radius * 0.8;
+            const ringRadius = Math.sin(phi) * radius;
+            
+            for (let seg = 0; seg <= segments / 2; seg++) {
+                const theta = (seg / segments) * Math.PI * 2;
+                let x = Math.cos(theta) * ringRadius - 15;
+                let z = Math.sin(theta) * ringRadius;
+                
+                // Add brain wrinkles/folds
+                const wrinkle1 = Math.sin(theta * 3) * Math.sin(phi * 4) * 8;
+                const wrinkle2 = Math.sin(theta * 5) * Math.sin(phi * 2) * 5;
+                const noise = Math.sin(x * 0.1) * Math.sin(y * 0.1) * Math.sin(z * 0.1) * 3;
+                
+                x += wrinkle1 + noise;
+                y += wrinkle2;
+                z += wrinkle1 * 0.5;
+                
+                vertices.push([x, y, z]);
+            }
+        }
+        
+        // Right hemisphere
+        for (let ring = 0; ring <= rings; ring++) {
+            const phi = (ring / rings) * Math.PI;
+            let y = -Math.cos(phi) * radius * 0.8;
+            const ringRadius = Math.sin(phi) * radius;
+            
+            for (let seg = segments / 2; seg <= segments; seg++) {
+                const theta = (seg / segments) * Math.PI * 2;
+                let x = Math.cos(theta) * ringRadius + 15;
+                let z = Math.sin(theta) * ringRadius;
+                
+                // Add brain wrinkles/folds
+                const wrinkle1 = Math.sin(theta * 3) * Math.sin(phi * 4) * 8;
+                const wrinkle2 = Math.sin(theta * 5) * Math.sin(phi * 2) * 5;
+                const noise = Math.sin(x * 0.1) * Math.sin(y * 0.1) * Math.sin(z * 0.1) * 3;
+                
+                x += wrinkle1 + noise;
+                y += wrinkle2;
+                z += wrinkle1 * 0.5;
+                
+                vertices.push([x, y, z]);
+            }
+        }
+        
+        // Brain stem
+        for (let i = 0; i < 8; i++) {
+            const t = i / 7;
+            vertices.push([0, radius * 0.8 + t * 40, Math.sin(t * Math.PI) * 10]);
+        }
+        
+        // Generate complex edge network
+        const totalRingVertices = (segments / 2 + 1) + (segments / 2 + 1);
+        for (let ring = 0; ring < rings; ring++) {
+            for (let seg = 0; seg < totalRingVertices - 1; seg++) {
+                const current = ring * totalRingVertices + seg;
+                edges.push([current, current + 1]);
+                if (ring < rings - 1) {
+                    edges.push([current, current + totalRingVertices]);
+                }
+            }
+        }
+        
+        // Brain hemisphere connection
+        for (let i = 0; i < rings; i++) {
+            const leftSide = i * totalRingVertices + segments / 2;
+            const rightSide = i * totalRingVertices + segments / 2 + 1;
+            edges.push([leftSide, rightSide]);
+        }
+        
+        return { vertices, edges, faces, type: 'brain' };
+    }
+
+    getAirplaneVertices() {
+        const vertices = [];
+        const edges = [];
+        const faces = [];
+        
+        // Fuselage (body)
+        const fuselageLength = 160;
+        const fuselagePoints = 20;
+        
+        for (let i = 0; i < fuselagePoints; i++) {
+            const t = i / (fuselagePoints - 1);
+            const x = (t - 0.5) * fuselageLength;
+            
+            // Fuselage profile (more realistic)
+            let radius;
+            if (t < 0.1) radius = t * 10 * 15; // Nose
+            else if (t < 0.7) radius = 15 - (t - 0.1) * 5; // Body narrowing
+            else radius = (1 - t) * 30; // Tail
+            
+            // Create circular cross-sections
+            const segments = 8;
+            for (let seg = 0; seg < segments; seg++) {
+                const theta = (seg / segments) * Math.PI * 2;
+                const y = Math.cos(theta) * radius;
+                const z = Math.sin(theta) * radius;
+                vertices.push([x, y, z]);
+            }
+        }
+        
+        // Wings (main)
+        const wingSpan = 120;
+        const wingChord = 40;
+        const wingPoints = 12;
+        
+        // Left wing
+        for (let i = 0; i < wingPoints; i++) {
+            const t = i / (wingPoints - 1);
+            const y = -wingSpan / 2 * (0.2 + t * 0.8);
+            const x = Math.sin(t * Math.PI * 0.5) * wingChord - 20;
+            const z = Math.sin(t * Math.PI) * 8; // Wing dihedral
+            
+            vertices.push([x, y, z]);
+            vertices.push([x - wingChord * 0.8, y, z + 3]); // Wing trailing edge
+        }
+        
+        // Right wing (mirror)
+        for (let i = 0; i < wingPoints; i++) {
+            const t = i / (wingPoints - 1);
+            const y = wingSpan / 2 * (0.2 + t * 0.8);
+            const x = Math.sin(t * Math.PI * 0.5) * wingChord - 20;
+            const z = Math.sin(t * Math.PI) * 8;
+            
+            vertices.push([x, y, z]);
+            vertices.push([x - wingChord * 0.8, y, z + 3]);
+        }
+        
+        // Tail wings
+        const tailY = [-30, 30];
+        tailY.forEach(yPos => {
+            vertices.push([60, yPos, 0]);
+            vertices.push([80, yPos * 0.7, 5]);
+            vertices.push([75, yPos * 0.5, 8]);
+        });
+        
+        // Vertical tail
+        for (let i = 0; i < 6; i++) {
+            const z = i * 8;
+            vertices.push([70, 0, z]);
+            vertices.push([85, 0, z + 5]);
+        }
+        
+        // Engines (simplified)
+        vertices.push([-10, -40, -15]);
+        vertices.push([10, -40, -15]);
+        vertices.push([-10, 40, -15]);
+        vertices.push([10, 40, -15]);
+        
+        // Generate edges for airplane structure
+        const fuselageVertices = fuselagePoints * 8;
+        
+        // Fuselage edges
+        for (let i = 0; i < fuselagePoints - 1; i++) {
+            for (let seg = 0; seg < 8; seg++) {
+                const current = i * 8 + seg;
+                const next = current + 8;
+                const nextSeg = (seg + 1) % 8;
+                
+                edges.push([current, current + nextSeg]); // Around
+                edges.push([current, next]); // Along
+            }
+        }
+        
+        // Wing edges
+        const wingStart = fuselageVertices;
+        for (let wing = 0; wing < 2; wing++) {
+            const offset = wingStart + wing * wingPoints * 2;
+            for (let i = 0; i < wingPoints - 1; i++) {
+                const current = offset + i * 2;
+                edges.push([current, current + 2]); // Leading edge
+                edges.push([current + 1, current + 3]); // Trailing edge
+                edges.push([current, current + 1]); // Chord
+            }
+        }
+        
+        return { vertices, edges, faces, type: 'airplane' };
+    }
+
+    getBlackHoleVertices() {
+        const vertices = [];
+        const edges = [];
+        const faces = [];
+        
+        // Event horizon (central sphere)
+        const horizonRadius = 30;
+        const horizonSegments = 16;
+        const horizonRings = 8;
+        
+        for (let ring = 0; ring <= horizonRings; ring++) {
+            const phi = (ring / horizonRings) * Math.PI;
+            const y = -Math.cos(phi) * horizonRadius;
+            const ringRadius = Math.sin(phi) * horizonRadius;
+            
+            for (let seg = 0; seg <= horizonSegments; seg++) {
+                const theta = (seg / horizonSegments) * Math.PI * 2;
+                const x = Math.cos(theta) * ringRadius;
+                const z = Math.sin(theta) * ringRadius;
+                vertices.push([x, y, z]);
+            }
+        }
+        
+        // Accretion disk (multiple rings)
+        const diskRings = 8;
+        const diskSegments = 32;
+        
+        for (let ring = 0; ring < diskRings; ring++) {
+            const diskRadius = 50 + ring * 15;
+            const diskHeight = Math.sin(ring * 0.5) * 8;
+            
+            for (let seg = 0; seg <= diskSegments; seg++) {
+                const theta = (seg / diskSegments) * Math.PI * 2;
+                const x = Math.cos(theta) * diskRadius;
+                const z = Math.sin(theta) * diskRadius;
+                
+                // Add spiral distortion
+                const spiral = ring * 0.3 + this.time * 0.5;
+                const distortedTheta = theta + spiral;
+                const distortedRadius = diskRadius + Math.sin(distortedTheta * 3) * 5;
+                
+                vertices.push([
+                    Math.cos(distortedTheta) * distortedRadius,
+                    diskHeight * Math.sin(theta * 4),
+                    Math.sin(distortedTheta) * distortedRadius
+                ]);
+            }
+        }
+        
+        // Gravitational lensing points (outer distortion)
+        const lensingPoints = 24;
+        for (let i = 0; i < lensingPoints; i++) {
+            const theta = (i / lensingPoints) * Math.PI * 2;
+            const phi = Math.sin(i * 0.7) * 0.5;
+            const radius = 120 + Math.sin(i * 1.3) * 20;
+            
+            const x = Math.cos(theta) * Math.cos(phi) * radius;
+            const y = Math.sin(phi) * radius;
+            const z = Math.sin(theta) * Math.cos(phi) * radius;
+            
+            vertices.push([x, y, z]);
+        }
+        
+        // Relativistic jets
+        for (let jet = 0; jet < 2; jet++) {
+            const direction = jet === 0 ? 1 : -1;
+            for (let i = 0; i < 8; i++) {
+                const t = i / 7;
+                const jetRadius = (1 - t) * 8 + 2;
+                const jetLength = direction * (50 + t * 100);
+                
+                for (let seg = 0; seg < 6; seg++) {
+                    const theta = (seg / 6) * Math.PI * 2;
+                    const x = Math.cos(theta) * jetRadius;
+                    const z = Math.sin(theta) * jetRadius;
+                    vertices.push([x, jetLength, z]);
+                }
+            }
+        }
+        
+        // Generate edges for black hole structure
+        // Event horizon edges
+        const horizonVertices = (horizonSegments + 1) * (horizonRings + 1);
+        for (let ring = 0; ring < horizonRings; ring++) {
+            for (let seg = 0; seg < horizonSegments; seg++) {
+                const current = ring * (horizonSegments + 1) + seg;
+                const next = current + horizonSegments + 1;
+                
+                edges.push([current, current + 1]);
+                edges.push([current, next]);
+            }
+        }
+        
+        // Accretion disk edges
+        const diskStart = horizonVertices;
+        for (let ring = 0; ring < diskRings; ring++) {
+            const ringStart = diskStart + ring * (diskSegments + 1);
+            for (let seg = 0; seg < diskSegments; seg++) {
+                edges.push([ringStart + seg, ringStart + seg + 1]);
+                if (ring < diskRings - 1) {
+                    edges.push([ringStart + seg, ringStart + seg + diskSegments + 1]);
+                }
+            }
+        }
+        
+        // Lensing effect edges
+        const lensingStart = diskStart + diskRings * (diskSegments + 1);
+        for (let i = 0; i < lensingPoints - 1; i++) {
+            edges.push([lensingStart + i, lensingStart + i + 1]);
+        }
+        edges.push([lensingStart + lensingPoints - 1, lensingStart]); // Close the loop
+        
+        return { vertices, edges, faces, type: 'blackhole' };
     }
 
     bindEvents() {
@@ -443,25 +754,20 @@ class Rotating3DShapes {
             this.mouseX = e.clientX - rect.left;
             this.mouseY = e.clientY - rect.top;
             
-            // Convert mouse position to rotation angles
-            // Map mouse movement to rotation range
             this.targetRotationY = ((this.mouseX - 300) / 300) * Math.PI * 0.6;
             this.targetRotationX = ((this.mouseY - 250) / 250) * Math.PI * 0.4;
         });
 
         heroSection.addEventListener('mouseleave', () => {
-            // Return to neutral position when mouse leaves
             this.targetRotationX = 0;
             this.targetRotationY = 0;
         });
 
-        // Click to change shape
         heroSection.addEventListener('click', (e) => {
             if (e.target.closest('.hero-left') || e.target.closest('.modern-btn')) return;
             this.switchShape();
         });
 
-        // Touch support
         heroSection.addEventListener('touchmove', (e) => {
             e.preventDefault();
             const rect = this.canvas.getBoundingClientRect();
@@ -483,9 +789,12 @@ class Rotating3DShapes {
         if (this.isTransitioning) return;
         
         this.isTransitioning = true;
-        const shapeNames = ['cube', 'pyramid', 'octahedron', 'dodecahedron'];
+        const shapeNames = ['apple', 'brain', 'airplane', 'blackhole'];
         const currentIndex = shapeNames.indexOf(this.currentShape);
         this.currentShape = shapeNames[(currentIndex + 1) % shapeNames.length];
+        
+        // Reset particles for new shape
+        this.initParticles();
         
         setTimeout(() => {
             this.isTransitioning = false;
@@ -522,113 +831,183 @@ class Rotating3DShapes {
 
     projectPoint(point) {
         const [x, y, z] = point;
-        const distance = 400; // Distance from camera
+        const distance = 400;
         const scale = distance / (distance + z);
         
         return [
-            300 + x * scale, // Center X + projected X
-            250 + y * scale  // Center Y + projected Y
+            300 + x * scale,
+            250 + y * scale
         ];
+    }
+
+    updateParticles() {
+        this.particles.forEach(particle => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.z += particle.vz;
+            particle.life += 0.01;
+            
+            // Wrap around screen
+            if (particle.x < 0) particle.x = 600;
+            if (particle.x > 600) particle.x = 0;
+            if (particle.y < 0) particle.y = 500;
+            if (particle.y > 500) particle.y = 0;
+            
+            // Reset particle if life exceeded
+            if (particle.life > particle.maxLife) {
+                particle.x = Math.random() * 600;
+                particle.y = Math.random() * 500;
+                particle.z = Math.random() * 400 - 200;
+                particle.life = 0;
+            }
+        });
+    }
+
+    drawParticles() {
+        this.particles.forEach(particle => {
+            const projected = this.projectPoint([particle.x - 300, particle.y - 250, particle.z]);
+            const alpha = 1 - (particle.life / particle.maxLife);
+            const size = 1 + alpha * 2;
+            
+            this.ctx.fillStyle = `rgba(120, 200, 255, ${alpha * 0.3})`;
+            this.ctx.beginPath();
+            this.ctx.arc(projected[0], projected[1], size, 0, Math.PI * 2);
+            this.ctx.fill();
+        });
     }
 
     animate() {
         this.time += 0.016;
         
-        // Smooth rotation interpolation
         this.rotationX += (this.targetRotationX - this.rotationX) * 0.08;
         this.rotationY += (this.targetRotationY - this.rotationY) * 0.08;
         
-        // Add subtle idle rotation when not moving mouse
         const idleRotation = this.time * 0.3;
         const finalRotX = this.rotationX + Math.sin(idleRotation) * 0.1;
         const finalRotY = this.rotationY + Math.cos(idleRotation * 0.7) * 0.1;
         
-        // Clear canvas
-        this.ctx.clearRect(0, 0, 600, 500);
+        // Clear canvas with sci-fi background
+        this.ctx.fillStyle = 'rgba(15, 23, 42, 0.1)';
+        this.ctx.fillRect(0, 0, 600, 500);
+        
+        // Update and draw particles
+        this.updateParticles();
+        this.drawParticles();
         
         // Draw current shape
         this.drawShape(this.shapes[this.currentShape], finalRotX, finalRotY);
         
-        // Draw shape name
+        // Draw shape name with sci-fi styling
         this.drawShapeLabel();
         
         this.animationId = requestAnimationFrame(() => this.animate());
     }
 
     drawShape(shape, rotX, rotY) {
-        // Rotate all vertices
         const rotatedVertices = shape.vertices.map(vertex => 
             this.rotatePoint(vertex, rotX, rotY)
         );
         
-        // Project to 2D
         const projectedVertices = rotatedVertices.map(vertex => 
             this.projectPoint(vertex)
         );
         
-        // Draw faces if available (filled shapes)
-        if (shape.faces && shape.faces.length > 0) {
-            this.drawFaces(shape.faces, projectedVertices, rotatedVertices);
+        // Shape-specific rendering
+        if (shape.type === 'blackhole') {
+            this.drawBlackHoleEffects(projectedVertices, rotatedVertices);
         }
         
-        // Draw edges (wireframe)
-        this.drawEdges(shape.edges, projectedVertices, rotatedVertices);
-        
-        // Draw vertices as dots
-        this.drawVertices(projectedVertices, rotatedVertices);
+        this.drawEdges(shape.edges, projectedVertices, rotatedVertices, shape.type);
+        this.drawVertices(projectedVertices, rotatedVertices, shape.type);
     }
 
-    drawFaces(faces, projectedVertices, rotatedVertices) {
-        // Sort faces by average Z depth for proper rendering order
-        const facesWithDepth = faces.map(face => {
-            const avgZ = face.reduce((sum, vertexIndex) => 
-                sum + rotatedVertices[vertexIndex][2], 0) / face.length;
-            return { face, avgZ };
-        });
+    drawBlackHoleEffects(projectedVertices, rotatedVertices) {
+        // Draw gravitational lensing effect
+        const gradient = this.ctx.createRadialGradient(300, 250, 0, 300, 250, 150);
+        gradient.addColorStop(0, 'rgba(0, 0, 0, 0.8)');
+        gradient.addColorStop(0.3, 'rgba(50, 0, 100, 0.4)');
+        gradient.addColorStop(0.7, 'rgba(120, 50, 200, 0.2)');
+        gradient.addColorStop(1, 'rgba(120, 200, 255, 0.1)');
         
-        facesWithDepth.sort((a, b) => a.avgZ - b.avgZ);
+        this.ctx.fillStyle = gradient;
+        this.ctx.beginPath();
+        this.ctx.arc(300, 250, 50, 0, Math.PI * 2);
+        this.ctx.fill();
         
-        facesWithDepth.forEach(({ face }, index) => {
+        // Draw accretion disk glow
+        for (let i = 0; i < 3; i++) {
+            const glowGradient = this.ctx.createRadialGradient(300, 250, 50 + i * 30, 300, 250, 120 + i * 30);
+            glowGradient.addColorStop(0, `rgba(255, 100, 0, ${0.3 - i * 0.1})`);
+            glowGradient.addColorStop(1, 'rgba(255, 200, 0, 0)');
+            
+            this.ctx.fillStyle = glowGradient;
             this.ctx.beginPath();
-            this.ctx.moveTo(projectedVertices[face[0]][0], projectedVertices[face[0]][1]);
-            
-            for (let i = 1; i < face.length; i++) {
-                this.ctx.lineTo(projectedVertices[face[i]][0], projectedVertices[face[i]][1]);
-            }
-            this.ctx.closePath();
-            
-            // Subtle face coloring
-            const hue = (index * 40 + this.time * 10) % 360;
-            this.ctx.fillStyle = `hsla(${hue}, 50%, 60%, 0.1)`;
+            this.ctx.arc(300, 250, 120 + i * 30, 0, Math.PI * 2);
             this.ctx.fill();
-            
-            this.ctx.strokeStyle = `hsla(${hue}, 60%, 70%, 0.3)`;
-            this.ctx.lineWidth = 1;
-            this.ctx.stroke();
-        });
+        }
     }
 
-    drawEdges(edges, projectedVertices, rotatedVertices) {
+    drawEdges(edges, projectedVertices, rotatedVertices, shapeType) {
         edges.forEach((edge, index) => {
             const [start, end] = edge;
+            if (!projectedVertices[start] || !projectedVertices[end]) return;
+            
             const startPoint = projectedVertices[start];
             const endPoint = projectedVertices[end];
             
-            // Calculate edge depth for coloring
             const avgZ = (rotatedVertices[start][2] + rotatedVertices[end][2]) / 2;
-            const depth = (avgZ + 200) / 400; // Normalize depth
+            const depth = (avgZ + 200) / 400;
             
             this.ctx.beginPath();
             this.ctx.moveTo(startPoint[0], startPoint[1]);
             this.ctx.lineTo(endPoint[0], endPoint[1]);
             
-            const hue = 200 + depth * 100;
-            const opacity = 0.4 + depth * 0.4;
+            // Shape-specific coloring
+            let hue, opacity, lineWidth;
+            switch (shapeType) {
+                case 'apple':
+                    hue = 120 + depth * 60; // Green to red
+                    opacity = 0.6 + depth * 0.4;
+                    lineWidth = 1.5 + depth;
+                    break;
+                case 'brain':
+                    hue = 300 + depth * 60; // Purple/pink
+                    opacity = 0.5 + depth * 0.5;
+                    lineWidth = 1 + depth * 2;
+                    break;
+                case 'airplane':
+                    hue = 200 + depth * 40; // Blue/cyan
+                    opacity = 0.7 + depth * 0.3;
+                    lineWidth = 2 + depth;
+                    break;
+                case 'blackhole':
+                    hue = depth > 0.5 ? 60 : 280; // Orange/purple
+                    opacity = 0.4 + depth * 0.6;
+                    lineWidth = 1.5 + depth * 1.5;
+                    break;
+                default:
+                    hue = 200 + depth * 100;
+                    opacity = 0.4 + depth * 0.4;
+                    lineWidth = 2 + depth;
+            }
+            
             this.ctx.strokeStyle = `hsla(${hue}, 70%, 70%, ${opacity})`;
-            this.ctx.lineWidth = 2 + depth;
+            this.ctx.lineWidth = lineWidth;
             this.ctx.stroke();
+            
+            // Add glow effect for sci-fi look
+            this.ctx.shadowColor = `hsla(${hue}, 80%, 60%, 0.5)`;
+            this.ctx.shadowBlur = 3;
+            this.ctx.stroke();
+            this.ctx.shadowBlur = 0;
         });
     }
+
+    drawVertices(projectedVertices, rotatedVertices, shapeType) {
+        projectedVertices.forEach((vertex, index) => {
+            if (!vertex) return;
+            
+            const
 
     drawVertices(projectedVertices, rotatedVertices) {
         projectedVertices.forEach((vertex, index) => {
