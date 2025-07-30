@@ -721,19 +721,16 @@ body {
 .other-projects {
     padding: 80px 0;
 }
-
 .other-projects .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
-
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
 }
-
 .project-card {
     padding: 24px;
     border-radius: 16px;
@@ -747,31 +744,62 @@ body {
     background-position: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Псевдо-элемент для фонового изображения */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+/* Текст карточки */
+.project-card > * {
+    position: relative;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Ховер эффекты */
 .project-card:hover {
     background: rgba(255, 255, 255, 0.06);
     transform: translateY(-4px);
     box-shadow: 0 15px 30px rgba(120, 119, 198, 0.1);
 }
 
-.project-nasa {
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-card:hover > * {
+    opacity: 0;
+}
+
+/* project background */
+.project-nasa::before {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/nasa.png');
 }
-
-.project-spaceX {
+.project-spaceX::before {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/spacex.png');
 }
-
-.project-xai {
+.project-xai::before {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/xai.png');
 }
-
-.project-tesla {
+.project-tesla::before {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/tesla.png');
 }
-
-.project-starlink {
+.project-starlink::before {
     background-image: url('https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img/starlink.png');
 }
 
