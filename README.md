@@ -6,7 +6,7 @@ https://serinegit.github.io/project-page/
 <img 
   src="https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img_for_readme/top.png" 
   alt="Top Image" 
-  style="width: 99%" 
+  style="width: 99.8%" 
 /><img 
     src="https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img_for_readme/left.png" 
     alt="Image 1" 
