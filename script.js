@@ -80,11 +80,9 @@ class TeamManager {
                 skills: ['Selenium WebDriver','Postman API', 'Performance testing', 'Security testing', 'Python/JavaScript', 'SQL/MySQL', 'Cross-browser testing', 'AI testing tools'],
                 experience: '11+ years in QA automation, performance testing and AI testing methodologies',
                 achievements: [
-                    'Development of end-to-end automation frameworks that prevent critical system failures
-Software defect detection',
+                    'Development of end-to-end automation frameworks that prevent critical system failures Software defect detection',
                     'Development of automated REST API testing with 100% coverage using Postman and Swagger',
-                    'Implementation of security testing protocols using Mozilla Observatory for web applications
-Development of cross-browser testing solutions using BrowserStack for various operating systems',
+                    'Implementation of security testing protocols using Mozilla Observatory for web applications Development of cross-browser testing solutions using BrowserStack for various operating systems',
                     'Development of performance benchmarks using Lighthouse, GTMetrix and SpeedLab tools'
                 ]
             },
