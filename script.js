@@ -72,21 +72,21 @@ class TeamManager {
                     'Improved API response time by 30% through performance testing insights'
                 ]
             },
-        'qa-engineer-4': {
-                name: 'Lina Gorelik',
-                role: 'QA Engineer',
-                photo: 'https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/team/Lina%20Gorelik.png',
-                details: 'Experienced QA and AI automation engineer with 11+ years of experience in end-to-end software testing, automation frameworks and AI testing solutions. Expert in performance testing,  security testing and cross-platform automation using Selenium WebDriver, Postman API and advanced testing tools. These are the quotes I live by: > "A bug is more than a line in Jira — it's a broken promise to the user.  > "Share the pain and find together the solution." — Lisa Crispin ',
-                skills: ['Selenium WebDriver', 'Postman API', 'Performance testing', 'Security testing', 'SQL/MySQL ', 'Python/JavaScript'],
-                experience: '11+ years in QA automation, performance testing and AI testing methodologies',
-                achievements: [
-                    'Development of end-to-end automation frameworks that prevent critical system failures Software defect detection',
-                    'Development of automated REST API testing with 100% coverage using Postman and Swagger',
-                    'Implementation of security testing protocols using Mozilla Observatory for web applications',
-                    'Development of cross-browser testing solutions using BrowserStack for various operating systems',
-                    'Development of performance benchmarks using Lighthouse, GTMetrix and SpeedLab tools'
-                ]
-            },
+'qa-engineer-4': {
+    name: 'Lina Gorelik',
+    role: 'QA Engineer',
+    photo: 'https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/team/Lina%20Gorelik.png',
+    details: 'Experienced QA and AI automation engineer with 11+ years of experience in end-to-end software testing, automation frameworks and AI testing solutions. Expert in performance testing, security testing and cross-platform automation using Selenium WebDriver, Postman API and advanced testing tools. These are the quotes I live by: "A bug is more than a line in Jira — it\'s a broken promise to the user." "Share the pain and find together the solution." — Lisa Crispin',
+    skills: ['Selenium WebDriver', 'Postman API', 'Performance testing', 'Security testing', 'SQL/MySQL', 'Python/JavaScript'],
+    experience: '11+ years in QA automation, performance testing and AI testing methodologies',
+    achievements: [
+        'Development of end-to-end automation frameworks that prevent critical system failures and software defect detection',
+        'Development of automated REST API testing with 100% coverage using Postman and Swagger',
+        'Implementation of security testing protocols using Mozilla Observatory for web applications',
+        'Development of cross-browser testing solutions using BrowserStack for various operating systems',
+        'Development of performance benchmarks using Lighthouse, GTMetrix and SpeedLab tools'
+    ]
+},
             'qa-engineer-5': {
                 name: 'Milana Binaminova',
                 role: 'QA Engineer',
