@@ -194,14 +194,19 @@ Development of cross-browser testing solutions using BrowserStack for various op
 
     bindEvents() {
         // Team card clicks
-        document.querySelectorAll('.team-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                if (!e.target.closest('.team-link')) {
-                    e.preventDefault();
-                    const role = card.getAttribute('data-role');
-                    this.showModal(role);
-                }
-            });
+       document.querySelectorAll('.team-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+        // Проверяем, что клик не по ссылке
+        if (e.target.tagName === 'A' || e.target.closest('a')) {
+            return; // Позволяем ссылке работать
+        }
+        e.preventDefault();
+        const role = card.getAttribute('data-role');
+        if (role && this.teamData[role]) {
+            this.showModal(role);
+        }
+    });
+});
 
             // Keyboard support
             card.setAttribute('tabindex', '0');
@@ -324,17 +329,25 @@ class Rotating3DShapes {
         };
     }
 
-    init() {
-        this.canvas = document.getElementById('dotShape');
-        if (!this.canvas) return;
-
-        this.ctx = this.canvas.getContext('2d');
-        this.setupCanvas();
-        this.bindEvents();
-        this.animate();
-        
-        console.log('✅ Rotating 3D Shapes initialized');
+   init() {
+    this.canvas = document.getElementById('dotShape');
+    if (!this.canvas) {
+        console.error('Canvas element not found');
+        return;
     }
+
+    this.ctx = this.canvas.getContext('2d');
+    if (!this.ctx) {
+        console.error('Canvas context not available');
+        return;
+    }
+    
+    this.setupCanvas();
+    this.bindEvents();
+    this.animate();
+    
+    console.log('✅ Rotating 3D Shapes initialized');
+}
 
     setupCanvas() {
         const dpr = window.devicePixelRatio || 1;
