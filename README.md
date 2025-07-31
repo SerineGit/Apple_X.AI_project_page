@@ -1,5 +1,5 @@
 1.
-[![Demo](https://img.shields.io/badge/Demo-Project-red?style=flat-square&logo=github)](https://serinegit.github.io/project-page/)
+[![Demo](https://img.shields.io/badge/Demo-Project-red?style=flat-square&logo=github)](https://serinegit.github.io/Apple_X.AI_project_page/)
 ![WELCOME](https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/img_for_readme/top.jpg)
 
 
@@ -24,7 +24,7 @@
 
 **👇 If you still dare to proceed... 👇**
 
-[![🌀 ENTER THE PORTAL 🌀](https://img.shields.io/badge/🚪_ENTER_IF_YOU_DARE-FF0000?style=for-the-badge&logo=ghost&logoColor=white&labelColor=000000)](https://serinegit.github.io/project-page/)
+[![🌀 ENTER THE PORTAL 🌀](https://img.shields.io/badge/🚪_ENTER_IF_YOU_DARE-FF0000?style=for-the-badge&logo=ghost&logoColor=white&labelColor=000000)](https://serinegit.github.io/Apple_X.AI_project_page/)
 
 </details>
 
@@ -70,7 +70,7 @@
 <br>
 <br>
 
-<a href="https://serinegit.github.io/project-page/">
+<a href="https://serinegit.github.io/Apple_X.AI_project_page/">
   <img src="https://img.shields.io/badge/🌀_ACTIVATE_PORTAL-darkred?style=for-the-badge&logo=atom&logoColor=white&animation=pulse" />
 </a>
 
@@ -165,7 +165,7 @@ Success: 15%
 
 **🎮 BOSS BATTLE:**
 
-[![ENTER THE DUNGEON](https://img.shields.io/badge/🏰_ENTER_THE_DUNGEON-8B0000?style=for-the-badge&logo=gamepad&logoColor=white)](https://serinegit.github.io/project-page/)
+[![ENTER THE DUNGEON](https://img.shields.io/badge/🏰_ENTER_THE_DUNGEON-8B0000?style=for-the-badge&logo=gamepad&logoColor=white)](https://serinegit.github.io/Apple_X.AI_project_page/)
 
 *Press START to continue... if you dare* 🕹️
 
