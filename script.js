@@ -76,14 +76,16 @@ class TeamManager {
                 name: 'Lina Gorelik',
                 role: 'QA Engineer',
                 photo: 'https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/team/Lina%20Gorelik.png',
-                details: 'Enthusiastic QA engineer specializing in performance testing and load testing. Committed to ensuring applications perform optimally under various conditions and user loads.',
-                skills: ['Performance Testing', 'Load Testing', 'Stress Testing', 'JMeter', 'Performance Monitoring', 'Capacity Planning'],
-                experience: '2+ years focused on performance testing and optimization',
+                details: 'Experienced QA and AI automation engineer with 11+ years of experience in end-to-end software testing, automation frameworks and AI testing solutions. Expert in performance testing, security testing and cross-platform automation using Selenium WebDriver, Postman API and advanced testing tools.',
+                skills: ['Selenium WebDriver','Postman API', 'Performance testing', 'Security testing', 'Python/JavaScript', 'SQL/MySQL', 'Cross-browser testing', 'AI testing tools'],
+                experience: '11+ years in QA automation, performance testing and AI testing methodologies',
                 achievements: [
-                    'Optimized application performance by 50% through comprehensive load testing',
-                    'Created performance testing scenarios for applications handling 100K+ concurrent users',
-                    'Identified critical bottlenecks preventing system failures under peak load',
-                    'Established performance benchmarks and monitoring alerts for production systems'
+                    'Development of end-to-end automation frameworks that prevent critical system failures
+Software defect detection',
+                    'Development of automated REST API testing with 100% coverage using Postman and Swagger',
+                    'Implementation of security testing protocols using Mozilla Observatory for web applications
+Development of cross-browser testing solutions using BrowserStack for various operating systems',
+                    'Development of performance benchmarks using Lighthouse, GTMetrix and SpeedLab tools'
                 ]
             },
             'qa-engineer-5': {
