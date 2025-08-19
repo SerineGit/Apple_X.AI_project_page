@@ -121,7 +121,7 @@ class TeamManager {
                 photo: 'https://raw.githubusercontent.com/SerineGit/project-page/refs/heads/main/team/Serine%20Zargaryan.jpg',
                 details: 'Engineer with experience in software/hardware testing and a solid foundation in C++ development. Skilled in manual and automated testing, CI/CD integration, and collaborative cross-functional work. Currently developing a personal 2D adventure game in C++ using SFML.',
                 skills: ['Test Automation', 'CI/CD Integration', 'Selenium', 'C++', 'Python', 'JavaScript', 'SQL', 'HTML5/CSS3'],
-                experience: '3+ years in QA, automation, and C++ development & 5+ in UI/UX Design',
+                experience: '9+ years in QA, automation, and C++ development & 5+ in UI/UX Design',
                 achievements: [
                     'Developed automated test framework reducing regression testing time by 50%',
                     'Integrated automated tests into CI/CD pipeline for projects',
